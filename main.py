@@ -337,11 +337,15 @@ def main():
     def battle():
         battling = True
         wild_pokemon = random.choice(POKE_DEX)
+        wild_pokemon_img = Player(WIDTH / 2 + 100, HEIGHT * .25)
+        party_slot_img = Player(WIDTH / 3 - 125, HEIGHT * .55)
 
         def fight():
             selecting = True
             while selecting:
                 WIN.fill(BLACK)
+                wild_pokemon_img.draw(WIN, wild_pokemon.poke_img)
+                party_slot_img.draw(WIN, party_slot[0].poke_img)
 
                 # Fight Buttons
                 MOVE_1_BUTTON = Button("1: " + party_slot[0].move1.name, (WIDTH / 3 - 125, HEIGHT * .75), font=30,
@@ -503,6 +507,8 @@ def main():
 
         while battling:
             WIN.fill(BLACK)
+            wild_pokemon_img.draw(WIN, wild_pokemon.poke_img)
+            party_slot_img.draw(WIN, party_slot[0].poke_img)
 
             if wild_pokemon.hp <= 0:
                 print("You Won!")
@@ -549,6 +555,8 @@ def main():
             ENEMY_HP = Button(str(wild_pokemon.name) + " " + str(wild_pokemon.hp), (WIDTH / 2 + 100, HEIGHT * .15),
                               font=30,
                               bg="navy", feedback=party_slot[0].move4.name)
+
+
 
             FIGHT_BATTLE_BUTTON.show(FIGHT_BATTLE_BUTTON)
             POKEMON_BATTLE_BUTTON.show(POKEMON_BATTLE_BUTTON)
