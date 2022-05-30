@@ -85,22 +85,14 @@ class Pokemon:
         if random_move == 1:
             attacker.move1.attack(attacker.move1, defender, attacker)
 
-            print(attacker.name + " used " + attacker.move1.name)
-
-        if random_move == 2:
+        elif random_move == 2:
             attacker.move2.attack(attacker.move2, defender, attacker)
 
-            print(attacker.name + " used " + attacker.move2.name)
-
-        if random_move == 3:
+        elif random_move == 3:
             attacker.move3.attack(attacker.move3, defender, attacker)
 
-            print(attacker.name + " used " + attacker.move3.name)
-
-        if random_move == 4:
+        elif random_move == 4:
             attacker.move4.attack(attacker.move4, defender, attacker)
-
-            print(attacker.name + " used " + attacker.move4.name)
 
 class Moves:
     def __init__(self, name, atk_type, dmg, accuracy, priority):
@@ -111,11 +103,19 @@ class Moves:
         self.priority = priority
 
     def attack(self, move, defender, attacker):
-        if move.atk_type == "atk":
-            defender.hp = int(defender.hp - (move.dmg * (attacker.atk / 200)))
+        attack_hit = random.randint(1, 100)
+        print(attacker.name + " used " + move.name)
 
-        elif move.atk_type == "spatk":
-            defender.hp = int(defender.hp - (move.dmg * (attacker.spatk / 200)))
+        if attack_hit <= move.accuracy:
+            print(attacker.name + ": hit")
+            if move.atk_type == "atk":
+                defender.hp = int(defender.hp - (move.dmg * (attacker.atk / 200)))
+
+            elif move.atk_type == "spatk":
+                defender.hp = int(defender.hp - (move.dmg * (attacker.spatk / 200)))
+
+        else:
+            print(attacker.name + ": Missed")
 
 class Button:
     """Create a button, then blit the surface in the while loop"""
@@ -216,7 +216,7 @@ SMOG = Moves("Smog", "spatk", 30, 70, 2)
 BONE_CLUB = Moves("Bone Club", "atk", 65, 85, 2)
 DIG = Moves("Dig", "atk", 80, 100, 2)
 EARTHQUAKE = Moves("Earthquake", "atk", 100, 100, 2)
-FISSURE = Moves("Fissure", "atk", 0, 30, 2) # This attack 1 hit K.0. if it hits
+FISSURE = Moves("Fissure", "atk", 10000, 30, 2) # This attack 1 hit K.0. if it hits
 
 # Flying
 DRILL_PECK = Moves("Drill Peck", "atk", 80, 100, 2)
@@ -245,7 +245,7 @@ MOVE_INDEX = [EMPTY, QUICK_ATK, TACKLE, SLAM, SCRATCH, BODY_SLAM, EMBER, FIRE_SP
               CONFUSION, PSYBEAM, PSYCHIC, TELEPORT, REST, DOUBLE_KICK, ROLLING_KICK]
 
 # Pokemon name, poke_img, level, hp, atk, df, spatk, spdf, speed, move1, move2, move3, move4
-PIKACHU = Pokemon("Pikachu", PIKA_IMG, 5, 35, 55, 40, 50, 50, 90, QUICK_ATK, TACKLE, THUNDER_SHOCK, EMPTY)
+PIKACHU = Pokemon("Pikachu", PIKA_IMG, 5, 35, 55, 40, 50, 50, 90, QUICK_ATK, TACKLE, THUNDER_SHOCK, FISSURE)
 CHARMANDER = Pokemon("Charmander", CHAR_IMG, 5, 39, 52, 43, 60, 50, 65, TACKLE, EMPTY, EMBER, FIRE_SPIN)
 TOTODILE = Pokemon("Totodile", TOTODILE_IMG, 5, 50, 65, 64, 44, 48, 43, EMPTY, WATER_GUN, TACKLE, SCRATCH)
 BULBASAUR = Pokemon("Bulbasaur", BULB_IMG, 5, 45, 49, 49, 65, 65, 45, RAZOR_LEAF, EMPTY, TACKLE, SLAM)
@@ -369,25 +369,21 @@ def main():
 
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_1]:
-                    print(party_slot[0].name + " used " + MOVE_1_BUTTON.show_feedback(MOVE_1_BUTTON))
                     party_slot[0].move1.attack(party_slot[0].move1, wild_pokemon, party_slot[0])
                     wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
                     break
 
                 if keys[pygame.K_2]:
-                    print(party_slot[0].name + " used " + MOVE_2_BUTTON.show_feedback(MOVE_2_BUTTON))
                     party_slot[0].move2.attack(party_slot[0].move2, wild_pokemon, party_slot[0])
                     wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
                     break
 
                 if keys[pygame.K_3]:
-                    print(party_slot[0].name + " used " + MOVE_3_BUTTON.show_feedback(MOVE_3_BUTTON))
                     party_slot[0].move3.attack(party_slot[0].move3, wild_pokemon, party_slot[0])
                     wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
                     break
 
                 if keys[pygame.K_4]:
-                    print(party_slot[0].name + " used " + MOVE_4_BUTTON.show_feedback(MOVE_4_BUTTON))
                     party_slot[0].move4.attack(party_slot[0].move4, wild_pokemon, party_slot[0])
                     wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
                     break
