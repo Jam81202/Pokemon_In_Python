@@ -542,10 +542,20 @@ def main():
                     print("you did not run away")
                     time.sleep(1)
 
+            PLAYER_HP = Button(str(party_slot[0].name) + " " + str(party_slot[0].hp), (WIDTH / 3 - 125, HEIGHT * .65),
+                               font=30,
+                               bg="navy", feedback=party_slot[0].move4.name)
+
+            ENEMY_HP = Button(str(wild_pokemon.name) + " " + str(wild_pokemon.hp), (WIDTH / 2 + 100, HEIGHT * .15),
+                              font=30,
+                              bg="navy", feedback=party_slot[0].move4.name)
+
             FIGHT_BATTLE_BUTTON.show(FIGHT_BATTLE_BUTTON)
             POKEMON_BATTLE_BUTTON.show(POKEMON_BATTLE_BUTTON)
             ITEMS_BATTLE_BUTTON.show(ITEMS_BATTLE_BUTTON)
             RUN_BATTLE_BUTTON.show(RUN_BATTLE_BUTTON)
+            PLAYER_HP.show(PLAYER_HP)
+            ENEMY_HP.show(ENEMY_HP)
 
             pygame.display.update()
 
