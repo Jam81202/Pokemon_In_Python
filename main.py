@@ -109,12 +109,16 @@ class Moves:
         if attack_hit <= move.accuracy:
             print(attacker.name + ": hit")
             if move.atk_type == "atk":
-                defender.hp = int(defender.hp - ((move.dmg * (attacker.atk / 200)) - (move.dmg * (defender.df / 250))))
-                print(((move.dmg * (attacker.atk / 200)) - (move.dmg * (defender.df / 250))))
+                defender.hp = int(defender.hp - abs(((move.dmg * (attacker.atk / 200)) - (move.dmg * (defender.df / 400)))))
+                print(abs(((move.dmg * (attacker.atk / 200)) - (move.dmg * (defender.df / 250)))))
 
             elif move.atk_type == "spatk":
-                defender.hp = int(defender.hp - (move.dmg * (attacker.spatk / 200)) - (move.dmg * (defender.spdf / 250)))
-                print(((move.dmg * (attacker.atk / 200)) - (move.dmg * (defender.df / 250))))
+                defender.hp = int(defender.hp - abs((move.dmg * (attacker.spatk / 200)) - (move.dmg * (defender.spdf / 400))))
+                print(abs(((move.dmg * (attacker.atk / 200)) - (move.dmg * (defender.df / 250)))))
+
+            elif move.atk_type == "status":
+                if move.name == "Rest":
+                    attacker.heal(attacker)
 
         else:
             print(attacker.name + ": Missed")
@@ -227,14 +231,14 @@ GUST = Moves("Gust", "apatk", 40, 100, 2)
 PECK = Moves("Peck", "atk", 35, 100, 2)
 
 # Dragon
-DRAGON_RAGE = Moves("Dragon Rage", "spatk", 0, 100, 2) # This move always damages by 40 hp
+DRAGON_RAGE = Moves("Dragon Rage", "spatk", 40, 100, 2) # This move always damages by 40 hp
 
 # Psychic
 CONFUSION = Moves("Confusion", "spatk", 50, 100, 2)
 PSYBEAM = Moves("Psybeam", "spatk", 65, 100, 2)
 PSYCHIC = Moves("Psychic", "spatk", 90, 100, 2)
 TELEPORT = Moves("Teleport", "status", 0, 100, 2) # Allows user to flee wild battles
-REST = Moves("Rest", "status", 0, 0, 2)
+REST = Moves("Rest", "status", 0, 100, 2) # Heals pokemon to full but makes the user fall asleep
 
 # Fighting
 DOUBLE_KICK = Moves("Double Kick", "atk", 60, 100, 2)
@@ -338,7 +342,7 @@ def main():
 
     def battle():
         battling = True
-        wild_pokemon = CHARMANDER #random.choice(POKE_DEX)
+        wild_pokemon = random.choice(POKE_DEX)
         wild_pokemon_img = Player(WIDTH / 2 + 100, HEIGHT * .20)
         party_slot_img = Player(WIDTH / 3 - 125, HEIGHT * .55)
 
