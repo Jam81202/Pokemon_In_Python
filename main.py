@@ -75,6 +75,10 @@ class Pokemon:
     def heal(self, pokemon):
         pokemon.hp = pokemon.maxhp
 
+    def heal_party(self, player_party):
+        for pokemon in player_party:
+            pokemon.partypoke_hp = pokemon.partypoke_maxhp
+
     def get_random_moves(self, attacker, defender):
         random_move = random.randint(1, 4)
 
