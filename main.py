@@ -109,10 +109,12 @@ class Moves:
         if attack_hit <= move.accuracy:
             print(attacker.name + ": hit")
             if move.atk_type == "atk":
-                defender.hp = int(defender.hp - (move.dmg * (attacker.atk / 200)))
+                defender.hp = int(defender.hp - ((move.dmg * (attacker.atk / 200)) - (move.dmg * (defender.df / 250))))
+                print(((move.dmg * (attacker.atk / 200)) - (move.dmg * (defender.df / 250))))
 
             elif move.atk_type == "spatk":
-                defender.hp = int(defender.hp - (move.dmg * (attacker.spatk / 200)))
+                defender.hp = int(defender.hp - (move.dmg * (attacker.spatk / 200)) - (move.dmg * (defender.spdf / 250)))
+                print(((move.dmg * (attacker.atk / 200)) - (move.dmg * (defender.df / 250))))
 
         else:
             print(attacker.name + ": Missed")
@@ -336,8 +338,8 @@ def main():
 
     def battle():
         battling = True
-        wild_pokemon = random.choice(POKE_DEX)
-        wild_pokemon_img = Player(WIDTH / 2 + 100, HEIGHT * .25)
+        wild_pokemon = CHARMANDER #random.choice(POKE_DEX)
+        wild_pokemon_img = Player(WIDTH / 2 + 100, HEIGHT * .20)
         party_slot_img = Player(WIDTH / 3 - 125, HEIGHT * .55)
 
         def fight():
