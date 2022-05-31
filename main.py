@@ -60,19 +60,6 @@ class Pokemon:
         self.move4 = move4
         self.maxhp = hp
 
-        self.partypoke_level = level
-        self.partypoke_hp = hp
-        self.partypoke_maxhp = self.maxhp
-        self.partypoke_atk = atk
-        self.partypoke_df = df
-        self.partypoke_spatk = spatk
-        self.partypoke_spdf = spdf
-        self.partypoke_speed = speed
-        self.partypoke_move1 = move1
-        self.partypoke_move2 = move2
-        self.partypoke_move3 = move3
-        self.partypoke_move4 = move4
-
     def heal(self, pokemon):
         pokemon.hp = pokemon.maxhp
 
@@ -294,12 +281,12 @@ global PARTY_POKE_5
 global PARTY_POKE_6
 global party
 
-PARTY_POKE_1 = PIDGEY
-PARTY_POKE_2 = CHARMANDER
-PARTY_POKE_3 = TOTODILE
-PARTY_POKE_4 = BULBASAUR
-PARTY_POKE_5 = EEVEE
-PARTY_POKE_6 = GENGAR
+PARTY_POKE_1 = Pokemon(PIKACHU.name, PIKACHU.poke_img, PIKACHU.level, PIKACHU.hp, PIKACHU.atk, PIKACHU.df, PIKACHU.spatk, PIKACHU.spdf, PIKACHU.speed, PIKACHU.move1, PIKACHU.move2, PIKACHU.move3, PIKACHU.move4)
+PARTY_POKE_2 = Pokemon(CHARMANDER.name, CHARMANDER.poke_img, CHARMANDER.level, CHARMANDER.hp, CHARMANDER.atk, CHARMANDER.df, CHARMANDER.spatk, CHARMANDER.spdf, CHARMANDER.speed, CHARMANDER.move1, CHARMANDER.move2, CHARMANDER.move3, CHARMANDER.move4)
+PARTY_POKE_3 = Pokemon(TOTODILE.name, TOTODILE.poke_img, TOTODILE.level, TOTODILE.hp, TOTODILE.atk, TOTODILE.df, TOTODILE.spatk, TOTODILE.spdf, TOTODILE.speed, TOTODILE.move1, TOTODILE.move2, TOTODILE.move3, TOTODILE.move4)
+PARTY_POKE_4 = Pokemon(BULBASAUR.name, BULBASAUR.poke_img, BULBASAUR.level, BULBASAUR.hp, BULBASAUR.atk, BULBASAUR.df, BULBASAUR.spatk, BULBASAUR.spdf, BULBASAUR.speed, BULBASAUR.move1, BULBASAUR.move2, BULBASAUR.move3, BULBASAUR.move4)
+PARTY_POKE_5 = Pokemon(EEVEE.name, EEVEE.poke_img, EEVEE.level, EEVEE.hp, EEVEE.atk, EEVEE.df, EEVEE.spatk, EEVEE.spdf, EEVEE.speed, EEVEE.move1, EEVEE.move2, EEVEE.move3, EEVEE.move4)
+PARTY_POKE_6 = Pokemon(GENGAR.name, GENGAR.poke_img, GENGAR.level, GENGAR.hp, GENGAR.atk, GENGAR.df, GENGAR.spatk, GENGAR.spdf, GENGAR.speed, GENGAR.move1, GENGAR.move2, GENGAR.move3, GENGAR.move4)
 
 party_slot = [PARTY_POKE_1, PARTY_POKE_2, PARTY_POKE_3, PARTY_POKE_4, PARTY_POKE_5, PARTY_POKE_6]
 
