@@ -3,6 +3,7 @@ import os
 import time
 import random
 import sys
+import copy
 from pygame.locals import *
 
 pygame.init()
@@ -94,6 +95,10 @@ class Pokemon:
         elif random_move == 4:
             attacker.move4.attack(attacker.move4, defender, attacker)
 
+    def add_pokemon(self, pokemon):
+        new_poke = Pokemon(pokemon.name, pokemon.poke_img, pokemon.level, pokemon.hp, pokemon.atk, pokemon.df, pokemon.spatk, pokemon.spdf, pokemon.speed, pokemon.move1, pokemon.move2, pokemon.move3, pokemon.move4)
+        return new_poke
+
 class Moves:
     def __init__(self, name, atk_type, dmg, accuracy, priority):
         self.name = name
@@ -109,11 +114,11 @@ class Moves:
         if attack_hit <= move.accuracy:
             print(attacker.name + ": hit")
             if move.atk_type == "atk":
-                defender.hp = int(defender.hp - abs(((move.dmg * (attacker.atk / 200)) - (move.dmg * (defender.df / 400)))))
+                defender.hp = int(defender.hp - (abs(((move.dmg * (attacker.atk / 200)) - (move.dmg * (defender.df / 400))))))
                 print(abs(((move.dmg * (attacker.atk / 200)) - (move.dmg * (defender.df / 250)))))
 
             elif move.atk_type == "spatk":
-                defender.hp = int(defender.hp - abs((move.dmg * (attacker.spatk / 200)) - (move.dmg * (defender.spdf / 400))))
+                defender.hp = int(defender.hp - (abs(((move.dmg * (attacker.spatk / 200)) - (move.dmg * (defender.spdf / 400))))))
                 print(abs(((move.dmg * (attacker.atk / 200)) - (move.dmg * (defender.df / 250)))))
 
             elif move.atk_type == "status":
@@ -210,7 +215,7 @@ NIGHT_SHADE = Moves("Night Shade", "spatk", 0, 100, 2) # Damage = user level
 RAZOR_LEAF = Moves("Razor Leaf", "atk", 55, 95, 2)
 MEGA_DRAIN = Moves("Mega Drain", "spatk", 40, 100, 2)
 VINE_WHIP = Moves("Vine Whipe", "atk", 45, 100, 2)
-ABSORB = Moves("Absorb", "apatk", 20, 100, 2)
+ABSORB = Moves("Absorb", "spatk", 20, 100, 2)
 
 # Poison
 ACID = Moves("Acid", "spatk", 40, 100, 2)
@@ -227,7 +232,7 @@ FISSURE = Moves("Fissure", "atk", 10000, 30, 2) # This attack 1 hit K.0. if it h
 # Flying
 DRILL_PECK = Moves("Drill Peck", "atk", 80, 100, 2)
 FLY = Moves("Fly", "atk", 90, 95, 2)
-GUST = Moves("Gust", "apatk", 40, 100, 2)
+GUST = Moves("Gust", "spatk", 40, 100, 2)
 PECK = Moves("Peck", "atk", 35, 100, 2)
 
 # Dragon
@@ -289,7 +294,7 @@ global PARTY_POKE_5
 global PARTY_POKE_6
 global party
 
-PARTY_POKE_1 = PIKACHU
+PARTY_POKE_1 = PIDGEY
 PARTY_POKE_2 = CHARMANDER
 PARTY_POKE_3 = TOTODILE
 PARTY_POKE_4 = BULBASAUR
@@ -375,23 +380,63 @@ def main():
 
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_1]:
-                    party_slot[0].move1.attack(party_slot[0].move1, wild_pokemon, party_slot[0])
-                    wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+                    if party_slot[0].speed >= wild_pokemon.speed:
+                        party_slot[0].move1.attack(party_slot[0].move1, wild_pokemon, party_slot[0])
+
+                        if wild_pokemon.hp > 0:
+                            wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+
+                    else:
+                        wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+
+                        if party_slot[0].hp > 0:
+                            party_slot[0].move1.attack(party_slot[0].move1, wild_pokemon, party_slot[0])
+
                     break
 
                 if keys[pygame.K_2]:
-                    party_slot[0].move2.attack(party_slot[0].move2, wild_pokemon, party_slot[0])
-                    wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+                    if party_slot[0].speed >= wild_pokemon.speed:
+                        party_slot[0].move2.attack(party_slot[0].move2, wild_pokemon, party_slot[0])
+
+                        if wild_pokemon.hp > 0:
+                            wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+
+                    else:
+                        wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+
+                        if party_slot[0].hp > 0:
+                            party_slot[0].move2.attack(party_slot[0].move2, wild_pokemon, party_slot[0])
+
                     break
 
                 if keys[pygame.K_3]:
-                    party_slot[0].move3.attack(party_slot[0].move3, wild_pokemon, party_slot[0])
-                    wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+                    if party_slot[0].speed >= wild_pokemon.speed:
+                        party_slot[0].move3.attack(party_slot[0].move3, wild_pokemon, party_slot[0])
+
+                        if wild_pokemon.hp > 0:
+                            wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+
+                    else:
+                        wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+
+                        if party_slot[0].hp > 0:
+                            party_slot[0].move3.attack(party_slot[0].move3, wild_pokemon, party_slot[0])
+
                     break
 
                 if keys[pygame.K_4]:
-                    party_slot[0].move4.attack(party_slot[0].move4, wild_pokemon, party_slot[0])
-                    wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+                    if party_slot[0].speed >= wild_pokemon.speed:
+                        party_slot[0].move4.attack(party_slot[0].move4, wild_pokemon, party_slot[0])
+
+                        if wild_pokemon.hp > 0:
+                            wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+
+                    else:
+                        wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+
+                        if party_slot[0].hp > 0:
+                            party_slot[0].move4.attack(party_slot[0].move4, wild_pokemon, party_slot[0])
+
                     break
 
 
@@ -621,3 +666,19 @@ def main():
         redraw_window()
 
 main()
+
+
+
+string = "Hello"
+also_string = "1"
+integer = 1
+also_integer = 100000
+boolean = True
+also_boolean = False
+floats = 1.043
+
+# Data structures
+list = ["james", "ethan", "rishiv"]
+
+another_list = [string, also_string, integer, also_integer, boolean, also_boolean, floats]
+
