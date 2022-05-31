@@ -304,6 +304,11 @@ def main():
     velocity = 7
     player = Player(WIDTH/2-50, HEIGHT/2-50)
 
+    party_slot_img_right = Player(WIDTH / 2 - 125, HEIGHT / 2 - 50)
+    party_slot_img_left = Player(WIDTH / 2 + 25, HEIGHT / 2 -50)
+    party_slot_img_down = Player(WIDTH / 2 - 50, HEIGHT / 2 - 125)
+    party_slot_img_up = Player(WIDTH / 2 - 50, HEIGHT / 2 + 25)
+
     pallet_town = Background(0-(BG_W * .015), 0-(BG_H/2))
 
     global step_counter, left, right
@@ -314,21 +319,24 @@ def main():
     def redraw_window():
         WIN.fill(BLACK)
         pallet_town.draw(WIN, PALLET_TOWN)
-
         player.draw(WIN, TRAINER_DOWN_IMG)
 
         if left:
             player.draw(WIN, TRAINER_RIGHT_IMG)
+            party_slot_img_right.draw(WIN, party_slot[0].poke_img)
             # step_counter += 1
 
         if right:
             player.draw(WIN, TRAINER_LEFT_IMG)
+            party_slot_img_left.draw(WIN, party_slot[0].poke_img)
 
         if up:
             player.draw(WIN, TRAINER_DOWN_IMG)
+            party_slot_img_down.draw(WIN, party_slot[0].poke_img)
 
         if down:
             player.draw(WIN, TRAINER_UP_IMG)
+            party_slot_img_up.draw(WIN, party_slot[0].poke_img)
 
         pygame.display.update()
 
@@ -653,19 +661,4 @@ def main():
         redraw_window()
 
 main()
-
-
-
-string = "Hello"
-also_string = "1"
-integer = 1
-also_integer = 100000
-boolean = True
-also_boolean = False
-floats = 1.043
-
-# Data structures
-list = ["james", "ethan", "rishiv"]
-
-another_list = [string, also_string, integer, also_integer, boolean, also_boolean, floats]
 
