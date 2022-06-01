@@ -411,6 +411,7 @@ def main():
     def battle():
         battling = True
         wild_pokemon = random.choice(POKE_DEX)
+        wild_pokemon = wild_pokemon.add_pokemon()
         wild_pokemon_img = Player(WIDTH / 2 + 100, HEIGHT * .20)
         party_slot_img = Player(WIDTH / 3 - 125, HEIGHT * .55)
         turn_counter = 1
@@ -432,10 +433,10 @@ def main():
                 MOVE_4_BUTTON = Button("4: " + party_slot[0].move4.name, (WIDTH / 2 + 100, HEIGHT * .85), font=30,
                                        bg="navy", feedback=party_slot[0].move4.name)
 
-                PLAYER_HP = Button(str(party_slot[0].name) + " " + str(party_slot[0].hp), (WIDTH / 3 - 125, HEIGHT * .65), font=30,
+                PLAYER_HP = Button("level " + str(party_slot[0].level) + " " + str(party_slot[0].name) + " | HP: " + str(party_slot[0].hp), (WIDTH / 3 - 125, HEIGHT * .65), font=20,
                                        bg="navy", feedback=party_slot[0].move4.name)
 
-                ENEMY_HP = Button(str(wild_pokemon.name) + " " + str(wild_pokemon.hp), (WIDTH / 2 + 100, HEIGHT * .15), font=30,
+                ENEMY_HP = Button("level " + str(wild_pokemon.level) + " " + str(wild_pokemon.name) + " | HP: " + str(wild_pokemon.hp), (WIDTH / 2 + 100, HEIGHT * .15), font=20,
                                    bg="navy", feedback=party_slot[0].move4.name)
 
                 for event in pygame.event.get():
@@ -520,17 +521,17 @@ def main():
                 WIN.fill(BLACK)
 
                 # Party Buttons
-                PARTY_SLOT_1_BUTTON = Button("1: " + party_slot[0].name, (WIDTH / 3 - 125, HEIGHT * .15), font=30,
+                PARTY_SLOT_1_BUTTON = Button("1: level " + str(party_slot[0].level) + " " + party_slot[0].name, (WIDTH / 3 - 125, HEIGHT * .15), font=30,
                                              bg="navy", feedback="You chose slot 1")
-                PARTY_SLOT_2_BUTTON = Button("2: " + party_slot[1].name, (WIDTH / 2 + 100, HEIGHT * .15), font=30,
+                PARTY_SLOT_2_BUTTON = Button("2: level " + str(party_slot[1].level) + " " + party_slot[1].name, (WIDTH / 2 + 100, HEIGHT * .15), font=30,
                                              bg="navy", feedback="You chose slot 2")
-                PARTY_SLOT_3_BUTTON = Button("3: " + party_slot[2].name, (WIDTH / 3 - 125, HEIGHT * .25), font=30,
+                PARTY_SLOT_3_BUTTON = Button("3: level " + str(party_slot[2].level) + " " + party_slot[2].name, (WIDTH / 3 - 125, HEIGHT * .25), font=30,
                                              bg="navy", feedback="You chose slot 3")
-                PARTY_SLOT_4_BUTTON = Button("4: " + party_slot[3].name, (WIDTH / 2 + 100, HEIGHT * .25), font=30,
+                PARTY_SLOT_4_BUTTON = Button("4: level " + str(party_slot[3].level) + " " + party_slot[3].name, (WIDTH / 2 + 100, HEIGHT * .25), font=30,
                                              bg="navy", feedback="You chose slot 4")
-                PARTY_SLOT_5_BUTTON = Button("5: " + party_slot[4].name, (WIDTH / 3 - 125, HEIGHT * .35), font=30,
+                PARTY_SLOT_5_BUTTON = Button("5: level " + str(party_slot[4].level) + " " + party_slot[4].name, (WIDTH / 3 - 125, HEIGHT * .35), font=30,
                                              bg="navy", feedback="You chose slot 5")
-                PARTY_SLOT_6_BUTTON = Button("6: " + party_slot[5].name, (WIDTH / 2 + 100, HEIGHT * .35), font=30,
+                PARTY_SLOT_6_BUTTON = Button("6: level " + str(party_slot[5].level) + " " + party_slot[5].name, (WIDTH / 2 + 100, HEIGHT * .35), font=30,
                                              bg="navy", feedback="You chose slot 6")
 
                 for event in pygame.event.get():
@@ -672,8 +673,8 @@ def main():
                     wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
                     turn_counter += 1
 
-            PLAYER_HP = Button(str(party_slot[0].name) + " " + str(party_slot[0].hp), (WIDTH / 3 - 125, HEIGHT * .65), font=30, bg="navy", feedback=party_slot[0].move4.name)
-            ENEMY_HP = Button(str(wild_pokemon.name) + " " + str(wild_pokemon.hp), (WIDTH / 2 + 100, HEIGHT * .15), font=30, bg="navy", feedback=party_slot[0].move4.name)
+            PLAYER_HP = Button("level " + str(party_slot[0].level) + " " + str(party_slot[0].name) + " | HP: " + str(party_slot[0].hp), (WIDTH / 3 - 125, HEIGHT * .65), font=25, bg="navy", feedback=party_slot[0].move4.name)
+            ENEMY_HP = Button("level " + str(wild_pokemon.level) + " " + str(wild_pokemon.name) + " | HP: " + str(wild_pokemon.hp), (WIDTH / 2 + 100, HEIGHT * .15), font=25, bg="navy", feedback=party_slot[0].move4.name)
             TURN_NUM = Button("Turn: " + str(turn_counter), (0, 0), font=30, bg="navy", feedback=str(turn_counter))
 
             FIGHT_BATTLE_BUTTON.show(FIGHT_BATTLE_BUTTON)
