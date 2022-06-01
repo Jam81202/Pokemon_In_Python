@@ -201,7 +201,7 @@ class Background():
 
 FIGHT_BATTLE_BUTTON = Button("FIGHT (F)", ((WIDTH/3)-125, HEIGHT * .75), font = 30, bg = "navy", feedback = "start fight")
 POKEMON_BATTLE_BUTTON = Button("POKEMON (P)", (WIDTH/2+100, HEIGHT * .75), font = 30, bg = "navy", feedback = "view party")
-ITEMS_BATTLE_BUTTON = Button("BAG (B)", ((WIDTH/3)-125, HEIGHT * .85), font = 30, bg = "navy", feedback = "check bag")
+ITEMS_BATTLE_BUTTON = Button("BAG (I)", ((WIDTH/3)-125, HEIGHT * .85), font = 30, bg = "navy", feedback = "check bag")
 RUN_BATTLE_BUTTON = Button("RUN (R)", (WIDTH/2+100, HEIGHT * .85), font = 30, bg = "navy", feedback = "you did not get away")
 
 # Items (name, level_raise, maxhp, heal_amt, atk_raise, df_raise, spatk_raise, spdf_raise, speed_raise)
@@ -404,6 +404,7 @@ def main():
         wild_pokemon = random.choice(POKE_DEX)
         wild_pokemon_img = Player(WIDTH / 2 + 100, HEIGHT * .20)
         party_slot_img = Player(WIDTH / 3 - 125, HEIGHT * .55)
+        turn_counter = 1
 
         def fight():
             selecting = True
@@ -505,6 +506,7 @@ def main():
 
         def party():
             selecting = True
+
             while selecting:
                 WIN.fill(BLACK)
 
@@ -631,12 +633,18 @@ def main():
             keys = pygame.key.get_pressed()
             if keys[pygame.K_f]:
                 fight()
+                turn_counter += 1
 
             if keys[pygame.K_p]:
                 party()
+                wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+                turn_counter += 1
 
-            if keys[pygame.K_b]:
+            if keys[pygame.K_i]:
                 bag()
+                wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+                time.sleep(1)
+                turn_counter += 1
 
             if keys[pygame.K_r]:
                 run_away = run()
@@ -648,6 +656,8 @@ def main():
                 elif run_away > 7:
                     print("you did not run away")
                     time.sleep(1)
+                    wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+                    turn_counter += 1
 
             PLAYER_HP = Button(str(party_slot[0].name) + " " + str(party_slot[0].hp), (WIDTH / 3 - 125, HEIGHT * .65),
                                font=30,
@@ -657,6 +667,8 @@ def main():
                               font=30,
                               bg="navy", feedback=party_slot[0].move4.name)
 
+            TURN_NUM = Button("Turn: " + str(turn_counter), (0, 0), font=30, bg="navy", feedback=str(turn_counter))
+
 
 
             FIGHT_BATTLE_BUTTON.show(FIGHT_BATTLE_BUTTON)
@@ -665,6 +677,7 @@ def main():
             RUN_BATTLE_BUTTON.show(RUN_BATTLE_BUTTON)
             PLAYER_HP.show(PLAYER_HP)
             ENEMY_HP.show(ENEMY_HP)
+            TURN_NUM.show(TURN_NUM)
 
             pygame.display.update()
 
