@@ -118,9 +118,10 @@ class Moves:
             print(attacker.name + ": Missed")
 
 class Items:
-    def __init__(self, name, level_raise, heal_amt, atk_raise, df_raise, spatk_raise, spdf_raise, speed_raise):
+    def __init__(self, name, level_raise, maxhp_raise, heal_amt, atk_raise, df_raise, spatk_raise, spdf_raise, speed_raise):
         self.name = name
         self.level_raise = level_raise
+        self.maxhp_raise = maxhp_raise
         self.heal_amt = heal_amt
         self.atk_raise = atk_raise
         self.df_raise = df_raise
@@ -131,6 +132,9 @@ class Items:
     def stat_raise(self, pokemon):
         if self.level_raise > 0:
             pokemon.level += self.level_raise
+
+        elif self.maxhp_raise > 0:
+            pokemon.maxhp += self.maxhp_raise
 
         elif self.heal_amt > 0:
             pokemon.hp += self.heal_amt
@@ -195,11 +199,31 @@ class Background():
     def draw(self, window, img):
         window.blit(img, (self.x, self.y))
 
-
 FIGHT_BATTLE_BUTTON = Button("FIGHT (F)", ((WIDTH/3)-125, HEIGHT * .75), font = 30, bg = "navy", feedback = "start fight")
 POKEMON_BATTLE_BUTTON = Button("POKEMON (P)", (WIDTH/2+100, HEIGHT * .75), font = 30, bg = "navy", feedback = "view party")
 ITEMS_BATTLE_BUTTON = Button("BAG (B)", ((WIDTH/3)-125, HEIGHT * .85), font = 30, bg = "navy", feedback = "check bag")
 RUN_BATTLE_BUTTON = Button("RUN (R)", (WIDTH/2+100, HEIGHT * .85), font = 30, bg = "navy", feedback = "you did not get away")
+
+# Items (name, level_raise, maxhp, heal_amt, atk_raise, df_raise, spatk_raise, spdf_raise, speed_raise)
+# Healing items
+POTION = Items("Potion", 0, 0, 20, 0, 0, 0, 0, 0)
+SUPER_POTION = Items("Potion", 0, 0, 60, 0, 0, 0, 0, 0)
+HYPER_POTION = Items("Potion", 0, 0, 120, 0, 0, 0, 0, 0)
+
+# Level Items
+RARE_CANDY = Items("Rare Candy", 0, 5, 0, 0, 0, 0, 0, 0)
+XL_CANDY = Items("Extra Large Candy", 0, 4, 0, 0, 0, 0, 0, 0)
+L_CANDY = Items("Large Candy", 0, 3, 0, 0, 0, 0, 0, 0)
+M_CANDY = Items("Medium Candy", 0, 2, 0, 0, 0, 0, 0, 0)
+S_CANDY = Items("Small Candy", 0, 1, 0, 0, 0, 0, 0, 0)
+
+# Battle Stat Items
+CALCIUM = Items("Calcium", 0, 0, 0, 0, 0, 10, 0, 0)
+CARBOS = Items("Carbos", 0, 0, 0, 0, 0, 0, 0, 10)
+HP_UP = Items("HP Up", 0, 10, 0, 0, 0, 0, 0, 0)
+IRON = Items("Iron", 0, 0, 0, 0, 10, 0, 0, 0)
+PROTEIN = Items("Protein", 0, 0, 0, 10, 0, 0, 0, 0)
+ZINC = Items("Zinc", 0, 0, 0, 0, 0, 0, 10, 0)
 
 # Moves (name, attack type, damage, accuracy, priority)
 EMPTY = Moves("Empty", "atk", 0, 0, 2) # Use this move to show you don't have a move in that slot
