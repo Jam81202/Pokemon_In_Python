@@ -82,8 +82,15 @@ class Pokemon:
         elif random_move == 4:
             attacker.move4.attack(attacker.move4, defender, attacker)
 
-    def add_pokemon(self, pokemon):
-        new_poke = Pokemon(pokemon.name, pokemon.poke_img, pokemon.level, pokemon.hp, pokemon.atk, pokemon.df, pokemon.spatk, pokemon.spdf, pokemon.speed, pokemon.move1, pokemon.move2, pokemon.move3, pokemon.move4)
+    def stat_calc(self, level, stat):
+        return int((stat + 1) + (0.4 * level) ** 1.5)
+
+    def add_pokemon(self):
+        rand_level = random.randint(1, 60)
+        new_poke = Pokemon(self.name, self.poke_img, rand_level, self.stat_calc(rand_level, self.hp), self.stat_calc(rand_level, self.atk),
+                           self.stat_calc(rand_level, self.df), self.stat_calc(rand_level, self.spatk), self.stat_calc(rand_level, self.spdf),
+                           self.stat_calc(rand_level, self.speed), self.move1, self.move2, self.move3, self.move4)
+
         return new_poke
 
 class Moves:
@@ -304,29 +311,29 @@ MOVE_INDEX = [EMPTY, QUICK_ATK, TACKLE, SLAM, SCRATCH, BODY_SLAM, EMBER, FIRE_SP
               CONFUSION, PSYBEAM, PSYCHIC, TELEPORT, REST, DOUBLE_KICK, ROLLING_KICK]
 
 # Pokemon name, poke_img, level, hp, atk, df, spatk, spdf, speed, move1, move2, move3, move4
-PIKACHU = Pokemon("Pikachu", PIKA_IMG, 5, 35, 55, 40, 50, 50, 90, QUICK_ATK, TACKLE, THUNDER_SHOCK, FISSURE)
-CHARMANDER = Pokemon("Charmander", CHAR_IMG, 5, 39, 52, 43, 60, 50, 65, TACKLE, EMPTY, EMBER, FIRE_SPIN)
-TOTODILE = Pokemon("Totodile", TOTODILE_IMG, 5, 50, 65, 64, 44, 48, 43, EMPTY, WATER_GUN, TACKLE, SCRATCH)
-BULBASAUR = Pokemon("Bulbasaur", BULB_IMG, 5, 45, 49, 49, 65, 65, 45, RAZOR_LEAF, EMPTY, TACKLE, SLAM)
-EEVEE = Pokemon("Eevee", UMB_IMG, 5, 95, 65, 110, 60, 130, 65, EMPTY, TACKLE, QUICK_ATK, SCRATCH)
-GENGAR = Pokemon("Gengar", GENGAR_IMG, 5, 60, 65, 60, 130, 75, 110, EMPTY, NIGHT_SHADE, SLUDGE, QUICK_ATK)
-CATERPIE = Pokemon("Caterpie", GENGAR_IMG, 5, 45, 30, 35, 20, 20, 45, QUICK_ATK, SCRATCH, TACKLE, EMPTY)
-WEEDLE = Pokemon("Weedle", GENGAR_IMG, 5, 40, 35, 30, 20, 20, 50, POISON_STING, SCRATCH, TACKLE, QUICK_ATK)
-PIDGEY = Pokemon("Pidgey", GENGAR_IMG, 5, 40, 45, 40, 35, 35, 56, FLY, GUST, TACKLE, QUICK_ATK)
-RATTATA = Pokemon("Rattata", GENGAR_IMG, 5, 30, 56, 35, 25, 35, 72, THUNDERBOLT, SCRATCH, TACKLE, QUICK_ATK)
-SPEAROW = Pokemon("Spearow", GENGAR_IMG, 5, 40, 60, 30, 31, 31, 70, PECK, DRILL_PECK, GUST, QUICK_ATK)
-EKANS = Pokemon("Ekans", GENGAR_IMG, 5, 35, 60, 44, 40, 54, 55, SLUDGE, POISON_STING, ACID, QUICK_ATK)
-SANDSHREW = Pokemon("Sandshrew", GENGAR_IMG, 5, 50, 75, 85, 20, 30, 40, POISON_STING, SCRATCH, DIG, EARTHQUAKE)
-CLEFAIRY = Pokemon("Clefairy", GENGAR_IMG, 5, 70, 45, 48, 60, 65, 35, PSYCHIC, PSYBEAM, CONFUSION, SLAM)
-VULPIX = Pokemon("Vulpix", GENGAR_IMG, 5, 38, 41, 40, 50, 65, 65, EMBER, FLAMETHROWER, FIRE_BLAST, QUICK_ATK)
-ZUBAT = Pokemon("Zubat", GENGAR_IMG, 5, 40, 45, 35, 30, 40, 55, ABSORB, POISON_STING, GUST, QUICK_ATK)
-ODDISH = Pokemon("Oddish", GENGAR_IMG, 5, 45, 50, 55, 75, 65, 30, ACID, ABSORB, MEGA_DRAIN, POISON_STING)
-PSYDUCK = Pokemon("Psyduck", GENGAR_IMG, 5, 50, 52, 48, 65, 50, 55, CONFUSION, SCRATCH, WATER_GUN, BUBBLE)
-MANKEY = Pokemon("Mankey", GENGAR_IMG, 5, 40, 80, 35, 35, 45, 70, THUNDER_PUNCH, SCRATCH, ROLLING_KICK, DOUBLE_KICK)
-GROWLITHE = Pokemon("Growlithe", GENGAR_IMG, 5, 55, 70, 45, 70, 50, 60, EMBER, FLAMETHROWER, TACKLE, FIRE_SPIN)
-ABRA = Pokemon("Abra", GENGAR_IMG, 5, 25, 20, 15, 105, 55, 90, TELEPORT, EMPTY, EMPTY, EMPTY)
-SNORLAX = Pokemon("Snorlax", GENGAR_IMG, 5, 160, 110, 65, 65, 110, 30, BODY_SLAM, SCRATCH, TACKLE, REST)
-DRAGONITE = Pokemon("Dragonite", GENGAR_IMG, 5, 91, 134, 95, 100, 100, 80, DRAGON_RAGE, FLY, THUNDER_PUNCH, SURF)
+PIKACHU = Pokemon("Pikachu", PIKA_IMG, 1, 12, 6, 6, 5, 6, 7, QUICK_ATK, TACKLE, THUNDER_SHOCK, FISSURE)
+CHARMANDER = Pokemon("Charmander", CHAR_IMG, 1, 12, 6, 6, 5, 6, 6, TACKLE, EMPTY, EMBER, FIRE_SPIN)
+TOTODILE = Pokemon("Totodile", TOTODILE_IMG, 1, 12, 6, 6, 5, 6, 6, EMPTY, WATER_GUN, TACKLE, SCRATCH)
+BULBASAUR = Pokemon("Bulbasaur", BULB_IMG, 1, 12, 6, 6, 5, 6, 6, RAZOR_LEAF, EMPTY, TACKLE, SLAM)
+EEVEE = Pokemon("Eevee", UMB_IMG, 1, 12, 6, 6, 5, 6, 6, EMPTY, TACKLE, QUICK_ATK, SCRATCH)
+GENGAR = Pokemon("Gengar", GENGAR_IMG, 1, 12, 6, 6, 6, 6, 7, EMPTY, NIGHT_SHADE, SLUDGE, QUICK_ATK)
+CATERPIE = Pokemon("Caterpie", GENGAR_IMG, 1, 12, 5, 6, 4, 5, 6, QUICK_ATK, SCRATCH, TACKLE, EMPTY)
+WEEDLE = Pokemon("Weedle", GENGAR_IMG, 1, 12, 6, 5, 4, 5, 6, POISON_STING, SCRATCH, TACKLE, QUICK_ATK)
+PIDGEY = Pokemon("Pidgey", GENGAR_IMG, 1, 12, 6, 6, 5, 6, 6, FLY, GUST, TACKLE, QUICK_ATK)
+RATTATA = Pokemon("Rattata", GENGAR_IMG, 1, 11, 6, 6, 4, 6, 6, THUNDERBOLT, SCRATCH, TACKLE, QUICK_ATK)
+SPEAROW = Pokemon("Spearow", GENGAR_IMG, 1, 12, 6, 5, 4, 5, 6, PECK, DRILL_PECK, GUST, QUICK_ATK)
+EKANS = Pokemon("Ekans", GENGAR_IMG, 1, 12, 6, 6, 5, 6, 6, SLUDGE, POISON_STING, ACID, QUICK_ATK)
+SANDSHREW = Pokemon("Sandshrew", GENGAR_IMG, 1, 12, 6, 7, 4, 5, 6, POISON_STING, SCRATCH, DIG, EARTHQUAKE)
+CLEFAIRY = Pokemon("Clefairy", GENGAR_IMG, 1, 12, 6, 6, 5, 6, 6, PSYCHIC, PSYBEAM, CONFUSION, SLAM)
+VULPIX = Pokemon("Vulpix", GENGAR_IMG, 1, 12, 6, 6, 5, 6, 6, EMBER, FLAMETHROWER, FIRE_BLAST, QUICK_ATK)
+ZUBAT = Pokemon("Zubat", GENGAR_IMG, 1, 12, 6, 6, 4, 6, 6, ABSORB, POISON_STING, GUST, QUICK_ATK)
+ODDISH = Pokemon("Oddish", GENGAR_IMG, 1, 12, 6, 6, 5, 6, 5, ACID, ABSORB, MEGA_DRAIN, POISON_STING)
+PSYDUCK = Pokemon("Psyduck", GENGAR_IMG, 1, 12, 6, 6, 5, 6, 6, CONFUSION, SCRATCH, WATER_GUN, BUBBLE)
+MANKEY = Pokemon("Mankey", GENGAR_IMG, 1, 12, 6, 6, 5, 6, 6, THUNDER_PUNCH, SCRATCH, ROLLING_KICK, DOUBLE_KICK)
+GROWLITHE = Pokemon("Growlithe", GENGAR_IMG, 1, 12, 6, 6, 5, 6, 6, EMBER, FLAMETHROWER, TACKLE, FIRE_SPIN)
+ABRA = Pokemon("Abra", GENGAR_IMG, 1, 11, 5, 5, 6, 6, 7, TELEPORT, EMPTY, EMPTY, EMPTY)
+SNORLAX = Pokemon("Snorlax", GENGAR_IMG, 1, 14, 7, 6, 5, 7, 5, BODY_SLAM, SCRATCH, TACKLE, REST)
+DRAGONITE = Pokemon("Dragonite", GENGAR_IMG, 1, 13, 7, 7, 6, 7, 6, DRAGON_RAGE, FLY, THUNDER_PUNCH, SURF)
 
 POKE_DEX = [PIKACHU, CHARMANDER, TOTODILE, BULBASAUR, EEVEE, GENGAR, CATERPIE, WEEDLE, WEEDLE, PIDGEY,
             RATTATA, SPEAROW, EKANS, SANDSHREW, CLEFAIRY, VULPIX, ZUBAT, ODDISH, PSYDUCK, MANKEY, GROWLITHE,
