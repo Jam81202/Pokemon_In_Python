@@ -103,12 +103,12 @@ class Moves:
             if move.atk_type == "atk":
                 damage = 1 + max(0, (move.dmg / 500) * ((2 * attacker.atk) - defender.df))
                 defender.hp -= int(damage)
-                print(int(damage))
+                print("damage:", int(damage))
 
             elif move.atk_type == "spatk":
                 damage = 1 + max(0, (move.dmg / 500) * ((2 * attacker.spatk) - defender.spdf))
                 defender.hp -= int(damage)
-                print(int(damage))
+                print("damage:", int(damage))
 
             elif move.atk_type == "status":
                 if move.name == "Rest":
@@ -224,6 +224,8 @@ HP_UP = Items("HP Up", 0, 10, 0, 0, 0, 0, 0, 0)
 IRON = Items("Iron", 0, 0, 0, 0, 10, 0, 0, 0)
 PROTEIN = Items("Protein", 0, 0, 0, 10, 0, 0, 0, 0)
 ZINC = Items("Zinc", 0, 0, 0, 0, 0, 0, 10, 0)
+
+ITEM_LIST = [POTION, SUPER_POTION, HYPER_POTION, RARE_CANDY, XL_CANDY, L_CANDY, M_CANDY, S_CANDY, CALCIUM, CARBOS, HP_UP, IRON, PROTEIN, ZINC]
 
 # Moves (name, attack type, damage, accuracy, priority)
 EMPTY = Moves("Empty", "atk", 0, 0, 2) # Use this move to show you don't have a move in that slot
@@ -613,10 +615,6 @@ def main():
             wild_pokemon_img.draw(WIN, wild_pokemon.poke_img)
             party_slot_img.draw(WIN, party_slot[0].poke_img)
 
-            if wild_pokemon.hp <= 0:
-                print("You Won!")
-                break
-
             if party_slot[0].hp <= 0:
                 if party_slot[1].hp <= 0:
                     if party_slot[2].hp <= 0:
@@ -625,6 +623,14 @@ def main():
                                 if party_slot[5].hp <= 0:
                                     print("You Lost!")
                                     break
+
+            if party_slot[0].hp <= 0:
+                party_slot[0].hp += abs(party_slot[0].hp)
+                print("Your", party_slot[0].name, "has fainted!")
+
+            if wild_pokemon.hp <= 0:
+                wild_pokemon.hp += abs(wild_pokemon.hp)
+                print("The wild", wild_pokemon.name, "has fainted!")
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -659,17 +665,9 @@ def main():
                     wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
                     turn_counter += 1
 
-            PLAYER_HP = Button(str(party_slot[0].name) + " " + str(party_slot[0].hp), (WIDTH / 3 - 125, HEIGHT * .65),
-                               font=30,
-                               bg="navy", feedback=party_slot[0].move4.name)
-
-            ENEMY_HP = Button(str(wild_pokemon.name) + " " + str(wild_pokemon.hp), (WIDTH / 2 + 100, HEIGHT * .15),
-                              font=30,
-                              bg="navy", feedback=party_slot[0].move4.name)
-
+            PLAYER_HP = Button(str(party_slot[0].name) + " " + str(party_slot[0].hp), (WIDTH / 3 - 125, HEIGHT * .65), font=30, bg="navy", feedback=party_slot[0].move4.name)
+            ENEMY_HP = Button(str(wild_pokemon.name) + " " + str(wild_pokemon.hp), (WIDTH / 2 + 100, HEIGHT * .15), font=30, bg="navy", feedback=party_slot[0].move4.name)
             TURN_NUM = Button("Turn: " + str(turn_counter), (0, 0), font=30, bg="navy", feedback=str(turn_counter))
-
-
 
             FIGHT_BATTLE_BUTTON.show(FIGHT_BATTLE_BUTTON)
             POKEMON_BATTLE_BUTTON.show(POKEMON_BATTLE_BUTTON)
@@ -680,6 +678,14 @@ def main():
             TURN_NUM.show(TURN_NUM)
 
             pygame.display.update()
+
+            if party_slot[0].hp == 0:
+                time.sleep(2)
+                party()
+
+            if wild_pokemon.hp == 0:
+                time.sleep(2)
+                break
 
         wild_pokemon.heal()
 
