@@ -60,8 +60,8 @@ class Pokemon:
         self.move4 = move4
         self.maxhp = hp
 
-    def heal(self, pokemon):
-        pokemon.hp = pokemon.maxhp
+    def heal(self):
+        self.hp = self.maxhp
 
     def heal_party(self, player_party):
         for pokemon in player_party:
@@ -112,10 +112,43 @@ class Moves:
 
             elif move.atk_type == "status":
                 if move.name == "Rest":
-                    attacker.heal(attacker)
+                    attacker.heal()
 
         else:
             print(attacker.name + ": Missed")
+
+class Items:
+    def __init__(self, name, level_raise, heal_amt, atk_raise, df_raise, spatk_raise, spdf_raise, speed_raise):
+        self.name = name
+        self.level_raise = level_raise
+        self.heal_amt = heal_amt
+        self.atk_raise = atk_raise
+        self.df_raise = df_raise
+        self.spatk_raise = spatk_raise
+        self.spdf_raise = spdf_raise
+        self.speed_raise = speed_raise
+
+    def stat_raise(self, pokemon):
+        if self.level_raise > 0:
+            pokemon.level += self.level_raise
+
+        elif self.heal_amt > 0:
+            pokemon.hp += self.heal_amt
+
+        elif self.atk_raise > 0:
+            pokemon.atk += self.atk_raise
+
+        elif self.df_raise > 0:
+            pokemon.df += self.df_raise
+
+        elif self.spatk_raise > 0:
+            pokemon.spatk += self.spatk_raise
+
+        elif self.spdf_raise > 0:
+            pokemon.spdf += self.spdf_raise
+
+        elif self.speed_raise > 0:
+            pokemon.speed += self.speed_raise
 
 class Button:
     """Create a button, then blit the surface in the while loop"""
@@ -610,6 +643,8 @@ def main():
             ENEMY_HP.show(ENEMY_HP)
 
             pygame.display.update()
+
+        wild_pokemon.heal()
 
     def inventory():
         pass
