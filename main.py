@@ -101,12 +101,14 @@ class Moves:
         if attack_hit <= move.accuracy:
             print(attacker.name + ": hit")
             if move.atk_type == "atk":
-                defender.hp = int(defender.hp - (abs(((move.dmg * (attacker.atk / 200)) - (move.dmg * (defender.df / 400))))))
-                print(abs(((move.dmg * (attacker.atk / 200)) - (move.dmg * (defender.df / 250)))))
+                damage = 1 + max(0, (move.dmg / 500) * ((2 * attacker.atk) - defender.df))
+                defender.hp -= int(damage)
+                print(int(damage))
 
             elif move.atk_type == "spatk":
-                defender.hp = int(defender.hp - (abs(((move.dmg * (attacker.spatk / 200)) - (move.dmg * (defender.spdf / 400))))))
-                print(abs(((move.dmg * (attacker.atk / 200)) - (move.dmg * (defender.df / 250)))))
+                damage = 1 + max(0, (move.dmg / 500) * ((2 * attacker.spatk) - defender.spdf))
+                defender.hp -= int(damage)
+                print(int(damage))
 
             elif move.atk_type == "status":
                 if move.name == "Rest":
