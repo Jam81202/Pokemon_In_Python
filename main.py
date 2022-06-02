@@ -372,6 +372,7 @@ global PARTY_POKE_4
 global PARTY_POKE_5
 global PARTY_POKE_6
 global party
+global pc
 
 PARTY_POKE_1 = Pokemon(GENGAR.name, GENGAR.poke_img, GENGAR.level, GENGAR.hp, GENGAR.atk, GENGAR.df, GENGAR.spatk, GENGAR.spdf, GENGAR.speed, GENGAR.move1, GENGAR.move2, GENGAR.move3, GENGAR.move4)
 PARTY_POKE_2 = Pokemon(CHARMANDER.name, CHARMANDER.poke_img, CHARMANDER.level, CHARMANDER.hp, CHARMANDER.atk, CHARMANDER.df, CHARMANDER.spatk, CHARMANDER.spdf, CHARMANDER.speed, CHARMANDER.move1, CHARMANDER.move2, CHARMANDER.move3, CHARMANDER.move4)
@@ -638,7 +639,149 @@ def main():
                 pygame.display.update()
 
         def bag():
-            pass
+            selecting = True
+
+            while selecting:
+                WIN.fill(BLACK)
+
+                # Bag buttons Buttons
+                POTION_MENU_BUTTON = Button("Z: Potions", (WIDTH / 3 - 125, HEIGHT * .15), font=30, bg="navy", feedback="You chose slot Potions")
+                LEVEL_ITEMS_MENU_BUTTON = Button("X: Level Items", (WIDTH / 3 - 125, HEIGHT * .15), font=30, bg="navy", feedback="You chose slot Level Items")
+                STAT_ITEMS_MENU_BUTTON = Button("C: Stat Items", (WIDTH / 3 - 125, HEIGHT * .15), font=30, bg="navy", feedback="You chose slot Stat Items")
+                POKE_BALLS_MENU_BUTTON = Button("V: Poke Balls", (WIDTH / 3 - 125, HEIGHT * .15), font=30, bg="navy", feedback="You chose slot Poke Balls")
+
+                BACK_BUTTON = Button("<-- Back", (WIDTH / 2 + 100, HEIGHT * .35), font=30, bg="navy", feedback="You chose to go back")
+
+                def potions_menu():
+                    while True:
+                        WIN.fill(BLACK)
+
+                        POTION_BUTTON = Button("1: Potion", (WIDTH / 3 - 125, HEIGHT * .15), font=30, bg="navy", feedback="You chose slot Potion")
+                        SUPER_POTION_BUTTON = Button("2: Super Potion ", (WIDTH / 2 + 100, HEIGHT * .15), font=30, bg="navy", feedback="You chose slot Super Potion")
+                        HYPER_POTION_BUTTON = Button("3: Hyper Potion ", (WIDTH / 3 - 125, HEIGHT * .25), font=30, bg="navy", feedback="You chose slot Hyper Potion")
+                        BACK_BUTTON = Button("<-- Back", (WIDTH / 2 + 100, HEIGHT * .35), font=30, bg="navy", feedback="You chose to go back")
+
+                        POTION_BUTTON.show(POTION_BUTTON)
+                        SUPER_POTION_BUTTON.show(SUPER_POTION_BUTTON)
+                        HYPER_POTION_BUTTON.show(HYPER_POTION_BUTTON)
+                        BACK_BUTTON.show(BACK_BUTTON)
+
+                def level_items_menu():
+                    while True:
+                        WIN.fill(BLACK)
+
+                        RARE_CANDY_BUTTON = Button("1: Rare Candy ", (WIDTH / 2 + 100, HEIGHT * .25), font=30, bg="navy", feedback="You chose slot Rare Candy")
+                        XL_CANDY_BUTTON = Button("2: XL Candy ", (WIDTH / 3 - 125, HEIGHT * .35), font=30, bg="navy", feedback="You chose slot XL Candy")
+                        L_CANDY_BUTTON = Button("3: L Candy ", (WIDTH / 2 + 100, HEIGHT * .35), font=30, bg="navy", feedback="You chose slot L Candy")
+                        M_CANDY_BUTTON = Button("4: M Candy ", (WIDTH / 2 + 100, HEIGHT * .25), font=30, bg="navy", feedback="You chose slot M Candy")
+                        S_CANDY_BUTTON = Button("5: S Candy ", (WIDTH / 3 - 125, HEIGHT * .35), font=30, bg="navy", feedback="You chose slot S Candy")
+                        BACK_BUTTON = Button("<-- Back", (WIDTH / 2 + 100, HEIGHT * .35), font=30, bg="navy", feedback="You chose to go back")
+
+
+
+                        RARE_CANDY_BUTTON.show(RARE_CANDY_BUTTON)
+                        XL_CANDY_BUTTON.show(XL_CANDY_BUTTON)
+                        L_CANDY_BUTTON.show(L_CANDY_BUTTON)
+                        M_CANDY_BUTTON.show(M_CANDY_BUTTON)
+                        S_CANDY_BUTTON.show(S_CANDY_BUTTON)
+                        BACK_BUTTON.show(BACK_BUTTON)
+
+                def stat_items_menu():
+                    while True:
+                        WIN.fill(BLACK)
+
+                        CALCIUM_BUTTON = Button("1: Calcium ", (WIDTH / 2 + 100, HEIGHT * .35), font=30, bg="navy", feedback="You chose slot Calcium")
+                        CARBOS_BUTTON = Button("2: Carbos ", (WIDTH / 2 + 100, HEIGHT * .25), font=30, bg="navy", feedback="You chose slot Carbos")
+                        HP_UP_BUTTON = Button("3: HP Up ", (WIDTH / 3 - 125, HEIGHT * .35), font=30, bg="navy", feedback="You chose slot HP Up")
+                        IRON_BUTTON = Button("4: Iron ", (WIDTH / 2 + 100, HEIGHT * .35), font=30, bg="navy", feedback="You chose slot Iron")
+                        PROTEIN_BUTTON = Button("5: Protein ", (WIDTH / 2 + 100, HEIGHT * .25), font=30, bg="navy", feedback="You chose slot Protein")
+                        ZINC_BUTTON = Button("6: Zinc ", (WIDTH / 3 - 125, HEIGHT * .35), font=30, bg="navy", feedback="You chose slot Zinc")
+                        BACK_BUTTON = Button("<-- Back", (WIDTH / 2 + 100, HEIGHT * .35), font=30, bg="navy", feedback="You chose to go back")
+
+                        CALCIUM_BUTTON.show(CALCIUM_BUTTON)
+                        CARBOS_BUTTON.show(CARBOS_BUTTON)
+                        HP_UP_BUTTON.show(HP_UP_BUTTON)
+                        IRON_BUTTON.show(IRON_BUTTON)
+                        PROTEIN_BUTTON.show(PROTEIN_BUTTON)
+                        ZINC_BUTTON.show(ZINC_BUTTON)
+                        BACK_BUTTON.show(BACK_BUTTON)
+
+                def poke_balls_menu():
+                    while True:
+                        WIN.fill(BLACK)
+
+                        POKE_BALL_BUTTON = Button("1: Poke Ball ", (WIDTH / 2 + 100, HEIGHT * .35), font=30, bg="navy", feedback="You chose slot Poke Ball")
+                        GREAT_BALL_BUTTON = Button("2: Great Ball ", (WIDTH / 2 + 100, HEIGHT * .25), font=30, bg="navy", feedback="You chose slot Great Ball")
+                        ULTRA_BALL_BUTTON = Button("3: Ultra Ball ", (WIDTH / 3 - 125, HEIGHT * .35), font=30, bg="navy", feedback="You chose slot Ultra Ball")
+                        MASTER_BALL_BUTTON = Button("4: Master Ball ", (WIDTH / 2 + 100, HEIGHT * .35), font=30, bg="navy", feedback="You chose slot Master Ball")
+                        BACK_BUTTON = Button("<-- Back", (WIDTH / 2 + 100, HEIGHT * .35), font=30, bg="navy", feedback="You chose to go back")
+
+                        for event in pygame.event.get():
+                            if event.type == pygame.QUIT:
+                                pygame.quit()
+
+                        keys = pygame.key.get_pressed()
+
+                        if keys[pygame.K_LEFT]:
+                            break
+
+                        if keys[pygame.K_1]:
+                            POKE_BALL.catch(wild_pokemon, party_slot, pc)
+                            break
+
+                        if keys[pygame.K_2]:
+                            GREAT_BALL.catch(wild_pokemon, party_slot, pc)
+                            break
+
+                        if keys[pygame.K_3]:
+                            ULTRA_BALL.catch(wild_pokemon, party_slot, pc)
+                            break
+
+                        if keys[pygame.K_4]:
+                            MASTER_BALL.catch(wild_pokemon, party_slot, pc)
+                            break
+
+
+                        POKE_BALL_BUTTON.show(POKE_BALL_BUTTON)
+                        GREAT_BALL_BUTTON.show(GREAT_BALL_BUTTON)
+                        ULTRA_BALL_BUTTON.show(ULTRA_BALL_BUTTON)
+                        MASTER_BALL_BUTTON.show(MASTER_BALL_BUTTON)
+                        BACK_BUTTON.show(BACK_BUTTON)
+
+                        pygame.display.update()
+
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+
+                keys = pygame.key.get_pressed()
+
+                if keys[pygame.K_LEFT]:
+                    break
+
+                if keys[pygame.K_z]:
+                    potions_menu()
+                    break
+
+                if keys[pygame.K_x]:
+                    level_items_menu()
+                    break
+
+                if keys[pygame.K_c]:
+                    stat_items_menu()
+                    break
+
+                if keys[pygame.K_v]:
+                    poke_balls_menu()
+                    break
+
+                POTION_MENU_BUTTON.show(POTION_MENU_BUTTON)
+                LEVEL_ITEMS_MENU_BUTTON.show(LEVEL_ITEMS_MENU_BUTTON)
+                STAT_ITEMS_MENU_BUTTON.show(STAT_ITEMS_MENU_BUTTON)
+                POKE_BALLS_MENU_BUTTON.show(POKE_BALLS_MENU_BUTTON)
+                BACK_BUTTON.show(BACK_BUTTON)
+
+                pygame.display.update()
 
         def run():
             return random.randint(1, 10)
@@ -774,6 +917,9 @@ def main():
             up = False
             down = False
             inventory()
+
+        elif keys[pygame.K_p]:
+            print(pc)
 
         else:
             left = False
