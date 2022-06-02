@@ -172,8 +172,38 @@ class Items:
             new_poke = Pokemon(pokemon.name, pokemon.poke_img, pokemon.level, pokemon.hp, pokemon.atk, pokemon.df,
                                 pokemon.spatk, pokemon.spdf, pokemon.speed, pokemon.move1, pokemon.move2, pokemon.move3, pokemon.move4)
 
-            if len(player_party) < 6:
-                player_party.append(new_poke)
+            if player_party[1].name == "":
+                player_party[1] = Pokemon(pokemon.name, pokemon.poke_img, pokemon.level, pokemon.hp, pokemon.atk, pokemon.df,
+                                          pokemon.spatk, pokemon.spdf, pokemon.speed, pokemon.move1, pokemon.move2, pokemon.move3, pokemon.move4)
+
+                print("Added " + pokemon.name + " to party.")
+                return "catch"
+
+            elif player_party[2].name == "":
+                player_party[2] = Pokemon(pokemon.name, pokemon.poke_img, pokemon.level, pokemon.hp, pokemon.atk, pokemon.df,
+                                          pokemon.spatk, pokemon.spdf, pokemon.speed, pokemon.move1, pokemon.move2, pokemon.move3, pokemon.move4)
+
+                print("Added " + pokemon.name + " to party.")
+                return "catch"
+
+            elif player_party[3].name == "":
+                player_party[3] = Pokemon(pokemon.name, pokemon.poke_img, pokemon.level, pokemon.hp, pokemon.atk, pokemon.df,
+                                          pokemon.spatk, pokemon.spdf, pokemon.speed, pokemon.move1, pokemon.move2, pokemon.move3, pokemon.move4)
+
+                print("Added " + pokemon.name + " to party.")
+                return "catch"
+
+            elif player_party[4].name == "":
+                player_party[4] = Pokemon(pokemon.name, pokemon.poke_img, pokemon.level, pokemon.hp, pokemon.atk, pokemon.df,
+                                          pokemon.spatk, pokemon.spdf, pokemon.speed, pokemon.move1, pokemon.move2, pokemon.move3, pokemon.move4)
+
+                print("Added " + pokemon.name + " to party.")
+                return "catch"
+
+            elif player_party[5].name == "":
+                player_party[5] = Pokemon(pokemon.name, pokemon.poke_img, pokemon.level, pokemon.hp, pokemon.atk, pokemon.df,
+                                          pokemon.spatk, pokemon.spdf, pokemon.speed, pokemon.move1, pokemon.move2, pokemon.move3, pokemon.move4)
+
                 print("Added " + pokemon.name + " to party.")
                 return "catch"
 
@@ -278,7 +308,7 @@ BODY_SLAM = Moves("Body Slam", "atk", 85, 100, 2)
 # Fire
 EMBER = Moves("Ember", "spatk", 40, 100, 2)
 FIRE_SPIN = Moves("Fire Spin", "spatk", 35, 95, 2)
-FLAMETHROWER = Moves("Flamethrower", "apatk", 90, 100, 2)
+FLAMETHROWER = Moves("Flamethrower", "spatk", 90, 100, 2)
 FIRE_BLAST = Moves("Fire Blast", "spatk", 110, 85, 2)
 
 # Electric
@@ -342,6 +372,7 @@ MOVE_INDEX = [EMPTY, QUICK_ATK, TACKLE, SLAM, SCRATCH, BODY_SLAM, EMBER, FIRE_SP
               CONFUSION, PSYBEAM, PSYCHIC, TELEPORT, REST, DOUBLE_KICK, ROLLING_KICK]
 
 # Pokemon name, poke_img, level, hp, atk, df, spatk, spdf, speed, move1, move2, move3, move4
+EMPTY_POKE = Pokemon("", PIKA_IMG, 0, 0, 0, 0, 0, 0, 0, EMPTY, EMPTY, EMPTY, EMPTY)
 PIKACHU = Pokemon("Pikachu", PIKA_IMG, 1, 12, 6, 6, 5, 6, 7, QUICK_ATK, TACKLE, THUNDER_SHOCK, FISSURE)
 CHARMANDER = Pokemon("Charmander", CHAR_IMG, 1, 12, 6, 6, 5, 6, 6, TACKLE, EMPTY, EMBER, FIRE_SPIN)
 TOTODILE = Pokemon("Totodile", TOTODILE_IMG, 1, 12, 6, 6, 5, 6, 6, EMPTY, WATER_GUN, TACKLE, SCRATCH)
@@ -380,12 +411,12 @@ global PARTY_POKE_6
 global party
 global pc
 
-PARTY_POKE_1 = Pokemon(GENGAR.name, GENGAR.poke_img, GENGAR.level, GENGAR.hp, GENGAR.atk, GENGAR.df, GENGAR.spatk, GENGAR.spdf, GENGAR.speed, GENGAR.move1, GENGAR.move2, GENGAR.move3, GENGAR.move4)
-PARTY_POKE_2 = Pokemon(CHARMANDER.name, CHARMANDER.poke_img, CHARMANDER.level, CHARMANDER.hp, CHARMANDER.atk, CHARMANDER.df, CHARMANDER.spatk, CHARMANDER.spdf, CHARMANDER.speed, CHARMANDER.move1, CHARMANDER.move2, CHARMANDER.move3, CHARMANDER.move4)
-PARTY_POKE_3 = Pokemon(TOTODILE.name, TOTODILE.poke_img, TOTODILE.level, TOTODILE.hp, TOTODILE.atk, TOTODILE.df, TOTODILE.spatk, TOTODILE.spdf, TOTODILE.speed, TOTODILE.move1, TOTODILE.move2, TOTODILE.move3, TOTODILE.move4)
-PARTY_POKE_4 = Pokemon(BULBASAUR.name, BULBASAUR.poke_img, BULBASAUR.level, BULBASAUR.hp, BULBASAUR.atk, BULBASAUR.df, BULBASAUR.spatk, BULBASAUR.spdf, BULBASAUR.speed, BULBASAUR.move1, BULBASAUR.move2, BULBASAUR.move3, BULBASAUR.move4)
-PARTY_POKE_5 = Pokemon(EEVEE.name, EEVEE.poke_img, EEVEE.level, EEVEE.hp, EEVEE.atk, EEVEE.df, EEVEE.spatk, EEVEE.spdf, EEVEE.speed, EEVEE.move1, EEVEE.move2, EEVEE.move3, EEVEE.move4)
-PARTY_POKE_6 = Pokemon(PIKACHU.name, PIKACHU.poke_img, PIKACHU.level, PIKACHU.hp, PIKACHU.atk, PIKACHU.df, PIKACHU.spatk, PIKACHU.spdf, PIKACHU.speed, PIKACHU.move1, PIKACHU.move2, PIKACHU.move3, PIKACHU.move4)
+PARTY_POKE_1 = Pokemon(TOTODILE.name, TOTODILE.poke_img, TOTODILE.level, TOTODILE.hp, TOTODILE.atk, TOTODILE.df, TOTODILE.spatk, TOTODILE.spdf, TOTODILE.speed, TOTODILE.move1, TOTODILE.move2, TOTODILE.move3, TOTODILE.move4)
+PARTY_POKE_2 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
+PARTY_POKE_3 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
+PARTY_POKE_4 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
+PARTY_POKE_5 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
+PARTY_POKE_6 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
 
 party_slot = [PARTY_POKE_1, PARTY_POKE_2, PARTY_POKE_3, PARTY_POKE_4, PARTY_POKE_5, PARTY_POKE_6]
 PC_STORAGE = []
@@ -769,23 +800,23 @@ def main():
                 keys = pygame.key.get_pressed()
 
                 if keys[pygame.K_LEFT]:
-                    break
+                    return False
 
                 if keys[pygame.K_z]:
                     potions_menu()
-                    break
+                    return True
 
                 if keys[pygame.K_x]:
                     level_items_menu()
-                    break
+                    return True
 
                 if keys[pygame.K_c]:
                     stat_items_menu()
-                    break
+                    return True
 
                 if keys[pygame.K_v]:
                     poke_balls_menu()
-                    break
+                    return True
 
                 POTION_MENU_BUTTON.show(POTION_MENU_BUTTON)
                 LEVEL_ITEMS_MENU_BUTTON.show(LEVEL_ITEMS_MENU_BUTTON)
@@ -835,9 +866,9 @@ def main():
                 turn_counter += 1
 
             if keys[pygame.K_i]:
-                bag()
+                skip = bag()
 
-                if wild_pokemon.hp > 0:
+                if wild_pokemon.hp > 0 and skip:
                     wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
 
                 time.sleep(1)
