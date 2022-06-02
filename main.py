@@ -83,7 +83,7 @@ class Pokemon:
             attacker.move4.attack(attacker.move4, defender, attacker)
 
     def stat_calc(self, level, stat):
-        return int((stat + 1) + (0.4 * level) ** 1.5)
+        return int((stat + 2) + (0.4 * level) ** 1.5)
 
     def add_pokemon(self):
         rand_level = random.randint(1, 60)
@@ -141,7 +141,12 @@ class Items:
 
     def stat_raise(self, pokemon):
         if self.level_raise > 0:
-            pokemon.level += self.level_raise
+            new_level = pokemon.level + self.level_raise
+            new_pokemon = Pokemon(pokemon.name, pokemon.poke_img, new_level, pokemon.stat_calc(new_level, pokemon.hp), pokemon.stat_calc(new_level, pokemon.atk),
+                           pokemon.stat_calc(new_level, pokemon.df), pokemon.stat_calc(new_level, pokemon.spatk), pokemon.stat_calc(new_level, pokemon.spdf),
+                           pokemon.stat_calc(new_level, pokemon.speed), pokemon.move1, pokemon.move2, pokemon.move3, pokemon.move4)
+
+            return new_pokemon
 
         elif self.maxhp_raise > 0:
             pokemon.maxhp += self.maxhp_raise
@@ -411,7 +416,8 @@ global PARTY_POKE_6
 global party
 global pc
 
-PARTY_POKE_1 = Pokemon(TOTODILE.name, TOTODILE.poke_img, TOTODILE.level, TOTODILE.hp, TOTODILE.atk, TOTODILE.df, TOTODILE.spatk, TOTODILE.spdf, TOTODILE.speed, TOTODILE.move1, TOTODILE.move2, TOTODILE.move3, TOTODILE.move4)
+PARTY_POKE_1 = Pokemon(TOTODILE.name, TOTODILE.poke_img, 5, TOTODILE.stat_calc(5, TOTODILE.hp), TOTODILE.stat_calc(5, TOTODILE.atk), TOTODILE.stat_calc(5, TOTODILE.df), TOTODILE.stat_calc(5, TOTODILE.spatk),
+                       TOTODILE.stat_calc(5, TOTODILE.spdf), TOTODILE.stat_calc(5, TOTODILE.speed), TOTODILE.move1, TOTODILE.move2, TOTODILE.move3, TOTODILE.move4)
 PARTY_POKE_2 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
 PARTY_POKE_3 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
 PARTY_POKE_4 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
@@ -604,7 +610,7 @@ def main():
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_1]:
                     print(PARTY_SLOT_1_BUTTON.show_feedback(PARTY_SLOT_1_BUTTON))
-                    break
+                    return True
 
                 if keys[pygame.K_2]:
                     print(PARTY_SLOT_2_BUTTON.show_feedback(PARTY_SLOT_2_BUTTON))
@@ -616,7 +622,7 @@ def main():
                         print("You must pick a conscious pokemon")
                         party()
 
-                    break
+                    return False
 
                 if keys[pygame.K_3]:
                     print(PARTY_SLOT_3_BUTTON.show_feedback(PARTY_SLOT_3_BUTTON))
@@ -628,7 +634,7 @@ def main():
                         print("You must pick a conscious pokemon")
                         party()
 
-                    break
+                    return False
 
                 if keys[pygame.K_4]:
                     print(PARTY_SLOT_4_BUTTON.show_feedback(PARTY_SLOT_4_BUTTON))
@@ -640,7 +646,7 @@ def main():
                         print("You must pick a conscious pokemon")
                         party()
 
-                    break
+                    return False
 
                 if keys[pygame.K_5]:
                     print(PARTY_SLOT_5_BUTTON.show_feedback(PARTY_SLOT_5_BUTTON))
@@ -652,7 +658,7 @@ def main():
                         print("You must pick a conscious pokemon")
                         party()
 
-                    break
+                    return False
 
                 if keys[pygame.K_6]:
                     print(PARTY_SLOT_6_BUTTON.show_feedback(PARTY_SLOT_6_BUTTON))
@@ -664,7 +670,7 @@ def main():
                         print("You must pick a conscious pokemon")
                         party()
 
-                    break
+                    return False
 
                 PARTY_SLOT_1_BUTTON.show(PARTY_SLOT_1_BUTTON)
                 PARTY_SLOT_2_BUTTON.show(PARTY_SLOT_2_BUTTON)
@@ -762,27 +768,28 @@ def main():
                         keys = pygame.key.get_pressed()
 
                         if keys[pygame.K_LEFT]:
-                            break
+                            time.sleep(1)
+                            return True
 
                         if keys[pygame.K_1]:
                             if POKE_BALL.catch(wild_pokemon, party_slot, PC_STORAGE) == "catch":
                                 wild_pokemon.hp = 0
-                            break
+                            return False
 
                         if keys[pygame.K_2]:
                             if GREAT_BALL.catch(wild_pokemon, party_slot, PC_STORAGE) == "catch":
                                 wild_pokemon.hp = 0
-                            break
+                            return False
 
                         if keys[pygame.K_3]:
                             if ULTRA_BALL.catch(wild_pokemon, party_slot, PC_STORAGE) == "catch":
                                 wild_pokemon.hp = 0
-                            break
+                            return False
 
                         if keys[pygame.K_4]:
                             if MASTER_BALL.catch(wild_pokemon, party_slot, PC_STORAGE) == "catch":
                                 wild_pokemon.hp = 0
-                            break
+                            return False
 
 
                         POKE_BALL_BUTTON.show(POKE_BALL_BUTTON)
@@ -800,23 +807,23 @@ def main():
                 keys = pygame.key.get_pressed()
 
                 if keys[pygame.K_LEFT]:
-                    return False
+                    return True
 
                 if keys[pygame.K_z]:
-                    potions_menu()
-                    return True
+                    if not potions_menu():
+                        break
 
                 if keys[pygame.K_x]:
-                    level_items_menu()
-                    return True
+                    if not level_items_menu():
+                        break
 
                 if keys[pygame.K_c]:
-                    stat_items_menu()
-                    return True
+                    if not stat_items_menu():
+                        break
 
                 if keys[pygame.K_v]:
-                    poke_balls_menu()
-                    return True
+                    if not poke_balls_menu():
+                        break
 
                 POTION_MENU_BUTTON.show(POTION_MENU_BUTTON)
                 LEVEL_ITEMS_MENU_BUTTON.show(LEVEL_ITEMS_MENU_BUTTON)
@@ -861,18 +868,20 @@ def main():
                 turn_counter += 1
 
             if keys[pygame.K_p]:
-                party()
-                wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
-                turn_counter += 1
+                skip = party()
+
+                if not skip:
+                    wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+                    turn_counter += 1
 
             if keys[pygame.K_i]:
                 skip = bag()
 
-                if wild_pokemon.hp > 0 and skip:
+                if wild_pokemon.hp > 0 and not skip:
                     wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+                    turn_counter += 1
 
                 time.sleep(1)
-                turn_counter += 1
 
             if keys[pygame.K_r]:
                 run_away = run()
