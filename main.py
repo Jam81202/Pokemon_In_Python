@@ -170,15 +170,21 @@ class Items:
         if pokemon_caught <= self.catch_percent:
             print("You successfully captured a " + pokemon.name + "!")
             new_poke = Pokemon(pokemon.name, pokemon.poke_img, pokemon.level, pokemon.hp, pokemon.atk, pokemon.df,
-                                pokemon.spatk, pokemon.spdf, pokemon.speed, pokemon.move2, pokemon.move4)
+                                pokemon.spatk, pokemon.spdf, pokemon.speed, pokemon.move1, pokemon.move2, pokemon.move3, pokemon.move4)
 
             if len(player_party) < 6:
                 player_party.append(new_poke)
                 print("Added " + pokemon.name + " to party.")
+                return "catch"
 
             else:
                 pc.append(new_poke)
                 print("Added " + pokemon.name + " to pc.")
+                return "catch"
+
+        else:
+            print("You failed to catch " + pokemon.name)
+            return "miss"
 
 class Button:
     """Create a button, then blit the surface in the while loop"""
@@ -252,10 +258,10 @@ PROTEIN = Items("Protein", 0, 0, 0, 10, 0, 0, 0, 0)
 ZINC = Items("Zinc", 0, 0, 0, 0, 0, 0, 10, 0)
 
 # PokeBalls
-POKE_BALL = Items("Poke Ball", 0, 0, 0, 0, 0, 10, 0, 0, 25)
-GREAT_BALL = Items("Great Ball", 0, 0, 0, 0, 0, 10, 0, 0, 50)
-ULTRA_BALL = Items("Ultra Ball", 0, 0, 0, 0, 0, 10, 0, 0, 75)
-MASTER_BALL = Items("Master Ball", 0, 0, 0, 0, 0, 10, 0, 0, 100)
+POKE_BALL = Items("Poke Ball", 0, 0, 0, 0, 0, 0, 0, 0, 25)
+GREAT_BALL = Items("Great Ball", 0, 0, 0, 0, 0, 0, 0, 0, 50)
+ULTRA_BALL = Items("Ultra Ball", 0, 0, 0, 0, 0, 0, 0, 0, 75)
+MASTER_BALL = Items("Master Ball", 0, 0, 0, 0, 0, 0, 0, 0, 100)
 
 ITEM_LIST = [POTION, SUPER_POTION, HYPER_POTION, RARE_CANDY, XL_CANDY, L_CANDY, M_CANDY, S_CANDY, CALCIUM, CARBOS, HP_UP, IRON, PROTEIN, ZINC]
 
@@ -307,7 +313,7 @@ SMOG = Moves("Smog", "spatk", 30, 70, 2)
 BONE_CLUB = Moves("Bone Club", "atk", 65, 85, 2)
 DIG = Moves("Dig", "atk", 80, 100, 2)
 EARTHQUAKE = Moves("Earthquake", "atk", 100, 100, 2)
-FISSURE = Moves("Fissure", "atk", 10000, 30, 2) # This attack 1 hit K.0. if it hits
+FISSURE = Moves("Fissure", "atk", 1000000, 30, 2) # This attack 1 hit K.0. if it hits
 
 # Flying
 DRILL_PECK = Moves("Drill Peck", "atk", 80, 100, 2)
@@ -645,12 +651,12 @@ def main():
                 WIN.fill(BLACK)
 
                 # Bag buttons Buttons
-                POTION_MENU_BUTTON = Button("Z: Potions", (WIDTH / 3 - 125, HEIGHT * .15), font=30, bg="navy", feedback="You chose slot Potions")
-                LEVEL_ITEMS_MENU_BUTTON = Button("X: Level Items", (WIDTH / 3 - 125, HEIGHT * .15), font=30, bg="navy", feedback="You chose slot Level Items")
-                STAT_ITEMS_MENU_BUTTON = Button("C: Stat Items", (WIDTH / 3 - 125, HEIGHT * .15), font=30, bg="navy", feedback="You chose slot Stat Items")
-                POKE_BALLS_MENU_BUTTON = Button("V: Poke Balls", (WIDTH / 3 - 125, HEIGHT * .15), font=30, bg="navy", feedback="You chose slot Poke Balls")
+                POTION_MENU_BUTTON = Button("Z: Potions", (WIDTH / 3 - 125, HEIGHT * .25), font=30, bg="navy", feedback="You chose slot Potions")
+                LEVEL_ITEMS_MENU_BUTTON = Button("X: Level Items", (WIDTH / 3 - 125, HEIGHT * .35), font=30, bg="navy", feedback="You chose slot Level Items")
+                STAT_ITEMS_MENU_BUTTON = Button("C: Stat Items", (WIDTH / 3 - 125, HEIGHT * .45), font=30, bg="navy", feedback="You chose slot Stat Items")
+                POKE_BALLS_MENU_BUTTON = Button("V: Poke Balls", (WIDTH / 3 - 125, HEIGHT * .55), font=30, bg="navy", feedback="You chose slot Poke Balls")
 
-                BACK_BUTTON = Button("<-- Back", (WIDTH / 2 + 100, HEIGHT * .35), font=30, bg="navy", feedback="You chose to go back")
+                BACK_BUTTON = Button("<-- Back", (0, 0), font=30, bg="navy", feedback="You chose to go back")
 
                 def potions_menu():
                     while True:
@@ -665,6 +671,8 @@ def main():
                         SUPER_POTION_BUTTON.show(SUPER_POTION_BUTTON)
                         HYPER_POTION_BUTTON.show(HYPER_POTION_BUTTON)
                         BACK_BUTTON.show(BACK_BUTTON)
+
+                        pygame.display.update()
 
                 def level_items_menu():
                     while True:
@@ -710,11 +718,11 @@ def main():
                     while True:
                         WIN.fill(BLACK)
 
-                        POKE_BALL_BUTTON = Button("1: Poke Ball ", (WIDTH / 2 + 100, HEIGHT * .35), font=30, bg="navy", feedback="You chose slot Poke Ball")
-                        GREAT_BALL_BUTTON = Button("2: Great Ball ", (WIDTH / 2 + 100, HEIGHT * .25), font=30, bg="navy", feedback="You chose slot Great Ball")
-                        ULTRA_BALL_BUTTON = Button("3: Ultra Ball ", (WIDTH / 3 - 125, HEIGHT * .35), font=30, bg="navy", feedback="You chose slot Ultra Ball")
-                        MASTER_BALL_BUTTON = Button("4: Master Ball ", (WIDTH / 2 + 100, HEIGHT * .35), font=30, bg="navy", feedback="You chose slot Master Ball")
-                        BACK_BUTTON = Button("<-- Back", (WIDTH / 2 + 100, HEIGHT * .35), font=30, bg="navy", feedback="You chose to go back")
+                        POKE_BALL_BUTTON = Button("1: Poke Ball ", (WIDTH / 3 - 125, HEIGHT * .25), font=30, bg="navy", feedback="You chose slot Poke Ball")
+                        GREAT_BALL_BUTTON = Button("2: Great Ball ", (WIDTH / 3 - 125, HEIGHT * .35), font=30, bg="navy", feedback="You chose slot Great Ball")
+                        ULTRA_BALL_BUTTON = Button("3: Ultra Ball ", (WIDTH / 3 - 125, HEIGHT * .45), font=30, bg="navy", feedback="You chose slot Ultra Ball")
+                        MASTER_BALL_BUTTON = Button("4: Master Ball ", (WIDTH / 3 - 125, HEIGHT * .55), font=30, bg="navy", feedback="You chose slot Master Ball")
+                        BACK_BUTTON = Button("<-- Back", (0, 0), font=30, bg="navy", feedback="You chose to go back")
 
                         for event in pygame.event.get():
                             if event.type == pygame.QUIT:
@@ -726,19 +734,23 @@ def main():
                             break
 
                         if keys[pygame.K_1]:
-                            POKE_BALL.catch(wild_pokemon, party_slot, pc)
+                            if POKE_BALL.catch(wild_pokemon, party_slot, PC_STORAGE) == "catch":
+                                wild_pokemon.hp = 0
                             break
 
                         if keys[pygame.K_2]:
-                            GREAT_BALL.catch(wild_pokemon, party_slot, pc)
+                            if GREAT_BALL.catch(wild_pokemon, party_slot, PC_STORAGE) == "catch":
+                                wild_pokemon.hp = 0
                             break
 
                         if keys[pygame.K_3]:
-                            ULTRA_BALL.catch(wild_pokemon, party_slot, pc)
+                            if ULTRA_BALL.catch(wild_pokemon, party_slot, PC_STORAGE) == "catch":
+                                wild_pokemon.hp = 0
                             break
 
                         if keys[pygame.K_4]:
-                            MASTER_BALL.catch(wild_pokemon, party_slot, pc)
+                            if MASTER_BALL.catch(wild_pokemon, party_slot, PC_STORAGE) == "catch":
+                                wild_pokemon.hp = 0
                             break
 
 
@@ -824,7 +836,10 @@ def main():
 
             if keys[pygame.K_i]:
                 bag()
-                wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+
+                if wild_pokemon.hp > 0:
+                    wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+
                 time.sleep(1)
                 turn_counter += 1
 
@@ -919,7 +934,8 @@ def main():
             inventory()
 
         elif keys[pygame.K_p]:
-            print(pc)
+            for pokemon in PC_STORAGE:
+                print(pokemon.name, pokemon.level)
 
         else:
             left = False
