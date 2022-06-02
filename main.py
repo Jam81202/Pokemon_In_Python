@@ -93,6 +93,8 @@ class Pokemon:
 
         return new_poke
 
+    # TODO add levelup function
+
 class Moves:
     def __init__(self, name, atk_type, dmg, accuracy, priority):
         self.name = name
@@ -125,7 +127,7 @@ class Moves:
             print(attacker.name + ": Missed")
 
 class Items:
-    def __init__(self, name, level_raise, maxhp_raise, heal_amt, atk_raise, df_raise, spatk_raise, spdf_raise, speed_raise):
+    def __init__(self, name, level_raise, maxhp_raise, heal_amt, atk_raise, df_raise, spatk_raise, spdf_raise, speed_raise, catch_percent=None):
         self.name = name
         self.level_raise = level_raise
         self.maxhp_raise = maxhp_raise
@@ -135,6 +137,7 @@ class Items:
         self.spatk_raise = spatk_raise
         self.spdf_raise = spdf_raise
         self.speed_raise = speed_raise
+        self.catch_percent = catch_percent
 
     def stat_raise(self, pokemon):
         if self.level_raise > 0:
@@ -160,6 +163,22 @@ class Items:
 
         elif self.speed_raise > 0:
             pokemon.speed += self.speed_raise
+
+    def catch(self, pokemon, player_party, pc):
+        pokemon_caught = random.randint(1, 100)
+
+        if pokemon_caught <= self.catch_percent:
+            print("You successfully captured a " + pokemon.name + "!")
+            new_poke = Pokemon(pokemon.name, pokemon.poke_img, pokemon.level, pokemon.hp, pokemon.atk, pokemon.df,
+                                pokemon.spatk, pokemon.spdf, pokemon.speed, pokemon.move2, pokemon.move4)
+
+            if len(player_party) < 6:
+                player_party.append(new_poke)
+                print("Added " + pokemon.name + " to party.")
+
+            else:
+                pc.append(new_poke)
+                print("Added " + pokemon.name + " to pc.")
 
 class Button:
     """Create a button, then blit the surface in the while loop"""
@@ -231,6 +250,12 @@ HP_UP = Items("HP Up", 0, 10, 0, 0, 0, 0, 0, 0)
 IRON = Items("Iron", 0, 0, 0, 0, 10, 0, 0, 0)
 PROTEIN = Items("Protein", 0, 0, 0, 10, 0, 0, 0, 0)
 ZINC = Items("Zinc", 0, 0, 0, 0, 0, 0, 10, 0)
+
+# PokeBalls
+POKE_BALL = Items("Poke Ball", 0, 0, 0, 0, 0, 10, 0, 0, 25)
+GREAT_BALL = Items("Great Ball", 0, 0, 0, 0, 0, 10, 0, 0, 50)
+ULTRA_BALL = Items("Ultra Ball", 0, 0, 0, 0, 0, 10, 0, 0, 75)
+MASTER_BALL = Items("Master Ball", 0, 0, 0, 0, 0, 10, 0, 0, 100)
 
 ITEM_LIST = [POTION, SUPER_POTION, HYPER_POTION, RARE_CANDY, XL_CANDY, L_CANDY, M_CANDY, S_CANDY, CALCIUM, CARBOS, HP_UP, IRON, PROTEIN, ZINC]
 
@@ -339,7 +364,6 @@ POKE_DEX = [PIKACHU, CHARMANDER, TOTODILE, BULBASAUR, EEVEE, GENGAR, CATERPIE, W
             RATTATA, SPEAROW, EKANS, SANDSHREW, CLEFAIRY, VULPIX, ZUBAT, ODDISH, PSYDUCK, MANKEY, GROWLITHE,
             ABRA, SNORLAX, DRAGONITE]
 
-
 # Party Pokemon (poke_name, poke_img, level, hp, atk, df, spatk, spdf, speed, move1, move2, move3, move4)
 global PARTY_POKE_1
 global PARTY_POKE_2
@@ -357,6 +381,7 @@ PARTY_POKE_5 = Pokemon(EEVEE.name, EEVEE.poke_img, EEVEE.level, EEVEE.hp, EEVEE.
 PARTY_POKE_6 = Pokemon(PIKACHU.name, PIKACHU.poke_img, PIKACHU.level, PIKACHU.hp, PIKACHU.atk, PIKACHU.df, PIKACHU.spatk, PIKACHU.spdf, PIKACHU.speed, PIKACHU.move1, PIKACHU.move2, PIKACHU.move3, PIKACHU.move4)
 
 party_slot = [PARTY_POKE_1, PARTY_POKE_2, PARTY_POKE_3, PARTY_POKE_4, PARTY_POKE_5, PARTY_POKE_6]
+PC_STORAGE = []
 
 left = False
 right = False
