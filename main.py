@@ -110,12 +110,12 @@ class Moves:
         if attack_hit <= move.accuracy:
             print(attacker.name + ": hit")
             if move.atk_type == "atk":
-                damage = 1 + max(0, (move.dmg / 500) * ((2 * attacker.atk) - defender.df))
+                damage = 1 + max(0, (move.dmg / 400) * ((2 * attacker.atk) - defender.df))
                 defender.hp -= int(damage)
                 print("damage:", int(damage))
 
             elif move.atk_type == "spatk":
-                damage = 1 + max(0, (move.dmg / 500) * ((2 * attacker.spatk) - defender.spdf))
+                damage = 1 + max(0, (move.dmg / 400) * ((2 * attacker.spatk) - defender.spdf))
                 defender.hp -= int(damage)
                 print("damage:", int(damage))
 
@@ -414,8 +414,8 @@ global PARTY_POKE_6
 global party
 global pc
 
-PARTY_POKE_1 = Pokemon(TOTODILE.name, TOTODILE.poke_img, 5, TOTODILE.stat_calc(5, TOTODILE.hp), TOTODILE.stat_calc(5, TOTODILE.atk), TOTODILE.stat_calc(5, TOTODILE.df), TOTODILE.stat_calc(5, TOTODILE.spatk),
-                       TOTODILE.stat_calc(5, TOTODILE.spdf), TOTODILE.stat_calc(5, TOTODILE.speed), TOTODILE.move1, TOTODILE.move2, TOTODILE.move3, TOTODILE.move4)
+PARTY_POKE_1 = Pokemon(TOTODILE.name, TOTODILE.poke_img, 25, TOTODILE.stat_calc(25, TOTODILE.hp), TOTODILE.stat_calc(25, TOTODILE.atk), TOTODILE.stat_calc(25, TOTODILE.df), TOTODILE.stat_calc(25, TOTODILE.spatk),
+                       TOTODILE.stat_calc(25, TOTODILE.spdf), TOTODILE.stat_calc(25, TOTODILE.speed), TOTODILE.move1, TOTODILE.move2, TOTODILE.move3, TOTODILE.move4)
 PARTY_POKE_2 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
 PARTY_POKE_3 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
 PARTY_POKE_4 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
@@ -437,14 +437,23 @@ def main():
     FPS = 60
 
     velocity = 7
+
+    # Player Trainer
     player = Player(WIDTH/2-50, HEIGHT/2-50)
 
+    # Party Pokemon Overworld Sprite
     party_slot_img_right = Player(WIDTH / 2 - 125, HEIGHT / 2 - 50)
-    party_slot_img_left = Player(WIDTH / 2 + 25, HEIGHT / 2 -50)
+    party_slot_img_left = Player(WIDTH / 2 + 25, HEIGHT / 2 - 50)
     party_slot_img_down = Player(WIDTH / 2 - 50, HEIGHT / 2 - 125)
     party_slot_img_up = Player(WIDTH / 2 - 50, HEIGHT / 2 + 25)
 
-    pallet_town = Background(0-(BG_W * .015), 0-(BG_H/2))
+    # Overworld Map
+    pallet_town = Background(0-(BG_W * .015), 0 - (BG_H / 2))
+
+    # Trainers
+    trainer1 = Player(WIDTH / 2 - 140, HEIGHT / 2 - 50)
+    trainer2 = Player(WIDTH / 2 - 150, HEIGHT / 2 - 50)
+    trainer3 = Player(WIDTH / 2 - 160, HEIGHT / 2 - 50)
 
     global step_counter, left, right
 
@@ -474,6 +483,9 @@ def main():
             party_slot_img_up.draw(WIN, party_slot[0].poke_img)
 
         pygame.display.update()
+
+    def inventory():
+        pass
 
     def battle():
         battling = True
@@ -1004,9 +1016,6 @@ def main():
                 break
 
         wild_pokemon.heal()
-
-    def inventory():
-        pass
 
     while run:
         clock.tick(FPS)
