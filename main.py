@@ -110,12 +110,12 @@ class Moves:
         if attack_hit <= move.accuracy:
             print(attacker.name + ": hit")
             if move.atk_type == "atk":
-                damage = 1 + max(0, (move.dmg / 400) * ((2 * attacker.atk) - defender.df))
+                damage = max(1, (move.dmg / 400) * ((3 * attacker.atk) - (defender.df * .25)))
                 defender.hp -= int(damage)
                 print("damage:", int(damage))
 
             elif move.atk_type == "spatk":
-                damage = 1 + max(0, (move.dmg / 400) * ((2 * attacker.spatk) - defender.spdf))
+                damage = max(1, (move.dmg / 400) * ((3 * attacker.spatk) - (defender.spdf * .25)))
                 defender.hp -= int(damage)
                 print("damage:", int(damage))
 
@@ -414,8 +414,8 @@ global PARTY_POKE_6
 global party
 global pc
 
-PARTY_POKE_1 = Pokemon(TOTODILE.name, TOTODILE.poke_img, 5, TOTODILE.stat_calc(5, TOTODILE.hp), TOTODILE.stat_calc(5, TOTODILE.atk), TOTODILE.stat_calc(5, TOTODILE.df), TOTODILE.stat_calc(5, TOTODILE.spatk),
-                       TOTODILE.stat_calc(5, TOTODILE.spdf), TOTODILE.stat_calc(5, TOTODILE.speed), TOTODILE.move1, TOTODILE.move2, TOTODILE.move3, TOTODILE.move4)
+PARTY_POKE_1 = Pokemon(TOTODILE.name, TOTODILE.poke_img, 10, TOTODILE.stat_calc(10, TOTODILE.hp), TOTODILE.stat_calc(10, TOTODILE.atk), TOTODILE.stat_calc(10, TOTODILE.df), TOTODILE.stat_calc(10, TOTODILE.spatk),
+                       TOTODILE.stat_calc(10, TOTODILE.spdf), TOTODILE.stat_calc(10, TOTODILE.speed), TOTODILE.move1, TOTODILE.move2, TOTODILE.move3, TOTODILE.move4)
 PARTY_POKE_2 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
 PARTY_POKE_3 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
 PARTY_POKE_4 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
@@ -963,8 +963,13 @@ def main():
                         break
 
                 if keys[pygame.K_v]:
-                    if not poke_balls_menu():
-                        break
+                    if not trainer_battle:
+                        if not poke_balls_menu():
+                            break
+
+                    else:
+                        print("You can not attempt to catch another Trainers Pokemon.")
+                        time.sleep(2)
 
                 POTION_MENU_BUTTON.show(POTION_MENU_BUTTON)
                 LEVEL_ITEMS_MENU_BUTTON.show(LEVEL_ITEMS_MENU_BUTTON)
@@ -1018,17 +1023,22 @@ def main():
                 time.sleep(1)
 
             if keys[pygame.K_r]:
-                run_away = run()
-                if run_away < 8:
-                    print("you ran away")
-                    time.sleep(1)
-                    break
+                if not trainer_battle:
+                    run_away = run()
+                    if run_away < 8:
+                        print("you ran away")
+                        time.sleep(1)
+                        break
 
-                elif run_away > 7:
-                    print("you did not run away")
-                    time.sleep(1)
-                    wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
-                    turn_counter += 1
+                    elif run_away > 7:
+                        print("you did not run away")
+                        time.sleep(1)
+                        wild_pokemon.get_random_moves(wild_pokemon, party_slot[0])
+                        turn_counter += 1
+
+                else:
+                    print("You can not run from a Trainer.")
+                    time.sleep(2)
 
             PLAYER_HP = Button("level " + str(party_slot[0].level) + " " + str(party_slot[0].name) + " | HP: " + str(party_slot[0].hp), (WIDTH / 3 - 125, HEIGHT * .65), font=25, bg="navy", feedback=party_slot[0].move4.name)
             ENEMY_HP = Button("level " + str(wild_pokemon.level) + " " + str(wild_pokemon.name) + " | HP: " + str(wild_pokemon.hp), (WIDTH / 2 + 100, HEIGHT * .15), font=25, bg="navy", feedback=party_slot[0].move4.name)
@@ -1132,7 +1142,7 @@ def main():
             up = False
             down = False
 
-        if player.x > trainer1.x and player.x < (trainer1.x + 50) and player.y > trainer1.y and player.y < (trainer1.y + 50) and not trainer1_battle:
+        if player.x + 50 >= trainer1.x and player.x + 50 <= (trainer1.x + 100) and player.y + 50 >= trainer1.y and player.y + 50 <= (trainer1.y + 100) and not trainer1_battle:
             trainer_battle = True
             trainer1_battle = True
             for pokemon in trainer1_party:
@@ -1140,7 +1150,7 @@ def main():
 
             trainer_battle = False
 
-        if player.x > trainer2.x and player.x < (trainer2.x + 50) and player.y > trainer2.y and player.y < (trainer2.y + 50) and not trainer2_battle:
+        if player.x + 50 >= trainer2.x and player.x + 50 <= (trainer2.x + 100) and player.y + 50 >= trainer2.y and player.y + 50 <= (trainer2.y + 100) and not trainer2_battle:
             trainer_battle = True
             trainer2_battle = True
             for pokemon in trainer2_party:
@@ -1148,7 +1158,7 @@ def main():
 
             trainer_battle = False
 
-        if player.x > trainer3.x and player.x < (trainer3.x + 50) and player.y > trainer3.y and player.y < (trainer3.y + 50) and not trainer3_battle:
+        if player.x + 50 >= trainer3.x and player.x + 50 <= (trainer3.x + 100) and player.y + 50 >= trainer3.y and player.y + 50 <= (trainer3.y + 100) and not trainer3_battle:
             trainer_battle = True
             trainer3_battle = True
             for pokemon in trainer3_party:
