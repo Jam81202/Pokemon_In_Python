@@ -378,7 +378,7 @@ MOVE_INDEX = [EMPTY, QUICK_ATK, TACKLE, SLAM, SCRATCH, BODY_SLAM, EMBER, FIRE_SP
 EMPTY_POKE = Pokemon("", PIKA_IMG, 0, 0, 0, 0, 0, 0, 0, EMPTY, EMPTY, EMPTY, EMPTY)
 PIKACHU = Pokemon("Pikachu", PIKA_IMG, 1, 12, 6, 6, 5, 6, 7, QUICK_ATK, TACKLE, THUNDER_SHOCK, FISSURE)
 CHARMANDER = Pokemon("Charmander", CHAR_IMG, 1, 12, 6, 6, 5, 6, 6, TACKLE, EMPTY, EMBER, FIRE_SPIN)
-TOTODILE = Pokemon("Totodile", TOTODILE_IMG, 1, 12, 6, 6, 5, 6, 6, EMPTY, WATER_GUN, TACKLE, SCRATCH)
+TOTODILE = Pokemon("Totodile", TOTODILE_IMG, 1, 12, 6, 6, 5, 6, 6, SURF, WATER_GUN, TACKLE, SCRATCH)
 BULBASAUR = Pokemon("Bulbasaur", BULB_IMG, 1, 12, 6, 6, 5, 6, 6, RAZOR_LEAF, EMPTY, TACKLE, SLAM)
 EEVEE = Pokemon("Eevee", UMB_IMG, 1, 12, 6, 6, 5, 6, 6, EMPTY, TACKLE, QUICK_ATK, SCRATCH)
 GENGAR = Pokemon("Gengar", GENGAR_IMG, 1, 12, 6, 6, 6, 6, 7, EMPTY, NIGHT_SHADE, SLUDGE, QUICK_ATK)
@@ -414,8 +414,8 @@ global PARTY_POKE_6
 global party
 global pc
 
-PARTY_POKE_1 = Pokemon(TOTODILE.name, TOTODILE.poke_img, 25, TOTODILE.stat_calc(25, TOTODILE.hp), TOTODILE.stat_calc(25, TOTODILE.atk), TOTODILE.stat_calc(25, TOTODILE.df), TOTODILE.stat_calc(25, TOTODILE.spatk),
-                       TOTODILE.stat_calc(25, TOTODILE.spdf), TOTODILE.stat_calc(25, TOTODILE.speed), TOTODILE.move1, TOTODILE.move2, TOTODILE.move3, TOTODILE.move4)
+PARTY_POKE_1 = Pokemon(TOTODILE.name, TOTODILE.poke_img, 5, TOTODILE.stat_calc(5, TOTODILE.hp), TOTODILE.stat_calc(5, TOTODILE.atk), TOTODILE.stat_calc(5, TOTODILE.df), TOTODILE.stat_calc(5, TOTODILE.spatk),
+                       TOTODILE.stat_calc(5, TOTODILE.spdf), TOTODILE.stat_calc(5, TOTODILE.speed), TOTODILE.move1, TOTODILE.move2, TOTODILE.move3, TOTODILE.move4)
 PARTY_POKE_2 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
 PARTY_POKE_3 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
 PARTY_POKE_4 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
@@ -423,6 +423,8 @@ PARTY_POKE_5 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, E
 PARTY_POKE_6 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
 
 party_slot = [PARTY_POKE_1, PARTY_POKE_2, PARTY_POKE_3, PARTY_POKE_4, PARTY_POKE_5, PARTY_POKE_6]
+
+# User PC
 PC_STORAGE = []
 
 left = False
@@ -451,9 +453,43 @@ def main():
     pallet_town = Background(0-(BG_W * .015), 0 - (BG_H / 2))
 
     # Trainers
-    trainer1 = Player(WIDTH / 2 - 140, HEIGHT / 2 - 50)
-    trainer2 = Player(WIDTH / 2 - 150, HEIGHT / 2 - 50)
-    trainer3 = Player(WIDTH / 2 - 160, HEIGHT / 2 - 50)
+    trainer_battle = False
+
+    # Trainer 1
+    trainer1_battle = False
+    trainer1_poke1 = Pokemon(RATTATA.name, RATTATA.poke_img, 4, RATTATA.stat_calc(4, RATTATA.hp),
+                             RATTATA.stat_calc(4, RATTATA.atk), RATTATA.stat_calc(4, RATTATA.df),
+                             RATTATA.stat_calc(4, RATTATA.spatk),
+                             RATTATA.stat_calc(4, RATTATA.spdf), RATTATA.stat_calc(4, RATTATA.speed), RATTATA.move1,
+                             RATTATA.move2, RATTATA.move3, RATTATA.move4)
+    trainer1_party = [trainer1_poke1]
+
+    # Trainer 2
+    trainer2_battle = False
+    trainer2_poke1 = Pokemon(WEEDLE.name, WEEDLE.poke_img, 4, WEEDLE.stat_calc(4, WEEDLE.hp),
+                             WEEDLE.stat_calc(4, WEEDLE.atk), WEEDLE.stat_calc(4, WEEDLE.df),
+                             WEEDLE.stat_calc(4, WEEDLE.spatk),
+                             WEEDLE.stat_calc(4, WEEDLE.spdf), WEEDLE.stat_calc(4, WEEDLE.speed), WEEDLE.move1,
+                             WEEDLE.move2, WEEDLE.move3, WEEDLE.move4)
+    trainer2_party = [trainer2_poke1]
+
+    # Trainer 3
+    trainer3_battle = False
+    trainer3_poke1 = Pokemon(WEEDLE.name, WEEDLE.poke_img, 4, WEEDLE.stat_calc(4, WEEDLE.hp),
+                             WEEDLE.stat_calc(4, WEEDLE.atk), WEEDLE.stat_calc(4, WEEDLE.df),
+                             WEEDLE.stat_calc(4, WEEDLE.spatk),
+                             WEEDLE.stat_calc(4, WEEDLE.spdf), WEEDLE.stat_calc(4, WEEDLE.speed), WEEDLE.move1,
+                             WEEDLE.move2, WEEDLE.move3, WEEDLE.move4)
+    trainer3_poke2 = Pokemon(CATERPIE.name, CATERPIE.poke_img, 4, CATERPIE.stat_calc(4, CATERPIE.hp),
+                             CATERPIE.stat_calc(4, CATERPIE.atk), CATERPIE.stat_calc(4, CATERPIE.df),
+                             CATERPIE.stat_calc(4, CATERPIE.spatk),
+                             CATERPIE.stat_calc(4, CATERPIE.spdf), CATERPIE.stat_calc(4, CATERPIE.speed),
+                             CATERPIE.move1, CATERPIE.move2, CATERPIE.move3, CATERPIE.move4)
+    trainer3_party = [trainer3_poke1, trainer3_poke2]
+
+    trainer1 = Player(WIDTH / 2 + 200, HEIGHT / 2 - 50)
+    trainer2 = Player(WIDTH / 2 + 350, HEIGHT / 2 - 50)
+    trainer3 = Player(WIDTH / 2 + 500, HEIGHT / 2 - 50)
 
     global step_counter, left, right
 
@@ -464,6 +500,9 @@ def main():
         WIN.fill(BLACK)
         pallet_town.draw(WIN, PALLET_TOWN)
         player.draw(WIN, TRAINER_DOWN_IMG)
+        trainer1.draw(WIN, TRAINER_DOWN_IMG)
+        trainer2.draw(WIN, TRAINER_DOWN_IMG)
+        trainer3.draw(WIN, TRAINER_DOWN_IMG)
 
         if left:
             player.draw(WIN, TRAINER_RIGHT_IMG)
@@ -487,10 +526,14 @@ def main():
     def inventory():
         pass
 
-    def battle():
+    def battle(pokemon = None):
         battling = True
-        wild_pokemon = random.choice(POKE_DEX)
-        wild_pokemon = wild_pokemon.add_pokemon()
+        if trainer_battle:
+            wild_pokemon = pokemon
+
+        else:
+            wild_pokemon = random.choice(POKE_DEX)
+            wild_pokemon = wild_pokemon.add_pokemon()
         wild_pokemon_img = Player(WIDTH / 2 + 100, HEIGHT * .20)
         party_slot_img = Player(WIDTH / 3 - 125, HEIGHT * .55)
         turn_counter = 1
@@ -1027,6 +1070,9 @@ def main():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d]:
             pallet_town.x -= velocity
+            trainer1.x -= velocity
+            trainer2.x -= velocity
+            trainer3.x -= velocity
             left = True
             right = False
             up = False
@@ -1034,6 +1080,9 @@ def main():
 
         elif keys[pygame.K_a]:
             pallet_town.x += velocity
+            trainer1.x += velocity
+            trainer2.x += velocity
+            trainer3.x += velocity
             left = False
             right = True
             up = False
@@ -1041,6 +1090,9 @@ def main():
 
         elif keys[pygame.K_s]:
             pallet_town.y -= velocity
+            trainer1.y -= velocity
+            trainer2.y -= velocity
+            trainer3.y -= velocity
             left = False
             right = False
             up = True
@@ -1048,6 +1100,9 @@ def main():
 
         elif keys[pygame.K_w]:
             pallet_town.y += velocity
+            trainer1.y += velocity
+            trainer2.y += velocity
+            trainer3.y += velocity
             left = False
             right = False
             up = False
@@ -1076,6 +1131,30 @@ def main():
             right = False
             up = False
             down = False
+
+        if player.x > trainer1.x and player.x < (trainer1.x + 50) and player.y > trainer1.y and player.y < (trainer1.y + 50) and not trainer1_battle:
+            trainer_battle = True
+            trainer1_battle = True
+            for pokemon in trainer1_party:
+                battle(pokemon)
+
+            trainer_battle = False
+
+        if player.x > trainer2.x and player.x < (trainer2.x + 50) and player.y > trainer2.y and player.y < (trainer2.y + 50) and not trainer2_battle:
+            trainer_battle = True
+            trainer2_battle = True
+            for pokemon in trainer2_party:
+                battle(pokemon)
+
+            trainer_battle = False
+
+        if player.x > trainer3.x and player.x < (trainer3.x + 50) and player.y > trainer3.y and player.y < (trainer3.y + 50) and not trainer3_battle:
+            trainer_battle = True
+            trainer3_battle = True
+            for pokemon in trainer3_party:
+                battle(pokemon)
+
+            trainer_battle = False
 
         redraw_window()
 
