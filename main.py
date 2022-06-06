@@ -414,8 +414,8 @@ global PARTY_POKE_6
 global party
 global pc
 
-PARTY_POKE_1 = Pokemon(TOTODILE.name, TOTODILE.poke_img, 10, TOTODILE.stat_calc(10, TOTODILE.hp), TOTODILE.stat_calc(10, TOTODILE.atk), TOTODILE.stat_calc(10, TOTODILE.df), TOTODILE.stat_calc(10, TOTODILE.spatk),
-                       TOTODILE.stat_calc(10, TOTODILE.spdf), TOTODILE.stat_calc(10, TOTODILE.speed), TOTODILE.move1, TOTODILE.move2, TOTODILE.move3, TOTODILE.move4)
+PARTY_POKE_1 = Pokemon(TOTODILE.name, TOTODILE.poke_img, 5, TOTODILE.stat_calc(5, TOTODILE.hp), TOTODILE.stat_calc(5, TOTODILE.atk), TOTODILE.stat_calc(5, TOTODILE.df), TOTODILE.stat_calc(5, TOTODILE.spatk),
+                       TOTODILE.stat_calc(5, TOTODILE.spdf), TOTODILE.stat_calc(5, TOTODILE.speed), TOTODILE.move1, TOTODILE.move2, TOTODILE.move3, TOTODILE.move4)
 PARTY_POKE_2 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
 PARTY_POKE_3 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
 PARTY_POKE_4 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
@@ -487,9 +487,9 @@ def main():
                              CATERPIE.move1, CATERPIE.move2, CATERPIE.move3, CATERPIE.move4)
     trainer3_party = [trainer3_poke1, trainer3_poke2]
 
-    trainer1 = Player(WIDTH / 2 + 200, HEIGHT / 2 - 50)
-    trainer2 = Player(WIDTH / 2 + 350, HEIGHT / 2 - 50)
-    trainer3 = Player(WIDTH / 2 + 500, HEIGHT / 2 - 50)
+    trainer1 = Player(0 + (BG_W * .015), 0 + (BG_H / 25))
+    trainer2 = Player(0 + (BG_W * .1), 0 + (BG_H / 25))
+    trainer3 = Player(0 + (BG_W * .185), 0 + (BG_H / 25))
 
     global step_counter, left, right
 
@@ -1144,25 +1144,76 @@ def main():
 
         if player.x + 50 >= trainer1.x and player.x + 50 <= (trainer1.x + 100) and player.y + 50 >= trainer1.y and player.y + 50 <= (trainer1.y + 100) and not trainer1_battle:
             trainer_battle = True
-            trainer1_battle = True
+
             for pokemon in trainer1_party:
                 battle(pokemon)
+
+            if party_slot[0].hp <= 0:
+                for pokemon in trainer1_party:
+                    pokemon.heal()
+
+                for pokemon in party_slot:
+                    pokemon.heal()
+
+                print("Returning to Pokecenter.")
+                time.sleep(2)
+                pallet_town.x, pallet_town.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
+                trainer1.x, trainer1.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
+                trainer2.x, trainer2.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
+                trainer3.x, trainer3.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
+
+            else:
+                trainer1_battle = True
 
             trainer_battle = False
 
         if player.x + 50 >= trainer2.x and player.x + 50 <= (trainer2.x + 100) and player.y + 50 >= trainer2.y and player.y + 50 <= (trainer2.y + 100) and not trainer2_battle:
             trainer_battle = True
-            trainer2_battle = True
+
             for pokemon in trainer2_party:
                 battle(pokemon)
+
+            if party_slot[0].hp <= 0:
+                for pokemon in trainer1_party:
+                    pokemon.heal()
+
+                for pokemon in party_slot:
+                    pokemon.heal()
+
+                print("Returning to Pokecenter.")
+                time.sleep(2)
+                pallet_town.x, pallet_town.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
+                trainer1.x, trainer1.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
+                trainer2.x, trainer2.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
+                trainer3.x, trainer3.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
+
+            else:
+                trainer2_battle = True
 
             trainer_battle = False
 
         if player.x + 50 >= trainer3.x and player.x + 50 <= (trainer3.x + 100) and player.y + 50 >= trainer3.y and player.y + 50 <= (trainer3.y + 100) and not trainer3_battle:
             trainer_battle = True
-            trainer3_battle = True
+
             for pokemon in trainer3_party:
                 battle(pokemon)
+
+            if party_slot[0].hp <= 0:
+                for pokemon in trainer1_party:
+                    pokemon.heal()
+
+                for pokemon in party_slot:
+                    pokemon.heal()
+
+                print("Returning to Pokecenter.")
+                time.sleep(2)
+                pallet_town.x, pallet_town.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
+                trainer1.x, trainer1.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
+                trainer2.x, trainer2.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
+                trainer3.x, trainer3.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
+
+            else:
+                trainer3_battle = True
 
             trainer_battle = False
 
