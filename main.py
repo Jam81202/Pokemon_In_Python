@@ -9,7 +9,7 @@ from pygame.locals import *
 pygame.init()
 
 WIDTH, HEIGHT = 800, 650
-BG_W, BG_H = 6000, 5450
+BG_W, BG_H = 6000, 6000
 SPRITE_W, SPRITE_H = 65, 65
 WIN = pygame.display.set_mode((WIDTH, HEIGHT), RESIZABLE)
 pygame.display.set_caption("Borpa")
@@ -17,11 +17,29 @@ pygame.display.set_caption("Borpa")
 FONT = pygame.font.SysFont("comicsans", 16)
 
 '''Things with images'''
-# Map
-PALLET_TOWN = pygame.transform.scale(pygame.image.load(os.path.join("assets", "world_map.png")), (BG_W, BG_H))
-VERMILION_CITY = pygame.transform.scale(pygame.image.load(os.path.join("assets", "vermilion_city.png")), (1500, 1404))
+# Map TODO create map assets (cities, routes, pokecenter, pokemart, gyms)
+STARTER_TOWN = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
 
-# Pokemon
+'''
+CITY_1 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+CITY_2 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+CITY_3 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+DIG_SITE = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+POKECENTER = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+POKEMART = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+GYM_1 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+GYM_2 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+GYM_3 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+GYM_4 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+ROUTE_1 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+ROUTE_2 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+ROUTE_3 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+ROUTE_4 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+ROUTE_5 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+ROUTE_6 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+'''
+
+# Pokemon TODO Pokemon need more images (different walking directions in overworld, battle stances)
 PIKA_IMG = pygame.transform.scale(pygame.image.load(os.path.join("assets", "Pika.png")), (SPRITE_W, SPRITE_H))
 CHAR_IMG = pygame.transform.scale(pygame.image.load(os.path.join("assets", "char.png")), (SPRITE_W, SPRITE_H))
 BULB_IMG = pygame.transform.scale(pygame.image.load(os.path.join("assets", "bulb.png")), (SPRITE_W, SPRITE_H))
@@ -259,7 +277,7 @@ class Background():
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.img = PALLET_TOWN
+        self.img = STARTER_TOWN
 
     def draw(self, window, img):
         window.blit(img, (self.x, self.y))
@@ -441,16 +459,16 @@ def main():
     velocity = 7
 
     # Player Trainer
-    player = Player(WIDTH/2-50, HEIGHT/2-50)
+    player = Player(WIDTH/2-32, HEIGHT/2-32)
 
     # Party Pokemon Overworld Sprite
-    party_slot_img_right = Player(WIDTH / 2 - 125, HEIGHT / 2 - 50)
-    party_slot_img_left = Player(WIDTH / 2 + 25, HEIGHT / 2 - 50)
-    party_slot_img_down = Player(WIDTH / 2 - 50, HEIGHT / 2 - 125)
-    party_slot_img_up = Player(WIDTH / 2 - 50, HEIGHT / 2 + 25)
+    party_slot_img_right = Player(WIDTH / 2 - 115, HEIGHT / 2 - 32)
+    party_slot_img_left = Player(WIDTH / 2 + 50, HEIGHT / 2 - 32)
+    party_slot_img_down = Player(WIDTH / 2 - 32, HEIGHT / 2 - 115)
+    party_slot_img_up = Player(WIDTH / 2 - 32, HEIGHT / 2 + 50)
 
     # Overworld Map
-    pallet_town = Background(0-(BG_W * .015), 0 - (BG_H / 2))
+    starter_town = Background(0-(BG_W * .015), 0 - (BG_H / 2))
 
     # Trainers
     trainer_battle = False
@@ -498,7 +516,7 @@ def main():
 
     def redraw_window():
         WIN.fill(BLACK)
-        pallet_town.draw(WIN, PALLET_TOWN)
+        starter_town.draw(WIN, STARTER_TOWN)
         player.draw(WIN, TRAINER_DOWN_IMG)
         trainer1.draw(WIN, TRAINER_DOWN_IMG)
         trainer2.draw(WIN, TRAINER_DOWN_IMG)
@@ -1070,6 +1088,8 @@ def main():
 
         wild_pokemon.heal()
 
+    # TODO after map and each area has been finished, split basically take this while loop and put it in a method for each region.
+    # TODO That way I can load everything separately and i dont have to worry about updating trainer locations because all pokecenters will be in a separatly loaded area
     while run:
         clock.tick(FPS)
 
@@ -1079,7 +1099,7 @@ def main():
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d]:
-            pallet_town.x -= velocity
+            starter_town.x -= velocity
             trainer1.x -= velocity
             trainer2.x -= velocity
             trainer3.x -= velocity
@@ -1089,7 +1109,7 @@ def main():
             down = False
 
         elif keys[pygame.K_a]:
-            pallet_town.x += velocity
+            starter_town.x += velocity
             trainer1.x += velocity
             trainer2.x += velocity
             trainer3.x += velocity
@@ -1099,7 +1119,7 @@ def main():
             down = False
 
         elif keys[pygame.K_s]:
-            pallet_town.y -= velocity
+            starter_town.y -= velocity
             trainer1.y -= velocity
             trainer2.y -= velocity
             trainer3.y -= velocity
@@ -1109,7 +1129,7 @@ def main():
             down = False
 
         elif keys[pygame.K_w]:
-            pallet_town.y += velocity
+            starter_town.y += velocity
             trainer1.y += velocity
             trainer2.y += velocity
             trainer3.y += velocity
@@ -1157,7 +1177,8 @@ def main():
 
                 print("Returning to Pokecenter.")
                 time.sleep(2)
-                pallet_town.x, pallet_town.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
+
+                starter_town.x, starter_town.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
                 trainer1.x, trainer1.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
                 trainer2.x, trainer2.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
                 trainer3.x, trainer3.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
@@ -1182,7 +1203,7 @@ def main():
 
                 print("Returning to Pokecenter.")
                 time.sleep(2)
-                pallet_town.x, pallet_town.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
+                starter_town.x, starter_town.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
                 trainer1.x, trainer1.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
                 trainer2.x, trainer2.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
                 trainer3.x, trainer3.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
@@ -1207,7 +1228,7 @@ def main():
 
                 print("Returning to Pokecenter.")
                 time.sleep(2)
-                pallet_town.x, pallet_town.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
+                starter_town.x, starter_town.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
                 trainer1.x, trainer1.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
                 trainer2.x, trainer2.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
                 trainer3.x, trainer3.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
