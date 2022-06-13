@@ -9,7 +9,7 @@ from pygame.locals import *
 pygame.init()
 
 WIDTH, HEIGHT = 800, 650
-BG_W, BG_H = 6000, 6000
+BG_W, BG_H = 3000, 1500
 SPRITE_W, SPRITE_H = 65, 65
 WIN = pygame.display.set_mode((WIDTH, HEIGHT), RESIZABLE)
 pygame.display.set_caption("Borpa")
@@ -18,7 +18,8 @@ FONT = pygame.font.SysFont("comicsans", 16)
 
 '''Things with images'''
 # Map TODO create map assets (cities, routes, pokecenter, pokemart, gyms)
-STARTER_TOWN = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+STARTER_TOWN = pygame.transform.scale(pygame.image.load(os.path.join("assets", "starter_town_sketch.png")), (BG_W, BG_H))
+ROUTE_1 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_one_sketch.png")), (BG_W, BG_H))
 
 '''
 CITY_1 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
@@ -31,12 +32,11 @@ GYM_1 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_ske
 GYM_2 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
 GYM_3 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
 GYM_4 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
-ROUTE_1 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
-ROUTE_2 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
-ROUTE_3 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
-ROUTE_4 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
-ROUTE_5 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
-ROUTE_6 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
+ROUTE_2 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_two_sketch.png")), (BG_W, BG_H))
+ROUTE_3 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_three_sketch.png")), (BG_W, BG_H))
+ROUTE_4 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_four_sketch.png")), (BG_W, BG_H))
+ROUTE_5 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_five_sketch.png")), (BG_W, BG_H))
+ROUTE_6 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_five_sketch.png")), (BG_W, BG_H))
 '''
 
 # Pokemon TODO Pokemon need more images (different walking directions in overworld, battle stances)
@@ -434,8 +434,10 @@ global pc
 
 PARTY_POKE_1 = Pokemon(TOTODILE.name, TOTODILE.poke_img, 5, TOTODILE.stat_calc(5, TOTODILE.hp), TOTODILE.stat_calc(5, TOTODILE.atk), TOTODILE.stat_calc(5, TOTODILE.df), TOTODILE.stat_calc(5, TOTODILE.spatk),
                        TOTODILE.stat_calc(5, TOTODILE.spdf), TOTODILE.stat_calc(5, TOTODILE.speed), TOTODILE.move1, TOTODILE.move2, TOTODILE.move3, TOTODILE.move4)
-PARTY_POKE_2 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
-PARTY_POKE_3 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
+PARTY_POKE_2 = Pokemon(PIKACHU.name, PIKACHU.poke_img, 5, PIKACHU.stat_calc(5, PIKACHU.hp), PIKACHU.stat_calc(5, PIKACHU.atk), PIKACHU.stat_calc(5, PIKACHU.df), PIKACHU.stat_calc(5, PIKACHU.spatk),
+                       PIKACHU.stat_calc(5, PIKACHU.spdf), PIKACHU.stat_calc(5, PIKACHU.speed), PIKACHU.move1, PIKACHU.move2, PIKACHU.move3, PIKACHU.move4)
+PARTY_POKE_3 = Pokemon(CHARMANDER.name, CHARMANDER.poke_img, 5, CHARMANDER.stat_calc(5, CHARMANDER.hp), CHARMANDER.stat_calc(5, CHARMANDER.atk), CHARMANDER.stat_calc(5, CHARMANDER.df), CHARMANDER.stat_calc(5, CHARMANDER.spatk),
+                       CHARMANDER.stat_calc(5, CHARMANDER.spdf), CHARMANDER.stat_calc(5, CHARMANDER.speed), CHARMANDER.move1, CHARMANDER.move2, CHARMANDER.move3, CHARMANDER.move4)
 PARTY_POKE_4 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
 PARTY_POKE_5 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
 PARTY_POKE_6 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
@@ -451,7 +453,109 @@ up = False
 down = False
 step_counter = 0
 
-def main():
+CLOSEST_TOWN = ""
+
+def starter_town():
+    run = True
+    clock = pygame.time.Clock()
+    FPS = 60
+
+    velocity = 7
+
+    # Player Trainer
+    player = Player(WIDTH / 2 - 32, HEIGHT / 2 - 32)
+
+    # Party Pokemon Overworld Sprite
+    party_slot_img_right = Player(WIDTH / 2 - 115, HEIGHT / 2 - 32)
+    party_slot_img_left = Player(WIDTH / 2 + 50, HEIGHT / 2 - 32)
+    party_slot_img_down = Player(WIDTH / 2 - 32, HEIGHT / 2 - 115)
+    party_slot_img_up = Player(WIDTH / 2 - 32, HEIGHT / 2 + 50)
+
+    # Overworld Map
+    starter_town = Background(0 - (BG_W * .015), 0 - (BG_H / 2))
+
+    def redraw_window():
+        WIN.fill(BLACK)
+        starter_town.draw(WIN, STARTER_TOWN)
+        player.draw(WIN, TRAINER_DOWN_IMG)
+
+        if left:
+            player.draw(WIN, TRAINER_RIGHT_IMG)
+            party_slot_img_right.draw(WIN, party_slot[0].poke_img)
+            # step_counter += 1
+
+        if right:
+            player.draw(WIN, TRAINER_LEFT_IMG)
+            party_slot_img_left.draw(WIN, party_slot[0].poke_img)
+
+        if up:
+            player.draw(WIN, TRAINER_DOWN_IMG)
+            party_slot_img_down.draw(WIN, party_slot[0].poke_img)
+
+        if down:
+            player.draw(WIN, TRAINER_UP_IMG)
+            party_slot_img_up.draw(WIN, party_slot[0].poke_img)
+
+        pygame.display.update()
+
+    def inventory():
+        pass
+
+    while run:
+        clock.tick(FPS)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_d]:
+            starter_town.x -= velocity
+            left = True
+            right = False
+            up = False
+            down = False
+
+        elif keys[pygame.K_a]:
+            starter_town.x += velocity
+            left = False
+            right = True
+            up = False
+            down = False
+
+        elif keys[pygame.K_s]:
+            starter_town.y -= velocity
+            left = False
+            right = False
+            up = True
+            down = False
+
+        elif keys[pygame.K_w]:
+            starter_town.y += velocity
+            left = False
+            right = False
+            up = False
+            down = True
+
+        elif keys[pygame.K_i]:
+            left = False
+            right = False
+            up = False
+            down = False
+            inventory()
+
+        else:
+            left = False
+            right = False
+            up = False
+            down = False
+
+        if player.y <= starter_town.y:
+            route_one()
+
+        redraw_window()
+
+def route_one():
     run = True
     clock = pygame.time.Clock()
     FPS = 60
@@ -468,7 +572,7 @@ def main():
     party_slot_img_up = Player(WIDTH / 2 - 32, HEIGHT / 2 + 50)
 
     # Overworld Map
-    starter_town = Background(0-(BG_W * .015), 0 - (BG_H / 2))
+    route_one_sketch = Background(0-(BG_W * .015), 0 - (BG_H / 2))
 
     # Trainers
     trainer_battle = False
@@ -516,7 +620,7 @@ def main():
 
     def redraw_window():
         WIN.fill(BLACK)
-        starter_town.draw(WIN, STARTER_TOWN)
+        route_one_sketch.draw(WIN, ROUTE_1)
         player.draw(WIN, TRAINER_DOWN_IMG)
         trainer1.draw(WIN, TRAINER_DOWN_IMG)
         trainer2.draw(WIN, TRAINER_DOWN_IMG)
@@ -1098,8 +1202,11 @@ def main():
                 run = False
 
         keys = pygame.key.get_pressed()
+        if keys[pygame.K_ESCAPE]:
+            pygame.quit()
+
         if keys[pygame.K_d]:
-            starter_town.x -= velocity
+            route_one_sketch.x -= velocity
             trainer1.x -= velocity
             trainer2.x -= velocity
             trainer3.x -= velocity
@@ -1109,7 +1216,7 @@ def main():
             down = False
 
         elif keys[pygame.K_a]:
-            starter_town.x += velocity
+            route_one_sketch.x += velocity
             trainer1.x += velocity
             trainer2.x += velocity
             trainer3.x += velocity
@@ -1119,7 +1226,7 @@ def main():
             down = False
 
         elif keys[pygame.K_s]:
-            starter_town.y -= velocity
+            route_one_sketch.y -= velocity
             trainer1.y -= velocity
             trainer2.y -= velocity
             trainer3.y -= velocity
@@ -1129,7 +1236,7 @@ def main():
             down = False
 
         elif keys[pygame.K_w]:
-            starter_town.y += velocity
+            route_one_sketch.y += velocity
             trainer1.y += velocity
             trainer2.y += velocity
             trainer3.y += velocity
@@ -1178,7 +1285,7 @@ def main():
                 print("Returning to Pokecenter.")
                 time.sleep(2)
 
-                starter_town.x, starter_town.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
+                route_one_sketch.x, route_one_sketch.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
                 trainer1.x, trainer1.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
                 trainer2.x, trainer2.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
                 trainer3.x, trainer3.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
@@ -1203,7 +1310,7 @@ def main():
 
                 print("Returning to Pokecenter.")
                 time.sleep(2)
-                starter_town.x, starter_town.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
+                route_one_sketch.x, route_one_sketch.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
                 trainer1.x, trainer1.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
                 trainer2.x, trainer2.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
                 trainer3.x, trainer3.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
@@ -1228,7 +1335,7 @@ def main():
 
                 print("Returning to Pokecenter.")
                 time.sleep(2)
-                starter_town.x, starter_town.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
+                route_one_sketch.x, route_one_sketch.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
                 trainer1.x, trainer1.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
                 trainer2.x, trainer2.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
                 trainer3.x, trainer3.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
@@ -1240,5 +1347,5 @@ def main():
 
         redraw_window()
 
-main()
+starter_town()
 
