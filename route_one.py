@@ -1,10 +1,3 @@
-import pygame
-import os
-import time
-import random
-import sys
-import copy
-from pygame.locals import *
 from classes import *
 from route_two import *
 
@@ -27,13 +20,15 @@ def route_one():
     party_slot_img_up = Player(WIDTH / 2 - 32, HEIGHT / 2 + 50)
 
     # Overworld Map
-    route_one_sketch = Background(0-(BG_W * .015), 0 - (BG_H / 2))
+    route_one_sketch = Background(0-(BG_W * .175), 0 - (BG_H * .7))
 
     # Trainers
-    trainer_battle = False
+    global trainer_battle
+    global trainer1_battle
+    global trainer2_battle
+    global trainer3_battle
 
     # Trainer 1
-    trainer1_battle = False
     trainer1_poke1 = Pokemon(RATTATA.name, RATTATA.poke_img, 4, RATTATA.stat_calc(4, RATTATA.hp),
                              RATTATA.stat_calc(4, RATTATA.atk), RATTATA.stat_calc(4, RATTATA.df),
                              RATTATA.stat_calc(4, RATTATA.spatk),
@@ -42,7 +37,6 @@ def route_one():
     trainer1_party = [trainer1_poke1]
 
     # Trainer 2
-    trainer2_battle = False
     trainer2_poke1 = Pokemon(WEEDLE.name, WEEDLE.poke_img, 4, WEEDLE.stat_calc(4, WEEDLE.hp),
                              WEEDLE.stat_calc(4, WEEDLE.atk), WEEDLE.stat_calc(4, WEEDLE.df),
                              WEEDLE.stat_calc(4, WEEDLE.spatk),
@@ -51,7 +45,6 @@ def route_one():
     trainer2_party = [trainer2_poke1]
 
     # Trainer 3
-    trainer3_battle = False
     trainer3_poke1 = Pokemon(WEEDLE.name, WEEDLE.poke_img, 4, WEEDLE.stat_calc(4, WEEDLE.hp),
                              WEEDLE.stat_calc(4, WEEDLE.atk), WEEDLE.stat_calc(4, WEEDLE.df),
                              WEEDLE.stat_calc(4, WEEDLE.spatk),
@@ -64,9 +57,9 @@ def route_one():
                              CATERPIE.move1, CATERPIE.move2, CATERPIE.move3, CATERPIE.move4)
     trainer3_party = [trainer3_poke1, trainer3_poke2]
 
-    trainer1 = Player(0 + (BG_W * .015), 0 + (BG_H / 25))
-    trainer2 = Player(0 + (BG_W * .1), 0 + (BG_H / 25))
-    trainer3 = Player(0 + (BG_W * .185), 0 + (BG_H / 25))
+    trainer1 = Player(0 + (BG_W * .22), 0 - (BG_H * .2))
+    trainer2 = Player(0 + (BG_W * .185), 0 - (BG_H * .6))
+    trainer3 = Player(0 - (WIDTH * .38), 0 + (HEIGHT * .35))
 
     global step_counter, left, right
 
@@ -110,7 +103,7 @@ def route_one():
 
         else:
             wild_pokemon = random.choice(POKE_DEX)
-            wild_pokemon = wild_pokemon.add_pokemon()
+            wild_pokemon = wild_pokemon.add_pokemon(1, 8)
         wild_pokemon_img = Player(WIDTH / 2 + 100, HEIGHT * .20)
         party_slot_img = Player(WIDTH / 3 - 125, HEIGHT * .55)
         turn_counter = 1
@@ -647,8 +640,6 @@ def route_one():
 
         wild_pokemon.heal()
 
-    # TODO after map and each area has been finished, split basically take this while loop and put it in a method for each region.
-    # TODO That way I can load everything separately and i dont have to worry about updating trainer locations because all pokecenters will be in a separatly loaded area
     while run:
         clock.tick(FPS)
 

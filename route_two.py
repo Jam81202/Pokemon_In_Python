@@ -1,10 +1,3 @@
-import pygame
-import os
-import time
-import random
-import sys
-import copy
-from pygame.locals import *
 from classes import *
 from route_one import *
 
@@ -723,6 +716,14 @@ def route_two():
             right = False
             up = False
             down = False
+
+        if player.y + 65 >= route_one_sketch.y + BG_H:
+            WIN.fill(BLACK)
+            LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
+            LOADING_SCREEN.show(LOADING_SCREEN)
+            pygame.display.update()
+            time.sleep(1)
+            break
 
         if player.x + 50 >= trainer1.x and player.x + 50 <= (trainer1.x + 100) and player.y + 50 >= trainer1.y and player.y + 50 <= (trainer1.y + 100) and not trainer1_battle:
             trainer_battle = True

@@ -9,7 +9,7 @@ from pygame.locals import *
 pygame.init()
 
 WIDTH, HEIGHT = 800, 650
-BG_W, BG_H = 3000, 1500
+BG_W, BG_H = 3000, 1200
 SPRITE_W, SPRITE_H = 65, 65
 WIN = pygame.display.set_mode((WIDTH, HEIGHT), RESIZABLE)
 pygame.display.set_caption("Borpa")
@@ -103,8 +103,8 @@ class Pokemon:
     def stat_calc(self, level, stat):
         return int((stat + 2) + (0.4 * level) ** 1.5)
 
-    def add_pokemon(self):
-        rand_level = random.randint(1, 60)
+    def add_pokemon(self, min_level, max_level):
+        rand_level = random.randint(min_level, max_level)
         new_poke = Pokemon(self.name, self.poke_img, rand_level, self.stat_calc(rand_level, self.hp), self.stat_calc(rand_level, self.atk),
                            self.stat_calc(rand_level, self.df), self.stat_calc(rand_level, self.spatk), self.stat_calc(rand_level, self.spdf),
                            self.stat_calc(rand_level, self.speed), self.move1, self.move2, self.move3, self.move4)
@@ -447,10 +447,23 @@ party_slot = [PARTY_POKE_1, PARTY_POKE_2, PARTY_POKE_3, PARTY_POKE_4, PARTY_POKE
 # User PC
 PC_STORAGE = []
 
+# Walking direction
 left = False
 right = False
 up = False
 down = False
 step_counter = 0
 
+# Closest town. Uses to know which pokecenter to take you back to
 CLOSEST_TOWN = ""
+
+# States whether you not you have fought that trainer before.
+global trainer_battle
+global trainer1_battle
+global trainer2_battle
+global trainer3_battle
+
+trainer_battle = False
+trainer1_battle = False
+trainer2_battle = False
+trainer3_battle = False

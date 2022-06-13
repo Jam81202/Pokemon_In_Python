@@ -1,15 +1,7 @@
-import pygame
-import os
-import time
-import random
-import sys
-import copy
-from pygame.locals import *
 from classes import *
 from route_one import *
 
 pygame.init()
-
 
 def starter_town():
     run = True
@@ -28,7 +20,7 @@ def starter_town():
     party_slot_img_up = Player(WIDTH / 2 - 32, HEIGHT / 2 + 50)
 
     # Overworld Map
-    starter_town = Background(0 - (BG_W * .015), 0 - (BG_H / 2))
+    starter_town = Background(0 - (BG_W * .01), 0 - (BG_H * .12))
 
     def redraw_window():
         WIN.fill(BLACK)
@@ -107,7 +99,7 @@ def starter_town():
             down = False
 
         if player.y <= starter_town.y:
-            player.y += 1
+            starter_town.y -= 5
             WIN.fill(BLACK)
             LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
             LOADING_SCREEN.show(LOADING_SCREEN)
@@ -118,4 +110,3 @@ def starter_town():
         redraw_window()
 
 starter_town()
-
