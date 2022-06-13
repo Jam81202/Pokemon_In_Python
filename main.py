@@ -107,6 +107,12 @@ def starter_town():
             down = False
 
         if player.y <= starter_town.y:
+            player.y += 1
+            WIN.fill(BLACK)
+            LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
+            LOADING_SCREEN.show(LOADING_SCREEN)
+            pygame.display.update()
+            time.sleep(1)
             route_one()
 
         redraw_window()
