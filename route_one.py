@@ -1,5 +1,6 @@
 from classes import *
 from route_two import *
+from village import *
 
 pygame.init()
 
@@ -722,6 +723,24 @@ def route_one():
             pygame.display.update()
             time.sleep(1)
             break
+
+        if player.y <= route_one_sketch.y and player.x >= trainer2.x:
+            route_one_sketch.y -= 5
+            WIN.fill(BLACK)
+            LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
+            LOADING_SCREEN.show(LOADING_SCREEN)
+            pygame.display.update()
+            time.sleep(1)
+            route_two()
+
+        if player.y <= route_one_sketch.y:
+            route_one_sketch.y -= 5
+            WIN.fill(BLACK)
+            LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
+            LOADING_SCREEN.show(LOADING_SCREEN)
+            pygame.display.update()
+            time.sleep(1)
+            village()
 
         if player.x + 50 >= trainer1.x and player.x + 50 <= (trainer1.x + 100) and player.y + 50 >= trainer1.y and player.y + 50 <= (trainer1.y + 100) and not trainer1_battle:
             trainer_battle = True

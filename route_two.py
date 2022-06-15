@@ -1,5 +1,6 @@
 from classes import *
 from route_one import *
+from village import *
 
 pygame.init()
 
@@ -20,46 +21,46 @@ def route_two():
     party_slot_img_up = Player(WIDTH / 2 - 32, HEIGHT / 2 + 50)
 
     # Overworld Map
-    route_one_sketch = Background(0-(BG_W * .015), 0 - (BG_H / 2))
+    route_two_sketch = Background(0-(BG_W * .175), 0 - (BG_H * .7))
 
     # Trainers
-    trainer_battle = False
+    global trainer_battle
+    global trainer5_battle
+    global trainer6_battle
+    global trainer7_battle
 
     # Trainer 1
-    trainer1_battle = False
-    trainer1_poke1 = Pokemon(RATTATA.name, RATTATA.poke_img, 4, RATTATA.stat_calc(4, RATTATA.hp),
+    trainer5_poke1 = Pokemon(RATTATA.name, RATTATA.poke_img, 4, RATTATA.stat_calc(4, RATTATA.hp),
                              RATTATA.stat_calc(4, RATTATA.atk), RATTATA.stat_calc(4, RATTATA.df),
                              RATTATA.stat_calc(4, RATTATA.spatk),
                              RATTATA.stat_calc(4, RATTATA.spdf), RATTATA.stat_calc(4, RATTATA.speed), RATTATA.move1,
                              RATTATA.move2, RATTATA.move3, RATTATA.move4)
-    trainer1_party = [trainer1_poke1]
+    trainer5_party = [trainer5_poke1]
 
     # Trainer 2
-    trainer2_battle = False
-    trainer2_poke1 = Pokemon(WEEDLE.name, WEEDLE.poke_img, 4, WEEDLE.stat_calc(4, WEEDLE.hp),
+    trainer6_poke1 = Pokemon(WEEDLE.name, WEEDLE.poke_img, 4, WEEDLE.stat_calc(4, WEEDLE.hp),
                              WEEDLE.stat_calc(4, WEEDLE.atk), WEEDLE.stat_calc(4, WEEDLE.df),
                              WEEDLE.stat_calc(4, WEEDLE.spatk),
                              WEEDLE.stat_calc(4, WEEDLE.spdf), WEEDLE.stat_calc(4, WEEDLE.speed), WEEDLE.move1,
                              WEEDLE.move2, WEEDLE.move3, WEEDLE.move4)
-    trainer2_party = [trainer2_poke1]
+    trainer6_party = [trainer6_poke1]
 
     # Trainer 3
-    trainer3_battle = False
-    trainer3_poke1 = Pokemon(WEEDLE.name, WEEDLE.poke_img, 4, WEEDLE.stat_calc(4, WEEDLE.hp),
+    trainer7_poke1 = Pokemon(WEEDLE.name, WEEDLE.poke_img, 4, WEEDLE.stat_calc(4, WEEDLE.hp),
                              WEEDLE.stat_calc(4, WEEDLE.atk), WEEDLE.stat_calc(4, WEEDLE.df),
                              WEEDLE.stat_calc(4, WEEDLE.spatk),
                              WEEDLE.stat_calc(4, WEEDLE.spdf), WEEDLE.stat_calc(4, WEEDLE.speed), WEEDLE.move1,
                              WEEDLE.move2, WEEDLE.move3, WEEDLE.move4)
-    trainer3_poke2 = Pokemon(CATERPIE.name, CATERPIE.poke_img, 4, CATERPIE.stat_calc(4, CATERPIE.hp),
+    trainer7_poke2 = Pokemon(CATERPIE.name, CATERPIE.poke_img, 4, CATERPIE.stat_calc(4, CATERPIE.hp),
                              CATERPIE.stat_calc(4, CATERPIE.atk), CATERPIE.stat_calc(4, CATERPIE.df),
                              CATERPIE.stat_calc(4, CATERPIE.spatk),
                              CATERPIE.stat_calc(4, CATERPIE.spdf), CATERPIE.stat_calc(4, CATERPIE.speed),
                              CATERPIE.move1, CATERPIE.move2, CATERPIE.move3, CATERPIE.move4)
-    trainer3_party = [trainer3_poke1, trainer3_poke2]
+    trainer7_party = [trainer7_poke1, trainer7_poke2]
 
-    trainer1 = Player(0 + (BG_W * .015), 0 + (BG_H / 25))
-    trainer2 = Player(0 + (BG_W * .1), 0 + (BG_H / 25))
-    trainer3 = Player(0 + (BG_W * .185), 0 + (BG_H / 25))
+    trainer5 = Player(0 + (BG_W * .22), 0 - (BG_H * .2))
+    trainer6 = Player(0 + (BG_W * .185), 0 - (BG_H * .6))
+    trainer7 = Player(0 - (WIDTH * .38), 0 + (HEIGHT * .35))
 
     global step_counter, left, right
 
@@ -68,11 +69,11 @@ def route_two():
 
     def redraw_window():
         WIN.fill(BLACK)
-        route_one_sketch.draw(WIN, ROUTE_1)
+        route_two_sketch.draw(WIN, ROUTE_2)
         player.draw(WIN, TRAINER_DOWN_IMG)
-        trainer1.draw(WIN, TRAINER_DOWN_IMG)
-        trainer2.draw(WIN, TRAINER_DOWN_IMG)
-        trainer3.draw(WIN, TRAINER_DOWN_IMG)
+        trainer5.draw(WIN, TRAINER_DOWN_IMG)
+        trainer6.draw(WIN, TRAINER_DOWN_IMG)
+        trainer7.draw(WIN, TRAINER_DOWN_IMG)
 
         if left:
             player.draw(WIN, TRAINER_RIGHT_IMG)
@@ -103,7 +104,7 @@ def route_two():
 
         else:
             wild_pokemon = random.choice(POKE_DEX)
-            wild_pokemon = wild_pokemon.add_pokemon()
+            wild_pokemon = wild_pokemon.add_pokemon(7, 15)
         wild_pokemon_img = Player(WIDTH / 2 + 100, HEIGHT * .20)
         party_slot_img = Player(WIDTH / 3 - 125, HEIGHT * .55)
         turn_counter = 1
@@ -640,54 +641,52 @@ def route_two():
 
         wild_pokemon.heal()
 
-    # TODO after map and each area has been finished, split basically take this while loop and put it in a method for each region.
-    # TODO That way I can load everything separately and i dont have to worry about updating trainer locations because all pokecenters will be in a separatly loaded area
     while run:
         clock.tick(FPS)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                run = False
+                pygame.quit()
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
             pygame.quit()
 
         if keys[pygame.K_d]:
-            route_one_sketch.x -= velocity
-            trainer1.x -= velocity
-            trainer2.x -= velocity
-            trainer3.x -= velocity
+            route_two_sketch.x -= velocity
+            trainer5.x -= velocity
+            trainer6.x -= velocity
+            trainer7.x -= velocity
             left = True
             right = False
             up = False
             down = False
 
         elif keys[pygame.K_a]:
-            route_one_sketch.x += velocity
-            trainer1.x += velocity
-            trainer2.x += velocity
-            trainer3.x += velocity
+            route_two_sketch.x += velocity
+            trainer5.x += velocity
+            trainer6.x += velocity
+            trainer7.x += velocity
             left = False
             right = True
             up = False
             down = False
 
         elif keys[pygame.K_s]:
-            route_one_sketch.y -= velocity
-            trainer1.y -= velocity
-            trainer2.y -= velocity
-            trainer3.y -= velocity
+            route_two_sketch.y -= velocity
+            trainer5.y -= velocity
+            trainer6.y -= velocity
+            trainer7.y -= velocity
             left = False
             right = False
             up = True
             down = False
 
         elif keys[pygame.K_w]:
-            route_one_sketch.y += velocity
-            trainer1.y += velocity
-            trainer2.y += velocity
-            trainer3.y += velocity
+            route_two_sketch.y += velocity
+            trainer5.y += velocity
+            trainer6.y += velocity
+            trainer7.y += velocity
             left = False
             right = False
             up = False
@@ -717,7 +716,7 @@ def route_two():
             up = False
             down = False
 
-        if player.y + 65 >= route_one_sketch.y + BG_H:
+        if player.y + 65 >= route_two_sketch.y + BG_H:
             WIN.fill(BLACK)
             LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
             LOADING_SCREEN.show(LOADING_SCREEN)
@@ -725,14 +724,23 @@ def route_two():
             time.sleep(1)
             break
 
-        if player.x + 50 >= trainer1.x and player.x + 50 <= (trainer1.x + 100) and player.y + 50 >= trainer1.y and player.y + 50 <= (trainer1.y + 100) and not trainer1_battle:
+        if player.x <= route_two_sketch.x:
+            route_two_sketch.x -= 5
+            WIN.fill(BLACK)
+            LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
+            LOADING_SCREEN.show(LOADING_SCREEN)
+            pygame.display.update()
+            time.sleep(1)
+            village()
+
+        if player.x + 50 >= trainer5.x and player.x + 50 <= (trainer5.x + 100) and player.y + 50 >= trainer5.y and player.y + 50 <= (trainer5.y + 100) and not trainer5_battle:
             trainer_battle = True
 
-            for pokemon in trainer1_party:
+            for pokemon in trainer5_party:
                 battle(pokemon)
 
             if party_slot[0].hp <= 0:
-                for pokemon in trainer1_party:
+                for pokemon in trainer5_party:
                     pokemon.heal()
 
                 for pokemon in party_slot:
@@ -741,24 +749,24 @@ def route_two():
                 print("Returning to Pokecenter.")
                 time.sleep(2)
 
-                route_one_sketch.x, route_one_sketch.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
-                trainer1.x, trainer1.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer2.x, trainer2.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer3.x, trainer3.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
+                route_two_sketch.x, route_two_sketch.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
+                trainer5.x, trainer5.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
+                trainer6.x, trainer6.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
+                trainer7.x, trainer7.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
 
             else:
-                trainer1_battle = True
+                trainer5_battle = True
 
             trainer_battle = False
 
-        if player.x + 50 >= trainer2.x and player.x + 50 <= (trainer2.x + 100) and player.y + 50 >= trainer2.y and player.y + 50 <= (trainer2.y + 100) and not trainer2_battle:
+        if player.x + 50 >= trainer6.x and player.x + 50 <= (trainer6.x + 100) and player.y + 50 >= trainer6.y and player.y + 50 <= (trainer6.y + 100) and not trainer6_battle:
             trainer_battle = True
 
-            for pokemon in trainer2_party:
+            for pokemon in trainer6_party:
                 battle(pokemon)
 
             if party_slot[0].hp <= 0:
-                for pokemon in trainer1_party:
+                for pokemon in trainer5_party:
                     pokemon.heal()
 
                 for pokemon in party_slot:
@@ -766,24 +774,24 @@ def route_two():
 
                 print("Returning to Pokecenter.")
                 time.sleep(2)
-                route_one_sketch.x, route_one_sketch.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
-                trainer1.x, trainer1.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer2.x, trainer2.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer3.x, trainer3.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
+                route_two_sketch.x, route_two_sketch.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
+                trainer5.x, trainer5.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
+                trainer6.x, trainer6.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
+                trainer7.x, trainer7.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
 
             else:
-                trainer2_battle = True
+                trainer6_battle = True
 
             trainer_battle = False
 
-        if player.x + 50 >= trainer3.x and player.x + 50 <= (trainer3.x + 100) and player.y + 50 >= trainer3.y and player.y + 50 <= (trainer3.y + 100) and not trainer3_battle:
+        if player.x + 50 >= trainer7.x and player.x + 50 <= (trainer7.x + 100) and player.y + 50 >= trainer7.y and player.y + 50 <= (trainer7.y + 100) and not trainer7_battle:
             trainer_battle = True
 
-            for pokemon in trainer3_party:
+            for pokemon in trainer7_party:
                 battle(pokemon)
 
             if party_slot[0].hp <= 0:
-                for pokemon in trainer1_party:
+                for pokemon in trainer5_party:
                     pokemon.heal()
 
                 for pokemon in party_slot:
@@ -791,13 +799,13 @@ def route_two():
 
                 print("Returning to Pokecenter.")
                 time.sleep(2)
-                route_one_sketch.x, route_one_sketch.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
-                trainer1.x, trainer1.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer2.x, trainer2.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer3.x, trainer3.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
+                route_two_sketch.x, route_two_sketch.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
+                trainer5.x, trainer5.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
+                trainer6.x, trainer6.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
+                trainer7.x, trainer7.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
 
             else:
-                trainer3_battle = True
+                trainer7_battle = True
 
             trainer_battle = False
 

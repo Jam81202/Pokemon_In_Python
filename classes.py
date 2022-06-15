@@ -20,6 +20,8 @@ FONT = pygame.font.SysFont("comicsans", 16)
 # Map TODO create map assets (cities, routes, pokecenter, pokemart, gyms)
 STARTER_TOWN = pygame.transform.scale(pygame.image.load(os.path.join("assets", "starter_town_sketch.png")), (BG_W, BG_H))
 ROUTE_1 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_one_sketch.png")), (BG_W, BG_H))
+ROUTE_2 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_two_sketch.png")), (BG_W, BG_H))
+VILLAGE = pygame.transform.scale(pygame.image.load(os.path.join("assets", "village_sketch.png")), (BG_W, BG_H))
 
 '''
 CITY_1 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
@@ -32,7 +34,6 @@ GYM_1 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_ske
 GYM_2 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
 GYM_3 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
 GYM_4 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "map_sketch.png")), (BG_W, BG_H))
-ROUTE_2 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_two_sketch.png")), (BG_W, BG_H))
 ROUTE_3 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_three_sketch.png")), (BG_W, BG_H))
 ROUTE_4 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_four_sketch.png")), (BG_W, BG_H))
 ROUTE_5 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_five_sketch.png")), (BG_W, BG_H))
@@ -462,8 +463,20 @@ global trainer_battle
 global trainer1_battle
 global trainer2_battle
 global trainer3_battle
+global trainer4_battle
+global trainer5_battle
+global trainer6_battle
+global trainer7_battle
+global trainer8_battle
+global trainer9_battle
 
 trainer_battle = False
 trainer1_battle = False
 trainer2_battle = False
 trainer3_battle = False
+trainer4_battle = False
+trainer5_battle = False
+trainer6_battle = False
+trainer7_battle = False
+trainer8_battle = False
+trainer9_battle = False
