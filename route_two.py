@@ -1,10 +1,9 @@
 from classes import *
 from route_one import *
-from village import *
 
 pygame.init()
 
-def route_two():
+def route_two(w, h):
     run = True
     clock = pygame.time.Clock()
     FPS = 60
@@ -21,7 +20,7 @@ def route_two():
     party_slot_img_up = Player(WIDTH / 2 - 32, HEIGHT / 2 + 50)
 
     # Overworld Map
-    route_two_sketch = Background(0-(BG_W * .175), 0 - (BG_H * .7))
+    route_two_sketch = Background(0 - w, 0 - h)
 
     # Trainers
     global trainer_battle
@@ -722,16 +721,15 @@ def route_two():
             LOADING_SCREEN.show(LOADING_SCREEN)
             pygame.display.update()
             time.sleep(1)
-            break
+            return 2, 775, -290
 
         if player.x <= route_two_sketch.x:
-            route_two_sketch.x -= 5
             WIN.fill(BLACK)
             LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
             LOADING_SCREEN.show(LOADING_SCREEN)
             pygame.display.update()
             time.sleep(1)
-            village()
+            return 4, 2525, 150
 
         if player.x + 50 >= trainer5.x and player.x + 50 <= (trainer5.x + 100) and player.y + 50 >= trainer5.y and player.y + 50 <= (trainer5.y + 100) and not trainer5_battle:
             trainer_battle = True

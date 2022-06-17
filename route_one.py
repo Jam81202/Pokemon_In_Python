@@ -4,7 +4,7 @@ from village import *
 
 pygame.init()
 
-def route_one():
+def route_one(w, h):
     run = True
     clock = pygame.time.Clock()
     FPS = 60
@@ -21,7 +21,7 @@ def route_one():
     party_slot_img_up = Player(WIDTH / 2 - 32, HEIGHT / 2 + 50)
 
     # Overworld Map
-    route_one_sketch = Background(0-(BG_W * .175), 0 - (BG_H * .7))
+    route_one_sketch = Background(0 - w, 0 - h)
 
     # Trainers
     global trainer_battle
@@ -722,25 +722,23 @@ def route_one():
             LOADING_SCREEN.show(LOADING_SCREEN)
             pygame.display.update()
             time.sleep(1)
-            break
+            return 1, 475, -290
 
-        if player.y <= route_one_sketch.y and player.x >= trainer2.x:
-            route_one_sketch.y -= 5
+        if player.y <= route_one_sketch.y and route_one_sketch.x <= -600:
             WIN.fill(BLACK)
             LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
             LOADING_SCREEN.show(LOADING_SCREEN)
             pygame.display.update()
             time.sleep(1)
-            route_two()
+            return 3, 600, 840
 
         if player.y <= route_one_sketch.y:
-            route_one_sketch.y -= 5
             WIN.fill(BLACK)
             LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
             LOADING_SCREEN.show(LOADING_SCREEN)
             pygame.display.update()
             time.sleep(1)
-            village()
+            return 4, 325, 840
 
         if player.x + 50 >= trainer1.x and player.x + 50 <= (trainer1.x + 100) and player.y + 50 >= trainer1.y and player.y + 50 <= (trainer1.y + 100) and not trainer1_battle:
             trainer_battle = True

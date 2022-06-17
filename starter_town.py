@@ -1,10 +1,9 @@
 from classes import *
 from route_one import *
-from route_two import *
 
 pygame.init()
 
-def village(w, h):
+def starter_town(w, h):
     run = True
     clock = pygame.time.Clock()
     FPS = 60
@@ -21,11 +20,11 @@ def village(w, h):
     party_slot_img_up = Player(WIDTH / 2 - 32, HEIGHT / 2 + 50)
 
     # Overworld Map
-    village = Background(0 - w, 0 - h)
+    starter_town = Background(0 - w, 0 - h)
 
     def redraw_window():
         WIN.fill(BLACK)
-        village.draw(WIN, VILLAGE)
+        starter_town.draw(WIN, STARTER_TOWN)
         player.draw(WIN, TRAINER_DOWN_IMG)
 
         if left:
@@ -59,28 +58,28 @@ def village(w, h):
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d]:
-            village.x -= velocity
+            starter_town.x -= velocity
             left = True
             right = False
             up = False
             down = False
 
         elif keys[pygame.K_a]:
-            village.x += velocity
+            starter_town.x += velocity
             left = False
             right = True
             up = False
             down = False
 
         elif keys[pygame.K_s]:
-            village.y -= velocity
+            starter_town.y -= velocity
             left = False
             right = False
             up = True
             down = False
 
         elif keys[pygame.K_w]:
-            village.y += velocity
+            starter_town.y += velocity
             left = False
             right = False
             up = False
@@ -99,20 +98,12 @@ def village(w, h):
             up = False
             down = False
 
-        if player.x + 65 >= village.x + BG_W:
+        if player.y <= starter_town.y:
             WIN.fill(BLACK)
             LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
             LOADING_SCREEN.show(LOADING_SCREEN)
             pygame.display.update()
             time.sleep(1)
-            return 3, -300, 550
-
-        if player.y + 65 >= village.y + BG_H:
-            WIN.fill(BLACK)
-            LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
-            LOADING_SCREEN.show(LOADING_SCREEN)
-            pygame.display.update()
-            time.sleep(1)
-            return 2, -100, -290
+            return 2, 525, 840
 
         redraw_window()
