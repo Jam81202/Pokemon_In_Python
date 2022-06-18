@@ -2,6 +2,7 @@ from starter_town import *
 from route_one import *
 from route_two import *
 from village import *
+from city_one import *
 
 global location
 location = 1
@@ -20,3 +21,6 @@ while True:
 
     elif location == 4:
         location, player_spawn_w, player_spawn_h = village(player_spawn_w, player_spawn_h)
+
+    elif location == 5:
+        location, player_spawn_w, player_spawn_h = city_one(player_spawn_w, player_spawn_h)
