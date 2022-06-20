@@ -1,5 +1,6 @@
 from classes import *
 from route_one import *
+from pokecenter import *
 
 pygame.init()
 
@@ -105,5 +106,15 @@ def starter_town(w, h):
             pygame.display.update()
             time.sleep(1)
             return 2, 525, 840
+
+        if player.x + 65 >= starter_town.x + BG_W / 3:
+            starter_town.x += 15
+            WIN.fill(BLACK)
+            LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
+            LOADING_SCREEN.show(LOADING_SCREEN)
+            pygame.display.update()
+            time.sleep(1)
+            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 1, 0 - starter_town.x, 0 - starter_town.y
+            return 6, 32, 75
 
         redraw_window()

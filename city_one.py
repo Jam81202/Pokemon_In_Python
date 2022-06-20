@@ -114,6 +114,7 @@ def city_one(w, h):
             LOADING_SCREEN.show(LOADING_SCREEN)
             pygame.display.update()
             time.sleep(1)
-            pokecenter()
+            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 5, 0 - city_one.x, 0 - city_one.y
+            return 6, 32, 75
 
         redraw_window()
