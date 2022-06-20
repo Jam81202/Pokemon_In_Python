@@ -10,6 +10,7 @@ pygame.init()
 
 WIDTH, HEIGHT = 800, 650
 BG_W, BG_H = 3000, 1200
+HOUSE_W, HOUSE_H = 1896, 919
 SPRITE_W, SPRITE_H = 65, 65
 WIN = pygame.display.set_mode((WIDTH, HEIGHT), RESIZABLE)
 pygame.display.set_caption("Borpa")
@@ -28,7 +29,6 @@ CITY_1 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "city_o
 CITY_2 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "city_two_sketch.png")), (BG_W, BG_H))
 CITY_3 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "city_three_sketch.png")), (BG_W, BG_H))
 DIG_SITE = pygame.transform.scale(pygame.image.load(os.path.join("assets", "dig_site_sketch.png")), (BG_W, BG_H))
-POKECENTER = pygame.transform.scale(pygame.image.load(os.path.join("assets", "pokecenter_sketch.png")), (BG_W, BG_H))
 POKEMART = pygame.transform.scale(pygame.image.load(os.path.join("assets", "pokemart_sketch.png")), (BG_W, BG_H))
 GYM_1 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "gym_one_sketch.png")), (BG_W, BG_H))
 GYM_2 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "gym_two_sketch.png")), (BG_W, BG_H))
@@ -39,6 +39,11 @@ ROUTE_4 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route
 ROUTE_5 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_five_sketch.png")), (BG_W, BG_H))
 ROUTE_6 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_six_sketch.png")), (BG_W, BG_H))
 '''
+
+# Pokecenter and PokeMart
+POKECENTER = pygame.transform.scale(pygame.image.load(os.path.join("assets", "pokecenter.png")), (WIDTH, HEIGHT))
+NURSE_LIGHT_ON = pygame.transform.scale(pygame.image.load(os.path.join("assets", "nurse_light_on.png")), (100, 100))
+NURSE_LIGHT_OFF = pygame.transform.scale(pygame.image.load(os.path.join("assets", "nurse_light_off.png")), (100, 100))
 
 # Pokemon TODO Pokemon need more images (different walking directions in overworld, battle stances)
 PIKA_IMG = pygame.transform.scale(pygame.image.load(os.path.join("assets", "Pika.png")), (SPRITE_W, SPRITE_H))
@@ -81,10 +86,6 @@ class Pokemon:
 
     def heal(self):
         self.hp = self.maxhp
-
-    def heal_party(self, player_party):
-        for pokemon in player_party:
-            pokemon.partypoke_hp = pokemon.partypoke_maxhp
 
     def get_random_moves(self, attacker, defender):
         random_move = random.randint(1, 4)
