@@ -558,15 +558,16 @@ def route_one(w, h):
             wild_pokemon_img.draw(WIN, wild_pokemon.poke_img)
             party_slot_img.draw(WIN, party_slot[0].poke_img)
 
-            if party_slot[0].hp <= 0:
-                if party_slot[1].hp <= 0:
-                    if party_slot[2].hp <= 0:
-                        if party_slot[3].hp <= 0:
-                            if party_slot[4].hp <= 0:
-                                if party_slot[5].hp <= 0:
-                                    print("You Lost!")
-                                    time.sleep(2)
-                                    break
+            alive_pokemon = 0
+
+            for pokemon in party_slot:
+                if pokemon.hp > 0:
+                    alive_pokemon += 1
+
+            if alive_pokemon == 0:
+                print("You Lost!")
+                time.sleep(2)
+                break
 
             if party_slot[0].hp <= 0:
                 party_slot[0].hp += abs(party_slot[0].hp)
@@ -634,14 +635,6 @@ def route_one(w, h):
             TURN_NUM.show(TURN_NUM)
 
             pygame.display.update()
-
-            if party_slot[0].hp <= 0:
-                if party_slot[1].hp <= 0:
-                    if party_slot[2].hp <= 0:
-                        if party_slot[3].hp <= 0:
-                            if party_slot[4].hp <= 0:
-                                if party_slot[5].hp <= 0:
-                                    break
 
             if wild_pokemon.hp == 0:
                 time.sleep(2)
@@ -763,11 +756,7 @@ def route_one(w, h):
 
                 print("Returning to Pokecenter.")
                 time.sleep(2)
-
-                route_one_sketch.x, route_one_sketch.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
-                trainer1.x, trainer1.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer2.x, trainer2.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer3.x, trainer3.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
+                return LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2]
 
             else:
                 trainer1_battle = True
@@ -789,10 +778,7 @@ def route_one(w, h):
 
                 print("Returning to Pokecenter.")
                 time.sleep(2)
-                route_one_sketch.x, route_one_sketch.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
-                trainer1.x, trainer1.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer2.x, trainer2.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer3.x, trainer3.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
+                return LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2]
 
             else:
                 trainer2_battle = True
