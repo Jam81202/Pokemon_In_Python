@@ -559,6 +559,16 @@ def route_one(w, h):
             party_slot_img.draw(WIN, party_slot[0].poke_img)
 
             if party_slot[0].hp <= 0:
+                if party_slot[1].hp <= 0:
+                    if party_slot[2].hp <= 0:
+                        if party_slot[3].hp <= 0:
+                            if party_slot[4].hp <= 0:
+                                if party_slot[5].hp <= 0:
+                                    print("You Lost!")
+                                    time.sleep(2)
+                                    break
+
+            if party_slot[0].hp <= 0:
                 party_slot[0].hp += abs(party_slot[0].hp)
                 print("Your", party_slot[0].name, "has fainted!")
                 time.sleep(2)
@@ -631,8 +641,6 @@ def route_one(w, h):
                         if party_slot[3].hp <= 0:
                             if party_slot[4].hp <= 0:
                                 if party_slot[5].hp <= 0:
-                                    print("You Lost!")
-                                    time.sleep(2)
                                     break
 
             if wild_pokemon.hp == 0:
@@ -804,12 +812,9 @@ def route_one(w, h):
                 for pokemon in party_slot:
                     pokemon.heal()
 
-                print("Returning to Pokecenter.")
+                print("Returning to last Pokecenter.")
                 time.sleep(2)
-                route_one_sketch.x, route_one_sketch.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
-                trainer1.x, trainer1.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer2.x, trainer2.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer3.x, trainer3.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
+                return LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2]
 
             else:
                 trainer3_battle = True
