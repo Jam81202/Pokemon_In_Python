@@ -23,10 +23,14 @@ def starter_town(w, h):
     # Overworld Map
     starter_town = Background(0 - w, 0 - h)
 
+    # Professor
+    professor = Player(starter_town.x + BG_W / 3 - 100, starter_town.y + BG_H / 2 + 25)
+
     def redraw_window():
         WIN.fill(BLACK)
         starter_town.draw(WIN, STARTER_TOWN)
         player.draw(WIN, TRAINER_DOWN_IMG)
+        professor.draw(WIN, PROFESSOR_LEFT)
 
         if left:
             player.draw(WIN, TRAINER_RIGHT_IMG)
@@ -60,6 +64,7 @@ def starter_town(w, h):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d]:
             starter_town.x -= velocity
+            professor.x -= velocity
             left = True
             right = False
             up = False
@@ -67,6 +72,7 @@ def starter_town(w, h):
 
         elif keys[pygame.K_a]:
             starter_town.x += velocity
+            professor.x += velocity
             left = False
             right = True
             up = False
@@ -74,6 +80,7 @@ def starter_town(w, h):
 
         elif keys[pygame.K_s]:
             starter_town.y -= velocity
+            professor.y -= velocity
             left = False
             right = False
             up = True
@@ -81,6 +88,7 @@ def starter_town(w, h):
 
         elif keys[pygame.K_w]:
             starter_town.y += velocity
+            professor.y += velocity
             left = False
             right = False
             up = False
@@ -107,7 +115,7 @@ def starter_town(w, h):
             time.sleep(1)
             return 2, 525, 840
 
-        if player.x + 65 >= starter_town.x + BG_W / 3:
+        if player.x + 65 >= starter_town.x + BG_W / 3 + 50:
             starter_town.x += 15
             WIN.fill(BLACK)
             LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")

@@ -44,6 +44,7 @@ ROUTE_6 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route
 POKECENTER = pygame.transform.scale(pygame.image.load(os.path.join("assets", "pokecenter.png")), (WIDTH, HEIGHT))
 NURSE_LIGHT_ON = pygame.transform.scale(pygame.image.load(os.path.join("assets", "nurse_light_on.png")), (100, 100))
 NURSE_LIGHT_OFF = pygame.transform.scale(pygame.image.load(os.path.join("assets", "nurse_light_off.png")), (100, 100))
+PROFESSOR_LEFT = pygame.transform.scale(pygame.image.load(os.path.join("assets", "professor_left.png")), (SPRITE_W, SPRITE_H))
 
 # Pokemon TODO Pokemon need more images (different walking directions in overworld, battle stances)
 PIKA_IMG = pygame.transform.scale(pygame.image.load(os.path.join("assets", "Pika.png")), (SPRITE_W, SPRITE_H))

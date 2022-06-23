@@ -58,9 +58,9 @@ def route_one(w, h):
                              CATERPIE.move1, CATERPIE.move2, CATERPIE.move3, CATERPIE.move4)
     trainer3_party = [trainer3_poke1, trainer3_poke2]
 
-    trainer1 = Player(0 + (BG_W * .22), 0 - (BG_H * .2))
-    trainer2 = Player(0 + (BG_W * .185), 0 - (BG_H * .6))
-    trainer3 = Player(0 - (WIDTH * .38), 0 + (HEIGHT * .35))
+    trainer1 = Player(route_one_sketch.x + BG_W / 2 - 300, route_one_sketch.y + BG_H / 2)
+    trainer2 = Player(route_one_sketch.x + BG_W / 2 - 425, route_one_sketch.y + 125)
+    trainer3 = Player(route_one_sketch.x + 225, route_one_sketch.y + BG_H - 125)
 
     global step_counter, left, right
 
