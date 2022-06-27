@@ -107,7 +107,7 @@ def city_one(w, h):
             time.sleep(1)
             return 3, 2525, 500
 
-        if player.y <= city_one.y:
+        if player.y <= city_one.y and player.x <= city_one.x + BG_W / 3:
             city_one.y -= 15
             WIN.fill(BLACK)
             LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
@@ -116,5 +116,7 @@ def city_one(w, h):
             time.sleep(1)
             LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 5, 0 - city_one.x, 0 - city_one.y
             return 6, 32, 75
+
+        # TODO draw out gym 1's areas (3 rooms total, 1 with 2 trainers, 1 with 1 trainer, and the final room with the leader
 
         redraw_window()
