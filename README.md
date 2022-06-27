@@ -28,8 +28,9 @@ In-Progress:
     Leveling (5), 
     Battle stat (6),
     Poke Balls (4),
+  Pokecenters - Basic function (healing party) is completed and functional, but interior is incomplete only having the nurse to heal your pokemon, 
   
 Untouched Features:
   Economy,
-  Poke center/marts (You can heal pokemon and use items. I want to complete the map before I start this however. Map will include Poke centers/marts),
+  Poke marts (You can use items. I want to complete the map before I start this however),
   Save States (As of now, you cannot save the game and all progress will be lost upon exiting the game)
