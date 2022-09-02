@@ -62,6 +62,11 @@ def starter_town(w, h):
                 run = False
 
         keys = pygame.key.get_pressed()
+        if keys[pygame.K_ESCAPE]:
+            #pygame.display.quit()
+            pygame.quit()
+
+        keys = pygame.key.get_pressed()
         if keys[pygame.K_d]:
             starter_town.x -= velocity
             professor.x -= velocity
