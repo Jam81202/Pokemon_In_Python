@@ -1,4 +1,7 @@
 # Pkmn-in-python
+
+*This is just a solo passion project I'm using to get familiar with Python and to have fun. I'm not going to sell this and I might not ever finish it.*
+
 Spin off Pokemon game made with python. It's pretty bad but the first actual project I'm doing in python so I'm okay with that. It's not simply a battle simulator. This is my attempt at recreating a basic version of the main line jrpg games with an overworld map, trainers, wild encounters, items, and an economy.
 
 Planned Features:
