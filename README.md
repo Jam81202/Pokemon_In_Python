@@ -1,4 +1,4 @@
-# Pkmn-in-python
+# Pythmon
 
 *This is just a solo passion project I'm using to get familiar with Python and to have fun. I'm not going to sell this and I might not ever finish it.*
 
