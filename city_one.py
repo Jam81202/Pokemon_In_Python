@@ -21,11 +21,11 @@ def city_one(w, h):
     party_slot_img_up = Player(WIDTH / 2 - 32, HEIGHT / 2 + 50)
 
     # Overworld Map
-    city_one = Background(0 - w, 0 - h)
+    city_one_sketch = Background(0 - w, 0 - h)
 
     def redraw_window():
         WIN.fill(BLACK)
-        city_one.draw(WIN, CITY_1)
+        city_one_sketch.draw(WIN, CITY_1)
         player.draw(WIN, TRAINER_DOWN_IMG)
 
         if left:
@@ -59,28 +59,28 @@ def city_one(w, h):
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d]:
-            city_one.x -= velocity
+            city_one_sketch.x -= velocity
             left = True
             right = False
             up = False
             down = False
 
         elif keys[pygame.K_a]:
-            city_one.x += velocity
+            city_one_sketch.x += velocity
             left = False
             right = True
             up = False
             down = False
 
         elif keys[pygame.K_s]:
-            city_one.y -= velocity
+            city_one_sketch.y -= velocity
             left = False
             right = False
             up = True
             down = False
 
         elif keys[pygame.K_w]:
-            city_one.y += velocity
+            city_one_sketch.y += velocity
             left = False
             right = False
             up = False
@@ -99,7 +99,7 @@ def city_one(w, h):
             up = False
             down = False
 
-        if player.x <= city_one.x:
+        if player.x <= city_one_sketch.x:
             WIN.fill(BLACK)
             LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
             LOADING_SCREEN.show(LOADING_SCREEN)
@@ -107,15 +107,23 @@ def city_one(w, h):
             time.sleep(1)
             return 3, 2525, 500
 
-        if player.y <= city_one.y and player.x <= city_one.x + BG_W / 3:
-            city_one.y -= 15
+        if player.y <= city_one_sketch.y and player.x <= city_one_sketch.x + BG_W / 3:
+            city_one_sketch.y -= 15
             WIN.fill(BLACK)
             LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
             LOADING_SCREEN.show(LOADING_SCREEN)
             pygame.display.update()
             time.sleep(1)
-            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 5, 0 - city_one.x, 0 - city_one.y
+            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 5, 0 - city_one_sketch.x, 0 - city_one_sketch.y
             return 6, 32, 75
+
+        if player.x + 65 >= city_one_sketch.x + BG_W:
+            WIN.fill(BLACK)
+            LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
+            LOADING_SCREEN.show(LOADING_SCREEN)
+            pygame.display.update()
+            time.sleep(1)
+            return 2, -300, 150
 
         # TODO draw out gym 1's areas (3 rooms total, 1 with 2 trainers, 1 with 1 trainer, and the final room with the leader
 
