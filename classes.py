@@ -24,6 +24,7 @@ ROUTE_1 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route
 ROUTE_2 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_two_sketch.png")), (BG_W, BG_H))
 VILLAGE = pygame.transform.scale(pygame.image.load(os.path.join("assets", "village_sketch.png")), (BG_W, BG_H))
 CITY_1 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "city_one_sketch.png")), (BG_W, BG_H))
+ROUTE_3 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_one_sketch.png")), (BG_W, BG_H))
 
 '''
 CITY_2 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "city_two_sketch.png")), (BG_W, BG_H))
@@ -34,7 +35,6 @@ GYM_1 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "gym_one
 GYM_2 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "gym_two_sketch.png")), (BG_W, BG_H))
 GYM_3 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "gym_three_sketch.png")), (BG_W, BG_H))
 GYM_4 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "gym_four_sketch.png")), (BG_W, BG_H))
-ROUTE_3 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_three_sketch.png")), (BG_W, BG_H))
 ROUTE_4 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_four_sketch.png")), (BG_W, BG_H))
 ROUTE_5 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_five_sketch.png")), (BG_W, BG_H))
 ROUTE_6 = pygame.transform.scale(pygame.image.load(os.path.join("assets", "route_six_sketch.png")), (BG_W, BG_H))

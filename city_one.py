@@ -117,13 +117,13 @@ def city_one(w, h):
             LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 5, 0 - city_one_sketch.x, 0 - city_one_sketch.y
             return 6, 32, 75
 
-        if player.x + 65 >= city_one_sketch.x + BG_W:
+        if player.y + 65 >= city_one_sketch.y + BG_H:
             WIN.fill(BLACK)
-            LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
+            LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy",feedback="loading")
             LOADING_SCREEN.show(LOADING_SCREEN)
             pygame.display.update()
             time.sleep(1)
-            return 2, -300, 150
+            return 7, 475, -290
 
         # TODO draw out gym 1's areas (3 rooms total, 1 with 2 trainers, 1 with 1 trainer, and the final room with the leader
 

@@ -36,6 +36,6 @@ while True:
         print("pokecenter")
         location, player_spawn_w, player_spawn_h = pokecenter(player_spawn_w, player_spawn_h)
 
-    elif location == 6:
+    elif location == 7:
         print("route 3")
         location, player_spawn_w, player_spawn_h = route_three(player_spawn_w, player_spawn_h)

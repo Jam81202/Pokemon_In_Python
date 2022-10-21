@@ -69,7 +69,7 @@ def route_three(w, h):
     def redraw_window():
         WIN.fill(BLACK)
         # TODO draw out ROUTE_3
-        route_three_sketch.draw(WIN, ROUTE_1)
+        route_three_sketch.draw(WIN, ROUTE_3)
         player.draw(WIN, TRAINER_DOWN_IMG)
         trainer1.draw(WIN, TRAINER_DOWN_IMG)
         trainer2.draw(WIN, TRAINER_DOWN_IMG)
