@@ -1,5 +1,4 @@
 from classes import *
-from city_one import *
 
 pygame.init()
 
@@ -58,6 +57,12 @@ def pokecenter(w, h):
                 run = False
 
         keys = pygame.key.get_pressed()
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_ESCAPE]:
+            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 6, player.x, player.y
+            return 8, 0, 0
+
         if keys[pygame.K_d] and player.x + 65 <= WIDTH:
             player.x += velocity
             left = True
@@ -119,6 +124,6 @@ def pokecenter(w, h):
             LOADING_SCREEN.show(LOADING_SCREEN)
             pygame.display.update()
             time.sleep(1)
-            return LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2]
+            return LAST_POKECENTER[0], LAST_POKECENTER[1], LAST_POKECENTER[2]
 
         redraw_window()

@@ -1,6 +1,7 @@
 from classes import *
 from route_two import *
 from pokecenter import *
+from menu_screen import *
 
 pygame.init()
 
@@ -58,6 +59,12 @@ def city_one(w, h):
                 run = False
 
         keys = pygame.key.get_pressed()
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_ESCAPE]:
+            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 5, 0 - city_one_sketch.x, 0 - city_one_sketch.y
+            return 8, 0, 0
+
         if keys[pygame.K_d]:
             city_one_sketch.x -= velocity
             left = True
@@ -114,7 +121,7 @@ def city_one(w, h):
             LOADING_SCREEN.show(LOADING_SCREEN)
             pygame.display.update()
             time.sleep(1)
-            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 5, 0 - city_one_sketch.x, 0 - city_one_sketch.y
+            LAST_POKECENTER[0], LAST_POKECENTER[1], LAST_POKECENTER[2] = 5, 0 - city_one_sketch.x, 0 - city_one_sketch.y
             return 6, 32, 75
 
         if player.y + 65 >= city_one_sketch.y + BG_H:

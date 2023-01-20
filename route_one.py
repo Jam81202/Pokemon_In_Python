@@ -1,7 +1,5 @@
 from classes import *
-from route_two import *
 from battle import *
-from village import *
 
 pygame.init()
 
@@ -98,8 +96,6 @@ def route_one(w, h):
     def inventory():
         pass
 
-    #TODO add battle code back if it doesnt work
-
     while run:
         clock.tick(FPS)
 
@@ -109,8 +105,8 @@ def route_one(w, h):
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
-            #pygame.display.quit()
-            pygame.quit()
+            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 2, 0 - route_one_sketch.x, 0 - route_one_sketch.y
+            return 8, 0, 0
 
         if keys[pygame.K_d]:
             route_one_sketch.x -= velocity

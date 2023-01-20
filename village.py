@@ -1,6 +1,4 @@
 from classes import *
-from route_one import *
-from route_two import *
 
 pygame.init()
 
@@ -58,6 +56,12 @@ def village(w, h):
                 run = False
 
         keys = pygame.key.get_pressed()
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_ESCAPE]:
+            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 4, 0 - village.x, 0 - village.y
+            return 8, 0, 0
+
         if keys[pygame.K_d]:
             village.x -= velocity
             left = True

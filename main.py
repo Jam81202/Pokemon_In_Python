@@ -4,6 +4,7 @@ from route_two import *
 from village import *
 from city_one import *
 from route_three import *
+from menu_screen import *
 
 global location
 location = 1
@@ -39,3 +40,7 @@ while True:
     elif location == 7:
         print("route 3")
         location, player_spawn_w, player_spawn_h = route_three(player_spawn_w, player_spawn_h)
+
+    elif location == 8:
+        print("menu screen")
+        location, player_spawn_w, player_spawn_h = menu()

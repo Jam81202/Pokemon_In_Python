@@ -459,6 +459,7 @@ step_counter = 0
 
 # Closest town. Uses to know which pokecenter to take you back to
 LAST_LOCATION = [0, 0, 0]
+LAST_POKECENTER = [0, 0, 0]
 
 # States whether you not you have fought that trainer before.
 global trainer_battle

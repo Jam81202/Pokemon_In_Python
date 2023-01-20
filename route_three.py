@@ -1,5 +1,4 @@
 from classes import *
-from city_one import *
 
 pygame.init()
 
@@ -651,7 +650,8 @@ def route_three(w, h):
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
-            pygame.quit()
+            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 7, 0 - route_three_sketch.x, 0 - route_three_sketch.y
+            return 8, 0, 0
 
         if keys[pygame.K_d]:
             route_three_sketch.x -= velocity

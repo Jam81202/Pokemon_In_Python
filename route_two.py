@@ -1,6 +1,5 @@
 from classes import *
 from battle import *
-from route_one import *
 
 pygame.init()
 
@@ -106,7 +105,8 @@ def route_two(w, h):
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
-            pygame.quit()
+            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 3, 0 - route_two_sketch.x, 0 - route_two_sketch.y
+            return 8, 0, 0
 
         if keys[pygame.K_d]:
             route_two_sketch.x -= velocity

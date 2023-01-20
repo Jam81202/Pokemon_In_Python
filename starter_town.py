@@ -1,6 +1,4 @@
 from classes import *
-from route_one import *
-from pokecenter import *
 
 pygame.init()
 
@@ -63,8 +61,8 @@ def starter_town(w, h):
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
-            #pygame.display.quit()
-            pygame.quit()
+            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 1, 0 - starter_town.x, 0 - starter_town.y
+            return 8, 0, 0
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d]:
@@ -127,7 +125,7 @@ def starter_town(w, h):
             LOADING_SCREEN.show(LOADING_SCREEN)
             pygame.display.update()
             time.sleep(1)
-            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 1, 0 - starter_town.x, 0 - starter_town.y
+            LAST_POKECENTER[0], LAST_POKECENTER[1], LAST_POKECENTER[2] = 1, 0 - starter_town.x, 0 - starter_town.y
             return 6, 32, 75
 
         redraw_window()
