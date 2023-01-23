@@ -4,6 +4,7 @@ import time
 import random
 import sys
 import copy
+import pickle
 from pygame.locals import *
 
 pygame.init()
@@ -458,7 +459,7 @@ down = False
 step_counter = 0
 
 # Closest town. Uses to know which pokecenter to take you back to
-LAST_LOCATION = [0, 0, 0]
+LAST_LOCATION = [1, 30, 144]
 LAST_POKECENTER = [0, 0, 0]
 
 # States whether you not you have fought that trainer before.
@@ -487,4 +488,8 @@ trainer9_battle = False
 trainer_status = [trainer_battle, trainer1_battle, trainer2_battle,trainer3_battle, trainer4_battle,
                   trainer5_battle, trainer6_battle, trainer7_battle, trainer8_battle, trainer9_battle]
 
-# TODO Things thats need to be saved: LAST_LOCATION, LAST_POKECENTER, PC_STORAGE, PARTY_SLOT
+# TODO Things thats need to be saved: LAST_LOCATION, LAST_POKECENTER, PC_STORAGE, PARTY_SLOT, trainer_status
+def save_game():
+    pickle.dump(LAST_LOCATION, open("lastlocation_savefile.pickle", "wb"))
+    pickle.dump(LAST_POKECENTER, open("lastpokecenter_savefile.pickle", "wb"))
+    pickle.dump(trainer_status, open("trainerstatus_savefile.pickle", "wb"))
