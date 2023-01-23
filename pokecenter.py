@@ -9,8 +9,14 @@ def pokecenter(w, h):
 
     velocity = 7
 
-    # Player Trainer
-    player = Player(WIDTH / 2 - w, HEIGHT - h)
+    # Player Trainer (if else because it affects the pause menu. Without this,
+    # the player will be in a different x,y after resuming game
+    if LAST_LOCATION[0] == 6:
+        player = Player(LAST_LOCATION[1], LAST_LOCATION[2])
+
+    else:
+        player = Player(WIDTH / 2 - w, HEIGHT - h)
+
     # player_box = pygame.Rect(0, 0, 65, 65)
 
     # Nurse
@@ -55,8 +61,6 @@ def pokecenter(w, h):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-
-        keys = pygame.key.get_pressed()
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:

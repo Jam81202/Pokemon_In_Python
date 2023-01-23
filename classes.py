@@ -483,3 +483,8 @@ trainer6_battle = False
 trainer7_battle = False
 trainer8_battle = False
 trainer9_battle = False
+
+trainer_status = [trainer_battle, trainer1_battle, trainer2_battle,trainer3_battle, trainer4_battle,
+                  trainer5_battle, trainer6_battle, trainer7_battle, trainer8_battle, trainer9_battle]
+
+# TODO Things thats need to be saved: LAST_LOCATION, LAST_POKECENTER, PC_STORAGE, PARTY_SLOT
