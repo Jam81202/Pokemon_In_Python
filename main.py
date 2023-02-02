@@ -7,10 +7,9 @@ from route_three import *
 from menu_screen import *
 
 global location
-
-location = LAST_LOCATION[0]
-player_spawn_w = LAST_LOCATION[1]
-player_spawn_h = LAST_LOCATION[2]
+location = 1
+player_spawn_w = 30
+player_spawn_h = 144
 
 # Loads each new location. Every new area should return the new location being entered, and the spawn coordinates of the new area being entered
 while True:

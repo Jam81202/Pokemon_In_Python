@@ -10,13 +10,13 @@ def menu():
 
         WIN.fill(BLACK)
 
-        LOAD_SAVE_BUTTON = Button("L: Loading Save", (WIDTH / 3 - 125, HEIGHT * .25), font=30, bg="navy",
+        RETURN_TO_MAIN_MENU_BUTTON = Button("Z: Return to Main Menu", (WIDTH / 3 - 125, HEIGHT * .25), font=30, bg="navy",
                                         feedback="Returning to Main Menu")
 
-        SAVE_GAME_BUTTON = Button("S: Save Game", (WIDTH / 3 - 125, HEIGHT * .35), font=30, bg="navy",
+        SAVE_GAME_BUTTON = Button("X: Save Game", (WIDTH / 3 - 125, HEIGHT * .35), font=30, bg="navy",
                                         feedback="Saving...")
 
-        QUIT_BUTTON = Button("Q: Quit Game", (WIDTH / 3 - 125, HEIGHT * .45), font=30, bg="navy",
+        QUIT_BUTTON = Button("C: Quit Game", (WIDTH / 3 - 125, HEIGHT * .45), font=30, bg="navy",
                                         feedback="Closing Game")
 
         BACK_BUTTON = Button("<-- Back", (0, 0), font=30, bg="navy", feedback="You chose to go back")
@@ -27,25 +27,19 @@ def menu():
             in_menu = False
             print(BACK_BUTTON.feedback)
 
-        if keys[pygame.K_l]:
+        if keys[pygame.K_z]:
             in_menu = False
-            print(LOAD_SAVE_BUTTON.feedback)
-            LAST_LOCATION = pickle.load(open("lastlocation_savefile.pickle", "rb"))
-            LAST_POKECENTER = pickle.load(open("lastpokecenter_savefile.pickle", "rb"))
-            trainer_status = pickle.load(open("trainerstatus_savefile.pickle", "rb"))
-            break
+            print(RETURN_TO_MAIN_MENU_BUTTON.feedback)
 
-        if keys[pygame.K_s]:
+        if keys[pygame.K_x]:
             in_menu = True
-            save_game()
             print(SAVE_GAME_BUTTON.feedback)
-            break
 
-        if keys[pygame.K_q]:
+        if keys[pygame.K_c]:
             print(QUIT_BUTTON.feedback)
             pygame.quit()
 
-        LOAD_SAVE_BUTTON.show(LOAD_SAVE_BUTTON)
+        RETURN_TO_MAIN_MENU_BUTTON.show(RETURN_TO_MAIN_MENU_BUTTON)
         SAVE_GAME_BUTTON.show(SAVE_GAME_BUTTON)
         QUIT_BUTTON.show(QUIT_BUTTON)
         BACK_BUTTON.show(BACK_BUTTON)
