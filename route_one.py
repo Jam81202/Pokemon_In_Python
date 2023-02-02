@@ -211,7 +211,7 @@ def route_one(w, h):
 
                 print("Returning to Pokecenter.")
                 time.sleep(2)
-                return LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2]
+                return LAST_POKECENTER[0], LAST_POKECENTER[1], LAST_POKECENTER[2]
 
             else:
                 trainer1_battle = True
@@ -225,7 +225,7 @@ def route_one(w, h):
                 battle(1, pokemon)
 
             if party_slot[0].hp <= 0:
-                for pokemon in trainer1_party:
+                for pokemon in trainer2_party:
                     pokemon.heal()
 
                 for pokemon in party_slot:
@@ -233,7 +233,7 @@ def route_one(w, h):
 
                 print("Returning to Pokecenter.")
                 time.sleep(2)
-                return LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2]
+                return LAST_POKECENTER[0], LAST_POKECENTER[1], LAST_POKECENTER[2]
 
             else:
                 trainer2_battle = True
@@ -255,7 +255,7 @@ def route_one(w, h):
 
                 print("Returning to last Pokecenter.")
                 time.sleep(2)
-                return LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2]
+                return LAST_POKECENTER[0], LAST_POKECENTER[1], LAST_POKECENTER[2]
 
             else:
                 trainer3_battle = True

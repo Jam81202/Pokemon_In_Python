@@ -28,7 +28,7 @@ def route_two(w, h):
     global trainer6_battle
     global trainer7_battle
 
-    # Trainer 1
+    # Trainer 5
     trainer5_poke1 = Pokemon(RATTATA.name, RATTATA.poke_img, 4, RATTATA.stat_calc(4, RATTATA.hp),
                              RATTATA.stat_calc(4, RATTATA.atk), RATTATA.stat_calc(4, RATTATA.df),
                              RATTATA.stat_calc(4, RATTATA.spatk),
@@ -36,7 +36,7 @@ def route_two(w, h):
                              RATTATA.move2, RATTATA.move3, RATTATA.move4)
     trainer5_party = [trainer5_poke1]
 
-    # Trainer 2
+    # Trainer 6
     trainer6_poke1 = Pokemon(WEEDLE.name, WEEDLE.poke_img, 4, WEEDLE.stat_calc(4, WEEDLE.hp),
                              WEEDLE.stat_calc(4, WEEDLE.atk), WEEDLE.stat_calc(4, WEEDLE.df),
                              WEEDLE.stat_calc(4, WEEDLE.spatk),
@@ -44,7 +44,7 @@ def route_two(w, h):
                              WEEDLE.move2, WEEDLE.move3, WEEDLE.move4)
     trainer6_party = [trainer6_poke1]
 
-    # Trainer 3
+    # Trainer 7
     trainer7_poke1 = Pokemon(WEEDLE.name, WEEDLE.poke_img, 4, WEEDLE.stat_calc(4, WEEDLE.hp),
                              WEEDLE.stat_calc(4, WEEDLE.atk), WEEDLE.stat_calc(4, WEEDLE.df),
                              WEEDLE.stat_calc(4, WEEDLE.spatk),
@@ -57,9 +57,9 @@ def route_two(w, h):
                              CATERPIE.move1, CATERPIE.move2, CATERPIE.move3, CATERPIE.move4)
     trainer7_party = [trainer7_poke1, trainer7_poke2]
 
-    trainer5 = Player(0 + (BG_W * .22), 0 - (BG_H * .2))
-    trainer6 = Player(0 + (BG_W * .185), 0 - (BG_H * .6))
-    trainer7 = Player(0 - (WIDTH * .38), 0 + (HEIGHT * .35))
+    trainer5 = Player(route_two_sketch.x + BG_W / 2 - 300, route_two_sketch.y + BG_H / 2)
+    trainer6 = Player(route_two_sketch.x + BG_W / 2 - 425, route_two_sketch.y + 125)
+    trainer7 = Player(route_two_sketch.x + 225, route_two_sketch.y + BG_H - 125)
 
     global step_counter, left, right
 
@@ -105,7 +105,7 @@ def route_two(w, h):
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
-            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 3, 0 - route_two_sketch.x, 0 - route_two_sketch.y
+            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 2, 0 - route_two_sketch.x, 0 - route_two_sketch.y
             return 8, 0, 0
 
         if keys[pygame.K_d]:
@@ -174,7 +174,8 @@ def route_two(w, h):
 
         if player.y + 65 >= route_two_sketch.y + BG_H:
             WIN.fill(BLACK)
-            LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
+            LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy",
+                                    feedback="loading")
             LOADING_SCREEN.show(LOADING_SCREEN)
             pygame.display.update()
             time.sleep(1)
@@ -182,7 +183,8 @@ def route_two(w, h):
 
         if player.x <= route_two_sketch.x:
             WIN.fill(BLACK)
-            LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
+            LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy",
+                                    feedback="loading")
             LOADING_SCREEN.show(LOADING_SCREEN)
             pygame.display.update()
             time.sleep(1)
@@ -190,7 +192,8 @@ def route_two(w, h):
 
         if player.x + 65 >= route_two_sketch.x + BG_W:
             WIN.fill(BLACK)
-            LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy", feedback="loading")
+            LOADING_SCREEN = Button("LOADING. . . ", (WIDTH / 2 - 200, HEIGHT / 2), font=50, bg="navy",
+                                    feedback="loading")
             LOADING_SCREEN.show(LOADING_SCREEN)
             pygame.display.update()
             time.sleep(1)
@@ -211,11 +214,7 @@ def route_two(w, h):
 
                 print("Returning to Pokecenter.")
                 time.sleep(2)
-
-                route_two_sketch.x, route_two_sketch.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
-                trainer5.x, trainer5.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer6.x, trainer6.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer7.x, trainer7.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
+                return LAST_POKECENTER[0], LAST_POKECENTER[1], LAST_POKECENTER[2]
 
             else:
                 trainer5_battle = True
@@ -229,7 +228,7 @@ def route_two(w, h):
                 battle(2, pokemon)
 
             if party_slot[0].hp <= 0:
-                for pokemon in trainer5_party:
+                for pokemon in trainer6_party:
                     pokemon.heal()
 
                 for pokemon in party_slot:
@@ -237,10 +236,7 @@ def route_two(w, h):
 
                 print("Returning to Pokecenter.")
                 time.sleep(2)
-                route_two_sketch.x, route_two_sketch.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
-                trainer5.x, trainer5.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer6.x, trainer6.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer7.x, trainer7.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
+                return LAST_POKECENTER[0], LAST_POKECENTER[1], LAST_POKECENTER[2]
 
             else:
                 trainer6_battle = True
@@ -254,18 +250,15 @@ def route_two(w, h):
                 battle(2, pokemon)
 
             if party_slot[0].hp <= 0:
-                for pokemon in trainer5_party:
+                for pokemon in trainer7_party:
                     pokemon.heal()
 
                 for pokemon in party_slot:
                     pokemon.heal()
 
-                print("Returning to Pokecenter.")
+                print("Returning to last Pokecenter.")
                 time.sleep(2)
-                route_two_sketch.x, route_two_sketch.y = 0 - (BG_W * .5), 0 - (BG_H / 2)
-                trainer5.x, trainer5.y = (BG_W * .015) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer6.x, trainer6.y = (BG_W * .1) - (BG_W * .5), 0 - (BG_H / 25)
-                trainer7.x, trainer7.y = (BG_W * .2) - (BG_W * .5), 0 - (BG_H / 25)
+                return LAST_POKECENTER[0], LAST_POKECENTER[1], LAST_POKECENTER[2]
 
             else:
                 trainer7_battle = True

@@ -276,6 +276,9 @@ class Player():
     def draw(self, window, img):
         window.blit(img, (self.x, self.y))
 
+    # TODO Move battle function to here inside of the player class. I think this will resolve the issue i have with "battle is not defined"
+    # TODO Also add "player.battle(route_num, pokemon)" to routes.
+
 class Background():
     def __init__(self, x, y):
         self.x = x
@@ -435,6 +438,7 @@ global PARTY_POKE_6
 global party
 global pc
 
+'''
 PARTY_POKE_1 = Pokemon(TOTODILE.name, TOTODILE.poke_img, 5, TOTODILE.stat_calc(5, TOTODILE.hp), TOTODILE.stat_calc(5, TOTODILE.atk), TOTODILE.stat_calc(5, TOTODILE.df), TOTODILE.stat_calc(5, TOTODILE.spatk),
                        TOTODILE.stat_calc(5, TOTODILE.spdf), TOTODILE.stat_calc(5, TOTODILE.speed), TOTODILE.move1, TOTODILE.move2, TOTODILE.move3, TOTODILE.move4)
 PARTY_POKE_2 = Pokemon(PIKACHU.name, PIKACHU.poke_img, 5, PIKACHU.stat_calc(5, PIKACHU.hp), PIKACHU.stat_calc(5, PIKACHU.atk), PIKACHU.stat_calc(5, PIKACHU.df), PIKACHU.stat_calc(5, PIKACHU.spatk),
@@ -444,6 +448,17 @@ PARTY_POKE_3 = Pokemon(CHARMANDER.name, CHARMANDER.poke_img, 5, CHARMANDER.stat_
 PARTY_POKE_4 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
 PARTY_POKE_5 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
 PARTY_POKE_6 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
+'''
+
+# Test Party
+PARTY_POKE_1 = Pokemon(TOTODILE.name, TOTODILE.poke_img, 100, TOTODILE.stat_calc(2, TOTODILE.hp), TOTODILE.stat_calc(100, TOTODILE.atk), TOTODILE.stat_calc(2, TOTODILE.df), TOTODILE.stat_calc(100, TOTODILE.spatk),
+                       TOTODILE.stat_calc(2, TOTODILE.spdf), TOTODILE.stat_calc(100, TOTODILE.speed), SURF, EMPTY, EMPTY, EMPTY)
+PARTY_POKE_2 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
+PARTY_POKE_3 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
+PARTY_POKE_4 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
+PARTY_POKE_5 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
+PARTY_POKE_6 = Pokemon(EMPTY_POKE.name, EMPTY_POKE.poke_img, EMPTY_POKE.level, EMPTY_POKE.hp, EMPTY_POKE.atk, EMPTY_POKE.df, EMPTY_POKE.spatk, EMPTY_POKE.spdf, EMPTY_POKE.speed, EMPTY_POKE.move1, EMPTY_POKE.move2, EMPTY_POKE.move3, EMPTY_POKE.move4)
+
 
 party_slot = [PARTY_POKE_1, PARTY_POKE_2, PARTY_POKE_3, PARTY_POKE_4, PARTY_POKE_5, PARTY_POKE_6]
 
