@@ -19,11 +19,11 @@ def menu():
         QUIT_BUTTON = Button("C: Quit Game", (WIDTH / 3 - 125, HEIGHT * .45), font=30, bg="navy",
                                         feedback="Closing Game")
 
-        BACK_BUTTON = Button("<-- Back", (0, 0), font=30, bg="navy", feedback="You chose to go back")
+        BACK_BUTTON = Button("Back (backspace)", (0, 0), font=30, bg="navy", feedback="You chose to go back")
 
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_BACKSPACE]:
             in_menu = False
             print(BACK_BUTTON.feedback)
 

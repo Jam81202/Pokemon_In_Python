@@ -1,5 +1,4 @@
 from classes import *
-from battle import *
 
 pygame.init()
 
@@ -29,37 +28,45 @@ def route_two(w, h):
     global trainer7_battle
 
     # Trainer 5
-    trainer5_poke1 = Pokemon(RATTATA.name, RATTATA.poke_img, 4, RATTATA.stat_calc(4, RATTATA.hp),
-                             RATTATA.stat_calc(4, RATTATA.atk), RATTATA.stat_calc(4, RATTATA.df),
-                             RATTATA.stat_calc(4, RATTATA.spatk),
-                             RATTATA.stat_calc(4, RATTATA.spdf), RATTATA.stat_calc(4, RATTATA.speed), RATTATA.move1,
-                             RATTATA.move2, RATTATA.move3, RATTATA.move4)
-    trainer5_party = [trainer5_poke1]
+    trainer5_poke1 = Pokemon(RATTATA.name, RATTATA.poke_img, 7, RATTATA.stat_calc(7, RATTATA.hp),
+                             RATTATA.stat_calc(7, RATTATA.atk), RATTATA.stat_calc(7, RATTATA.df),
+                             RATTATA.stat_calc(7, RATTATA.spatk), RATTATA.stat_calc(7, RATTATA.spdf),
+                             RATTATA.stat_calc(7, RATTATA.speed), RATTATA.move1,RATTATA.move2, RATTATA.move3,
+                             RATTATA.move4)
+
+    trainer5_poke2 = Pokemon(SPEAROW.name, SPEAROW.poke_img, 8, SPEAROW.stat_calc(8, SPEAROW.hp),
+                             SPEAROW.stat_calc(8, SPEAROW.atk), SPEAROW.stat_calc(8, SPEAROW.df),
+                             SPEAROW.stat_calc(8, SPEAROW.spatk), SPEAROW.stat_calc(8, SPEAROW.spdf),
+                             SPEAROW.stat_calc(8, SPEAROW.speed), SPEAROW.move1, SPEAROW.move2, SPEAROW.move3,
+                             SPEAROW.move4)
+
+    trainer5_party = [trainer5_poke1, trainer5_poke2]
 
     # Trainer 6
-    trainer6_poke1 = Pokemon(WEEDLE.name, WEEDLE.poke_img, 4, WEEDLE.stat_calc(4, WEEDLE.hp),
-                             WEEDLE.stat_calc(4, WEEDLE.atk), WEEDLE.stat_calc(4, WEEDLE.df),
-                             WEEDLE.stat_calc(4, WEEDLE.spatk),
-                             WEEDLE.stat_calc(4, WEEDLE.spdf), WEEDLE.stat_calc(4, WEEDLE.speed), WEEDLE.move1,
-                             WEEDLE.move2, WEEDLE.move3, WEEDLE.move4)
+    trainer6_poke1 = Pokemon(ODDISH.name, ODDISH.poke_img, 11, ODDISH.stat_calc(11, ODDISH.hp),
+                             ODDISH.stat_calc(11, ODDISH.atk), ODDISH.stat_calc(11, ODDISH.df),
+                             ODDISH.stat_calc(11, ODDISH.spatk), ODDISH.stat_calc(11, ODDISH.spdf),
+                             ODDISH.stat_calc(11, ODDISH.speed), ODDISH.move1, ODDISH.move2, ODDISH.move3, ODDISH.move4)
+
     trainer6_party = [trainer6_poke1]
 
     # Trainer 7
-    trainer7_poke1 = Pokemon(WEEDLE.name, WEEDLE.poke_img, 4, WEEDLE.stat_calc(4, WEEDLE.hp),
-                             WEEDLE.stat_calc(4, WEEDLE.atk), WEEDLE.stat_calc(4, WEEDLE.df),
-                             WEEDLE.stat_calc(4, WEEDLE.spatk),
-                             WEEDLE.stat_calc(4, WEEDLE.spdf), WEEDLE.stat_calc(4, WEEDLE.speed), WEEDLE.move1,
-                             WEEDLE.move2, WEEDLE.move3, WEEDLE.move4)
-    trainer7_poke2 = Pokemon(CATERPIE.name, CATERPIE.poke_img, 4, CATERPIE.stat_calc(4, CATERPIE.hp),
-                             CATERPIE.stat_calc(4, CATERPIE.atk), CATERPIE.stat_calc(4, CATERPIE.df),
-                             CATERPIE.stat_calc(4, CATERPIE.spatk),
-                             CATERPIE.stat_calc(4, CATERPIE.spdf), CATERPIE.stat_calc(4, CATERPIE.speed),
-                             CATERPIE.move1, CATERPIE.move2, CATERPIE.move3, CATERPIE.move4)
+    trainer7_poke1 = Pokemon(PIDGEY.name, PIDGEY.poke_img, 14, PIDGEY.stat_calc(14, PIDGEY.hp),
+                             PIDGEY.stat_calc(14, PIDGEY.atk), PIDGEY.stat_calc(14, PIDGEY.df),
+                             PIDGEY.stat_calc(14, PIDGEY.spatk), PIDGEY.stat_calc(14, PIDGEY.spdf),
+                             PIDGEY.stat_calc(14, PIDGEY.speed), PIDGEY.move1, PIDGEY.move2, PIDGEY.move3, PIDGEY.move4)
+
+    trainer7_poke2 = Pokemon(CATERPIE.name, CATERPIE.poke_img, 15, CATERPIE.stat_calc(15, CATERPIE.hp),
+                             CATERPIE.stat_calc(15, CATERPIE.atk), CATERPIE.stat_calc(15, CATERPIE.df),
+                             CATERPIE.stat_calc(15, CATERPIE.spatk), CATERPIE.stat_calc(15, CATERPIE.spdf),
+                             CATERPIE.stat_calc(15, CATERPIE.speed), CATERPIE.move1, CATERPIE.move2, CATERPIE.move3,
+                             CATERPIE.move4)
+
     trainer7_party = [trainer7_poke1, trainer7_poke2]
 
-    trainer5 = Player(route_two_sketch.x + BG_W / 2 - 300, route_two_sketch.y + BG_H / 2)
-    trainer6 = Player(route_two_sketch.x + BG_W / 2 - 425, route_two_sketch.y + 125)
-    trainer7 = Player(route_two_sketch.x + 225, route_two_sketch.y + BG_H - 125)
+    trainer5 = Player(route_two_sketch.x + BG_W / 2 + 150, route_two_sketch.y + BG_H / 2 + 275)
+    trainer6 = Player(route_two_sketch.x + BG_W / 2 + 525, route_two_sketch.y + 150)
+    trainer7 = Player(route_two_sketch.x + BG_W / 2 + 825, route_two_sketch.y + BG_H / 2 - 35)
 
     global step_counter, left, right
 
@@ -105,7 +112,7 @@ def route_two(w, h):
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
-            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 2, 0 - route_two_sketch.x, 0 - route_two_sketch.y
+            LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 3, 0 - route_two_sketch.x, 0 - route_two_sketch.y
             return 8, 0, 0
 
         if keys[pygame.K_d]:
@@ -153,7 +160,11 @@ def route_two(w, h):
             right = False
             up = False
             down = False
-            battle(2)
+            player.battle(2, False)
+
+            if party_slot[0].hp <= 0:
+                player.blackout()
+                return LAST_POKECENTER[0], LAST_POKECENTER[1], LAST_POKECENTER[2]
 
         elif keys[pygame.K_i]:
             left = False
@@ -200,20 +211,15 @@ def route_two(w, h):
             return 5, -300, 150
 
         if player.x + 50 >= trainer5.x and player.x + 50 <= (trainer5.x + 100) and player.y + 50 >= trainer5.y and player.y + 50 <= (trainer5.y + 100) and not trainer5_battle:
-            trainer_battle = True
 
             for pokemon in trainer5_party:
-                battle(2, pokemon)
+                player.battle(2, True, pokemon)
 
             if party_slot[0].hp <= 0:
                 for pokemon in trainer5_party:
                     pokemon.heal()
 
-                for pokemon in party_slot:
-                    pokemon.heal()
-
-                print("Returning to Pokecenter.")
-                time.sleep(2)
+                player.blackout()
                 return LAST_POKECENTER[0], LAST_POKECENTER[1], LAST_POKECENTER[2]
 
             else:
@@ -222,20 +228,15 @@ def route_two(w, h):
             trainer_battle = False
 
         if player.x + 50 >= trainer6.x and player.x + 50 <= (trainer6.x + 100) and player.y + 50 >= trainer6.y and player.y + 50 <= (trainer6.y + 100) and not trainer6_battle:
-            trainer_battle = True
 
             for pokemon in trainer6_party:
-                battle(2, pokemon)
+                player.battle(2, True, pokemon)
 
             if party_slot[0].hp <= 0:
                 for pokemon in trainer6_party:
                     pokemon.heal()
 
-                for pokemon in party_slot:
-                    pokemon.heal()
-
-                print("Returning to Pokecenter.")
-                time.sleep(2)
+                player.blackout()
                 return LAST_POKECENTER[0], LAST_POKECENTER[1], LAST_POKECENTER[2]
 
             else:
@@ -244,20 +245,15 @@ def route_two(w, h):
             trainer_battle = False
 
         if player.x + 50 >= trainer7.x and player.x + 50 <= (trainer7.x + 100) and player.y + 50 >= trainer7.y and player.y + 50 <= (trainer7.y + 100) and not trainer7_battle:
-            trainer_battle = True
 
             for pokemon in trainer7_party:
-                battle(2, pokemon)
+                player.battle(2, True, pokemon)
 
             if party_slot[0].hp <= 0:
                 for pokemon in trainer7_party:
                     pokemon.heal()
 
-                for pokemon in party_slot:
-                    pokemon.heal()
-
-                print("Returning to last Pokecenter.")
-                time.sleep(2)
+                player.blackout()
                 return LAST_POKECENTER[0], LAST_POKECENTER[1], LAST_POKECENTER[2]
 
             else:
