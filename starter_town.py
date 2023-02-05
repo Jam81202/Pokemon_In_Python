@@ -64,6 +64,8 @@ def starter_town(w, h):
             LAST_LOCATION[0], LAST_LOCATION[1], LAST_LOCATION[2] = 1, 0 - starter_town.x, 0 - starter_town.y
             return 8, 0, 0
 
+        # TODO Change movement to where the map background never moves far enough to reveal the black behind it. start to move player image when it reaches to far (Ex. Startdew Valley)
+        # TODO Add if-else to WASD movement so when the map reachest the window border the character starts to move instead.
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d]:
             starter_town.x -= velocity
